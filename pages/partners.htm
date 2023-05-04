@@ -1,0 +1,130 @@
+url = "/partners"
+layout = "default"
+title = "Partners"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+header_image = "about.jpg"
+
+[jumbotron consortium]
+jumbotron = "consortium"
+title = 0
+background = "transperant"
+templates = "template1"
+description_limit = 0
+==
+<?php
+use Pensoft\Partners\Models\Partners;
+use Pensoft\Cardprofiles\Models\Profiles;
+use Rainlab\Location\Models\Country;
+
+function onStart(){
+	$this['partners'] =  Partners::where('type', 1)->get();
+$this['members'] = Profiles::where('category_id',  2)->get();
+$this['countries'] =  Country::where('is_enabled', true)->get();
+
+$this['insider_members'] = new class {
+public function getIM($id) {
+return Profiles::where('partner_id', $id)->where('category_id',  2)->get();
+}
+};
+
+}
+
+function onPartners(){
+$this['partners'] = [];
+if(post('code')){
+$this['partners'] =  Partners::whereRaw('country_code ILIKE \'%'.post('code').'%\'')->where('type', 1)->get();
+}
+$this['insider_members'] = new class {
+public function getIM($id) {
+return Profiles::where('partner_id', $id)->where('category_id',  2)->get();
+}
+};
+}
+
+function onSinglePartner(){
+$this['partners'] = [];
+if(post('partner_id')){
+$this['partners'] =  Partners::where('id', post('partner_id'))->where('type', 1)->get();
+}
+$this['insider_members'] = new class {
+public function getIM($id) {
+return Profiles::where('partner_id', $id)->where('category_id',  2)->get();
+}
+};
+}
+?>
+==
+<div class="container">
+    <div class="consortium center-xs">
+        {% component 'consortium' %}
+    </div>
+
+    <div class="tabs">
+        <a class="" href="#mapView">Map view</a>
+        <a class="" href="#listView">List view</a>
+    </div>
+
+    <div id="mapView">
+        <div class="svg_map">
+            {% partial 'components/svg' %}
+        </div>
+    </div>
+    <div id="listView" class="accordion-insider-members-list">
+        {% for partner in partners %}
+        <div class="col-xs-12 partner-item">
+            <div class="row">
+                <div class="col-xs-12 col-md-2 start-md center-xs partner_cover"><img src="{{partner.cover.thumb(119, auto, {mode: 'crop'})}}"></div>
+                <div class="col-xs-12 col-md-7 start-md center-xs partner_title">{{partner.instituion}}</div>
+                <div class="col-xs-12 col-md-3 end-md start-xs partner_link"><a href="{{partner.instituion_url}}" class="btn btn-primary" target="_blank">Visit website</a></div>
+                <div class="col-xs-12 partner_description">{{partner.content|raw}}</div>
+            </div>
+            {% if insider_members.getIM(partner.id).count > 0 %}
+            <div id="accordion-insider-members-list-{{partner.id}}" class="partners-insider">
+                <div class="accordion-border">
+                    <div class="row middle-xs accordion-toggle">
+                        <span class="plusminus"><span>Members</span><div class="plus"></div></span>
+                    </div>
+                    <div class="accordion-content" style="display: none;">
+                        <div class="row top-xs">
+                            {% for profile in insider_members.getIM(partner.id) %}
+                            <div class="col-md-3 col-xs-12">
+                            <div class="contact_info row">
+                                <div class="col-xs-12 coordinator_image">
+                                    {% if profile.avatar %}
+                                    <!--                            <img alt="{{ profile.names }}" src="{{profile.avatar.thumb(175,145,{'mode':'crop'})}}">-->
+                                    <img alt="{{ profile.names }}" src="{{profile.avatar.thumb(119,119,{'mode':'crop'})}}">
+                                    {% else %}
+                                    <img alt="{{ profile.names }}" src="{{ 'avatar.svg'|media }}" width="119" height="119" class="no-image">
+                                    {% endif %}
+                                </div>
+                                <div class="col-xs-12 coordinator_info">
+                                    <h3>{{ profile.names }}</h3>
+                                    <div class="body"><p class="read-more" onclick="expandReadMore(this);">Read more</p>{{ profile.content|raw }}</div>
+                                </div>
+                            </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        {% endfor %}
+    </div>
+
+
+    <span class="tooltiptext" id="tooltip">Bulgaria</span>
+    <div class="container partners-map-container">
+        <div id="mycomponentpartners" class="row">
+
+            {% component 'PartnersPage' %}
+        </div>
+    </div>
+
+
+
+</div>

@@ -1,0 +1,144 @@
+
+.card_title{
+  font-size: 22px;
+  font-weight: 600;
+  color: @dark-color;
+}
+
+.card-group {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+}
+
+.card-container {
+  min-width: fit-content;
+  display: block;
+  justify-content: center;
+  //height: 212px;
+  //width: 150px;
+  margin: 25px auto 100px auto;
+  text-align: center;
+    a{
+        display: block;
+    }
+
+  //&:hover{
+  //    //opacity: 0.7;
+  //    opacity: 1;
+  //    background: #EFF5F5;
+  //}
+  .breakpoint-laptop-down({
+    padding: 0px;
+  });
+}
+
+//.card_image_container{
+//  display: flex;
+//  background-size: contain!important;
+//  height: 183px;
+//  width: 144px;
+//  margin: 0px auto;
+//
+//  //.breakpoint-small-down({
+//  //  width: 150px!important;
+//  //  height: 150px!important;
+//  //  background-size: 60px!important;
+//  //})
+//}
+
+
+//.newsletters,
+//.logo,
+//.presentation,
+//.flyer{
+//  .card_image_container{
+//    display: flex;
+//    background-size: unset!important;
+//    height: 220px;
+//    width: 220px;
+//    background-color: @white-color!important;
+//    border-radius: 5px;
+//    margin: 27px auto;
+//    border: none;
+//
+//    .breakpoint-small-down({
+//      width: 220px!important;
+//      height: 220px!important;
+//      background-size: unset!important;
+//    });
+//  }
+//}
+
+.card-columns {
+  flex-flow: column wrap !important;
+  .card {
+    margin-bottom: @margin-base-space * .75;
+  }
+  .breakpoint-small({
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+    -webkit-column-gap: 1.25rem;
+    -moz-column-gap: 1.25rem;
+    column-gap: 1.25rem;
+    orphans: 1;
+    widows: 1;
+    .card {
+      display: inline-flex;
+      width: 100%;
+    }
+  });
+}
+
+.card-columns-three {
+  .card {
+    margin-bottom: @margin-base-space * .75;
+  }
+  .breakpoint-small({
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+    -webkit-column-gap: 1.25rem;
+    -moz-column-gap: 1.25rem;
+    column-gap: 1.25rem;
+    orphans: 1;
+    widows: 1;
+    .card {
+      display: inline-flex;
+      width: 100%;
+    }
+  });
+}
+
+.cards {
+  display: flex;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+
+
+  margin-left: -.5rem;
+  margin-right: -.5rem;
+
+  .card {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .breakpoint-small-down({
+    .card {
+      width: 100%;
+    }
+  });
+  .breakpoint-small-down({
+    margin-right: 0;
+    margin-left: 0;
+  });
+}
+
+.breakpoint-small-down({
+  .card + .card {
+    margin-top: @margin-base-space;
+  }
+});

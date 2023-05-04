@@ -1,0 +1,66 @@
+url = "/sent-messages"
+layout = "default"
+title = "My sent messages"
+
+[session]
+security = "user"
+redirect = "login"
+==
+<?php
+use Pensoft\Mailing\Models\Mails;
+use RainLab\User\Facades\Auth;
+
+function onStart(){
+
+    $user = Auth::getUser();
+    $this['messages'] = Mails::where('from_user', $user->id)->orderBy('id', 'desc')->get();
+
+}
+?>
+==
+{% component 'session' %}
+<div class="container">
+        <div class="row sent-messages-container">
+            {% for record in messages %}
+            <div class="col-xs-12 messages">
+                <div class="row middle-xs between-xs accordion-toggle">
+                    <div class="col-xs-10 start-xs title_container">
+                        {{record.subject}} &nbsp; <span class="date">{{record.created_at |date('d F Y')}}</span>
+                    </div>
+                    <div class="col-xs-2 end-xs plusminus"><span class="plus"></span></div>
+                </div>
+                <div class="row accordion-content" style="display: none;">
+                    {% if record.user.count %}
+                    <div class="col-xs-12 col-md-6">
+                        <h2>To user(s):</h2>
+                        {% for recipient_user in record.user %}
+                        {{recipient_user.name}} {{recipient_user.surname}} - <a class="website" href="mailto:{{recipient_user.email}}">{{recipient_user.email}}</a><br>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    {% if record.group.count %}
+                    <div class="col-xs-12 col-md-6">
+                        <h2>To group(s):</h2>
+                        {% for recipient_group in record.group %}
+                        {{recipient_group.name}} - <a class="website" href="mailto:{{recipient_group.email}}">{{recipient_group.email}}</a><br>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    {% if record.attachments.count %}
+                    <div class="col-xs-12 role">
+                        <h2>Attachment(s):</h2>
+                        <ul>
+                            {% for attachment in record.attachments %}
+                            <li><a  href="{{attachment.path}}" target="_blank">{{attachment.file_name}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    <div class="col-xs-12"><h2>Message:</h2><p>{{record.body | raw}}</p></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+</div>

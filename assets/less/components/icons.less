@@ -1,0 +1,303 @@
+// https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use
+
+// .ps - Solid Rendering
+// .pr - Regular Rendering
+// .pl - Light
+// .pd - Duotone
+// .pb - Brands
+
+// <span style="font-size: 3em; color: Tomato;">
+//   <i class="ps p-camera"></i>
+// </span>
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icons/icomoon/icomoon.eot?ilrlqa');
+  src:  url('../fonts/icons/icomoon/icomoon.eot?ilrlqa#iefix') format('embedded-opentype'),
+    url('../fonts/icons/icomoon/icomoon.ttf?ilrlqa') format('truetype'),
+    url('../fonts/icons/icomoon/icomoon.woff?ilrlqa') format('woff'),
+    url('../fonts/icons/icomoon/icomoon.svg?ilrlqa#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.p, .pb, .pd, .pl, .pr, .ps {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    .font-size;
+    .line-height;
+
+    &.small, &.large, &.huge {
+      .line-height;
+      vertical-align: middle;
+    }
+    &.small {
+      .font-size(0.80);
+    }
+    &.normal {
+      .font-size(1.3);
+    }
+    &.big {
+      .font-size(1.8);
+    }
+    &.middle {
+      .font-size(2.3);
+    }
+
+    &.medium {
+      .font-size(2.7);
+    }
+    &.large {
+      .font-size(3.5);
+    }
+    &.huge {
+      .font-size(5);
+    }
+    &.p-primary {
+        color: @link-color;
+        background-color: @white-color;
+        border: 2px solid @link-color;
+        width: 78px;
+        height: 78px;
+        line-height: 78px;
+        align-items: center;
+      .rounded(50%);
+
+      &.subscribe_home{
+        .rounded(3px);
+        width: fit-content;
+        padding: 10px 50px 0 50px!important;
+
+        font-weight: bold;
+        .breakpoint-small-down({
+          font-size: 16px;
+        });
+      }
+    }
+    &.p-primary:hover {
+        color: @white-color;
+        background-color: @link-color;
+        border-color: @link-color;
+    }
+
+    &.p-facebook{
+    }
+    &.p-twitter{
+    }
+
+    &.p-secondary {
+      line-height: 1em!important;
+    }
+    &.p-secondary:hover {
+      opacity: 0.7!important;
+    }
+
+    &.p-search {
+    }
+    &.p-success {
+      color: @success-color;
+    }
+    &.p-danger {
+      color: @danger-color;
+    }
+    &.p-warning {
+      color: @warning-color;
+    }
+    &.p-info {
+      color: @info-color;
+    }
+    &.p-light {
+      color: @light-color;
+    }
+    &.p-dark {
+      color: @dark-color;
+    }
+    &.p-link {
+    color: @primary-color;
+    }
+    &.p-subscribe {
+      font-size: 1.3em!important;
+      width: 36px!important;
+      height: 36px!important;
+      line-height: 36px!important;
+      text-align: center;
+    }
+    &.p-mail {
+      font-size: 1em!important;
+      width: 36px!important;
+      height: 36px!important;
+      line-height: 36px!important;
+      text-align: center;
+    }
+
+
+}
+
+.ps {
+    font-family: "icomoon";
+    font-weight: 900;
+}
+.pr {
+    font-family: "icomoon";
+    font-weight: 400;
+}
+.pl {
+    font-family: "icomoon";
+    font-weight: 300;
+}
+.pd {
+    font-family: "icomoon";
+    font-weight: 900;
+}
+.pb {
+    font-family: "icomoon";
+    font-weight: 400;
+}
+
+.icons {
+  display: flex;
+  font-family: "icomoon";
+  font-weight: 400;
+
+
+  .p + .p, .pb+.pb, .pd+.pd, .pl+.pl, .pr+.pr, .ps+.ps {
+    margin-left: 10px;
+  }
+
+  &.icons-vertical {
+    flex-direction: column;
+
+    .p + .p, .pb+.pb, .pd+.pd, .pl+.pl, .pr+.pr, .ps+.ps {
+      margin-left: 0;
+      margin-top:@margin-base-space;
+    }
+  }
+}
+
+
+
+.p-researchgate:before {
+    content: "\e900";
+}
+.p-location:before {
+    content: "\e90c";
+}
+.p-time:before {
+    content: "\e901";
+}
+.p-gearwheel:before {
+    content: "\e902";
+}
+.p-country-ch:before {
+    content: "\e903";
+}
+.p-country-de:before {
+    content: "\e904";
+}
+.p-country-fr:before {
+    content: "\e905";
+}
+.p-country-pl:before {
+    content: "\e900";
+}
+.p-search:before {
+    content: "\ea82";
+}
+.p-facebook:before {
+    content: "\eaeb";
+}
+.p-instagram:before {
+    content: "\eaec";
+}
+.p-linkedin:before {
+    content: "\eaed";
+}
+.p-mail:before {
+    content: "\e900";
+}
+.p-website:before {
+    content: "\e903";
+}
+.p-organisation:before {
+    content: "\e911";
+}
+.p-phone:before {
+    content: "\e906";
+}
+.p-mendeley:before {
+    content: "\eaef";
+}
+.p-reddit:before {
+    content: "\eaf0";
+}
+.p-RSS:before {
+    content: "\eaf1";
+}
+.p-twitter:before {
+    content: "\eaf2";
+}
+.p-youtube:before {
+    content: "\eaf3";
+}
+.p-subscribe:before {
+    content: "\e901";
+}
+.p-mail:before {
+    content: "\e900";
+}
+.p-key:before {
+    content: "\eaf4";
+}
+.p-minus:before {
+    content: "\eaf5";
+}
+.p-person:before {
+    content: "\eaf6";
+}
+.p-plus:before {
+    content: "\eaf7";
+}
+.p-hamburger:before {
+    content: "\eaf8";
+}
+.p-share1:before {
+    content: "\eaf9";
+}
+.p-back:before {
+    content: "\eafb";
+}
+.p-colapse:before {
+    content: "\eafc";
+}
+.p-remove:before {
+    content: "\eafd";
+}
+.p-trash:before {
+    content: "\eafe";
+}
+.p-download:before {
+    //content: "\e914";
+    content: "";
+    background: url("../../assets/images/download-icon.svg") center no-repeat;
+    background-size: 12px;
+    width: 12px;
+    height: 12px;
+    display: flex;
+}
+.p-drag:before {
+    content: "\eb00";
+}
+.p-expand:before {
+    content: "\eb01";
+}
+.p-forward:before {
+    content: "\eb02";
+}
+.p-add:before {
+    content: "\eb03";
+}

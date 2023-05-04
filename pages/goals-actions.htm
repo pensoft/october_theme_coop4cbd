@@ -1,0 +1,68 @@
+url = "/goals-actions"
+layout = "default"
+title = "About"
+
+[siteSearchInclude]
+
+[jumbotron mission]
+jumbotron = "mission"
+title = 1
+background = "transperant"
+templates = "template1"
+description_limit = 0
+
+[jumbotron goals]
+jumbotron = "goal"
+title = 1
+background = "transperant"
+templates = "template1"
+description_limit = 0
+
+[jumbotron numbers]
+jumbotron = "numbers"
+background = "transperant"
+templates = "template1"
+description_limit = 0
+
+[jumbotron objectives]
+jumbotron = "objectives"
+title = 1
+background = "transperant"
+templates = "template1"
+description_limit = 0
+
+[accordion]
+maxItems = 10
+accordion = 1
+elementId = "work-packages"
+active = 0
+collapsible = "false"
+heightStyle = "auto"
+iconsHeader = "ui-icon-triangle-1-e"
+iconsHeaderActive = "ui-icon-triangle-1-s"
+templates = "template4"
+==
+{% component 'siteSearchInclude' %}
+
+<div class="container">
+    <div class="row middle-xs">
+        <div class="col-md-6 col-xs-12 mission">
+            {% component 'mission' %}
+        </div>
+        <div class="col-md-6 col-xs-12 goals">
+            {% component 'goals' %}
+        </div>
+    </div>
+</div>
+
+<div class="container numbers_container">
+    {% component 'numbers' %}
+</div>
+<div class="container objectives mt-4 mb-2">
+    {% component 'objectives' %}
+</div>
+<div class="container-fluid work_packages">
+    <div class="container">
+        {% component 'accordion' %}
+    </div>
+</div>

@@ -1,0 +1,86 @@
+url = "/media-center/poster"
+layout = "default"
+title = "Poster"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[builderList mediaGraphicList]
+modelClass = "pensoft\Media\Models\Graphic"
+scope = "-"
+scopeValue = "{{ :scope }}"
+displayColumn = "name"
+noRecordsMessage = "No records found"
+detailsPage = "-"
+detailsUrlParameter = "id"
+pageNumber = "{{ :page }}"
+==
+<?php
+use Pensoft\Media\Models\Graphic;
+use System\Models\File;
+
+function onStart(){
+	$this['mediaGraphicList'] =  Graphic::get();
+	if(get('download')){
+		$file = File::find((int)get('download'));
+		$file_name = $file->getLocalPath();
+$recordName = get('file_name') ? get('file_name') : 'COOP4CBD_flyer';
+$ext= $file->getExtension();
+
+if (file_exists($file_name)) {
+header('Content-Description: File Transfer');
+header('Content-Type: application/octet-stream');
+header("Content-Type: application/force-download");
+header('Content-Disposition: attachment; filename='.$recordName .'.'. $ext);
+header('Content-Transfer-Encoding: binary');
+header('Expires: 0');
+header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+header('Pragma: public');
+header('Content-Length: ' . filesize($file_name));
+ob_clean();
+flush();
+readfile($file_name);
+exit();
+}
+return Redirect::to('/media-center/flyer');
+}
+
+}
+?>
+==
+<div class="container">
+    <div class="row">
+        {% set records = mediaGraphicList %}
+        {% set displayColumn = mediaGraphicList.displayColumn %}
+        {% set noRecordsMessage = mediaGraphicList.noRecordsMessage %}
+        {% set detailsPage = mediaGraphicList.detailsPage %}
+        {% set detailsKeyColumn = mediaGraphicList.detailsKeyColumn %}
+        {% set detailsUrlParameter = mediaGraphicList.detailsUrlParameter %}
+
+        {% for record in records %}
+        {# Use spaceless tag to remove spaces inside the A tag. #}
+        {% spaceless %}
+        {% if record.image %}
+        <div class="col-md-3 col-xs-12 center-xs">
+            <p class="logo_container"><img src="{{record.image.path}}" title="{{record.name}}"></p>
+
+            {% if record.file %}
+            <div class="col-xs-12">
+                <div class="text-center">
+                    <h3><b>{{record.name}}</b></h3>
+                    <a href="{{ ''| page }}?{{queries}}&download={{record.file.id}}&file_name={{record.file.file_name|replace({' ': '_'})}}" title="{{record.name}}" class="btn btn-primary">Download</a>
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+
+
+        {% endif %}
+
+        {% endspaceless %}
+        {% else %}
+        {{ noRecordsMessage }}
+        {% endfor %}
+    </div>
+</div>

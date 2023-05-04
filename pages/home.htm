@@ -1,0 +1,60 @@
+url = "/"
+layout = "default"
+title = "COOP4CBD"
+is_hidden = 0
+meta_description = "homepage desc"
+seo_keywords = "keywords"
+robot_index = "index"
+robot_follow = "follow"
+
+==
+<?php
+use Pensoft\Calendar\Models\Entry;
+use Carbon\Carbon;
+function onStart(){
+    $this['entries'] = Entry::where('end', '>', Carbon::now())->where('show_on_timeline', true)->where('is_internal', false)->orderBy('start', 'asc')->take(3)->get();
+}
+?>
+==
+
+	<div class="container mt-4">
+	<div class="row between-xs">
+		<div class="col-lg-7 col-xs-12 upcoming_events_container">
+			<h1 class="base_heading"><a href="{{'events'|page}}">Upcoming Events</a></h1>
+            {% for event in entries %}
+            <a href="{{'events'|page}}/{{event.slug}}">
+                <div class="row entry_item">
+                    <div class="col-md-7 col-xs-12 start-md center-xs date_and_location">
+                        <span class="date_day">{{event.start|date("d")}}</span>
+                        <span class="date_month">{{event.start|date("M")}}</span>
+                        <span class="date_year">{{event.start|date("Y")}}</span>
+                    </div>
+                    <div class="col-md-5 col-xs-12 end-md center-xs date_and_location">
+                        {{event.place}}
+                    </div>
+                    <div class="col-md-12 col-xs-12 start-md center-xs mt-md-1 mt-1">
+                        <h3>{{event.title|raw}}</h3>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+		</div>
+
+        <div class="col-lg-5 col-xs-12 social_media_conainer">
+            <h1 class="base_heading">Follow COOP4CBD</h1>
+            <div class="twitter-widget">
+                <a class="twitter-timeline" href="https://twitter.com/coop4cbd?ref_src=twsrc%5Etfw">Tweets by @coop4cbd</a>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+        </div>
+
+	</div>
+
+</div>
+
+{% if this.theme.subscribe %}
+    <div class="row container subscribe-newsletter-background">
+        <div class="col-xs-12 center-xs mt-2 mb-1">Sign up to our newsletter and stay up to date!</div>
+        <div class="col-xs-12 center-xs"><a href="{{this.theme.subscribe}}" class="btn btn-primary mb-2" target="_blank">Subscribe</a></div>
+    </div>
+{% endif %}

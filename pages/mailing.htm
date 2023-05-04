@@ -1,0 +1,48 @@
+url = "/mails"
+layout = "default"
+title = "Mails"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[MailingForm]
+unique_emails = 1
+
+[session]
+security = "user"
+allowedUserGroups[] = "internal-users"
+allowedUserGroups[] = "registered"
+allowedUserGroups[] = "guest"
+redirect = "login"
+==
+<?php
+use Pensoft\Mailing\Models\Groups;
+use Pensoft\Mailing\Models\Mails;
+use RainLab\User\Models\User;
+
+function onFetchMailingList(){
+	if(post('search_str')){
+
+	    $this['result'] = DB::table('pensoft_mailing_groups')
+            ->leftJoin('pensoft_mailing_groups_users', 'pensoft_mailing_groups_users.groups_id', '=', 'pensoft_mailing_groups.id')
+            ->leftJoin('users', 'pensoft_mailing_groups_users.user_id', '=', 'users.id')
+            ->whereRaw('users.email ILIKE \''.post('search_str').'\' OR pensoft_mailing_groups.name ILIKE \''.post('search_str').'\'')
+            ->select('users.*')
+            ->orderBy('users.email', 'asc')
+            ->get();
+    }
+}
+
+function onFetchSingleMail(){
+	if(post('search_str')){
+        $this['item']  = DB::table('users')->whereRaw('(TRIM(CONCAT(users.name, \' \', users.surname)) = \''.post('search_str').'\') OR users.email ILIKE \''.post('search_str').'\' ')->first();
+    }
+}
+?>
+==
+<div class="container">
+    &nbsp; &nbsp; &nbsp;<a class="btn btn-primary" href="{{'my-sent-messages'|page}}">My sent messages</a>
+    <p>&nbsp;</p>
+    {% component 'MailingForm' %}
+    <script>initMailingTooltip();</script>
+</div>

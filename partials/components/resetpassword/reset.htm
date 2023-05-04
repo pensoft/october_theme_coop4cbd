@@ -1,0 +1,27 @@
+<p class="lead">
+	Please check your email for the activation code.
+</p>
+
+<form
+		class="ui form"
+		data-request="onResetPassword"
+		data-request-success="alert('You have successfully changed your password. Please login to the Internal Repository.');"
+        data-request-redirect="/login"
+    >
+	<div class="fields">
+		<div class="field">
+			<label for="resetCode">Activation Code</label>
+			<input name="code" type="text" id="resetCode" placeholder="Enter the activation code" value="{{get('reset')}}">
+		</div>
+
+		<div class="field">
+			<label for="resetPassword">New Password</label>
+			<input name="password" type="password" id="resetPassword" placeholder="Enter a new password">
+		</div>
+	</div>
+
+	<div class="text-center mt-1">
+		<button type="submit" class="btn btn-primary">Reset password</button>
+		<a class="btn btn-link" href="/login">Return to login</a>
+	</div>
+</form>

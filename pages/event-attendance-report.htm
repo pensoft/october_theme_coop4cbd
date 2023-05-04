@@ -1,0 +1,24 @@
+url = "/event-attendance-planner/:slug?|[a-zA-Z\-0-9]"
+layout = "default"
+title = "Event Planner"
+
+[EventReportingForm]
+
+[session]
+security = "user"
+redirect = "home"
+==
+<?php
+function onStart(){
+		if($this['message']){
+			header('Refresh: 10; URL='/event-attendance-report);
+		}
+		$this['id'] = (int)$this->param('id');
+	}
+?>
+==
+{% component 'session' %}
+<div class="container">
+    <a href="{{'event-attendees'|page}}" class="btn btn-primary" style="margin: 20px">&#10094;&nbsp; Back to events</a>
+    {% component 'EventReportingForm' slug=slug %}
+</div>

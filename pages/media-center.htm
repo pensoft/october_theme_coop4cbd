@@ -1,0 +1,286 @@
+url = "/media-center"
+layout = "default"
+title = "Media center"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+header_image = "media.jpg"
+
+[siteSearchInclude]
+==
+<?php
+use Pensoft\Media\Models\MediaLogos;
+use Pensoft\Media\Models\Flyers;
+use Pensoft\Media\Models\Newsletters;
+use Pensoft\Media\Models\Presentations;
+use Pensoft\Media\Models\Pressreleases;
+use Pensoft\Media\Models\Videos;
+use Pensoft\Media\Models\Graphic;
+use System\Models\File;
+
+function onStart(){
+	$this['logos'] =  MediaLogos::get();
+	$this['flyers'] =  Flyers::get();
+	$this['newsletters'] =  Newsletters::get();
+	$this['presentations'] =  Presentations::get();
+	$this['pressreleases'] =  Pressreleases::get();
+	$this['videos'] =  Videos::get();
+}
+
+
+function onDownloadFile(){
+	$file = File::find(post('id'));
+	$pathToFile = $file->getLocalPath();
+$fileName = $file->file_name;
+$fileType = $file->content_type;
+$headers = [
+'HTTP/1.1 200 OK',
+'Pragma: public',
+'Content-Type: '.$fileType,
+'Content-Type: application/force-download'
+];
+
+return Response::download($pathToFile, $fileName, $headers);
+}
+?>
+==
+{% component 'siteSearchInclude' %}
+<div class="container-fluid">
+    <div class="container">
+        <div class="row tabs">
+            {% if logos.count() %}
+            <div class="col-md col-sm-6 col-xs-12">
+                <div class="card-container text-center">
+                    <a href="#logo" title="Logo">
+                        <div class="card_border"><span class="card_image_container"  style="background: url({{'Logo.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/logo" title="Logo"></span></div>
+                        <span class="media_label">Logo</span>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if flyers.count() %}
+            <div class="col-md col-sm-6 col-xs-12">
+                <div class="card-container text-center">
+                    <a href="#promotional-materials" title="Promotional materials">
+                        <div class="card_border"><span class="card_image_container"  style="background: url({{'Promotional-materials.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/promotional-materials" title="Promotional materials"></span></div>
+                        <span class="media_label">Promotional materials</span>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if graphics.count() %}
+            <div class="col-md col-sm-6 col-xs-12">
+                <div class="card-container text-center">
+                    <a href="#poster" title="Poster">
+                        <div class="card_border"><span class="card_image_container"  style="background: url({{'poster.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/poster" title="Poster"></span></div>
+                        <span class="media_label">Poster</span>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if pressreleases.count() %}
+            <div class="col-md col-sm-6 col-xs-12">
+                <div class="card-container text-center">
+                    <a href="#press-releases" title="Press releases">
+                        <div class="card_border"><span class="card_image_container"  style="background: url({{'Press-releases.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/press-releases" title="Press releases"></span></div>
+                        <span class="media_label">Press releases</span>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+            {% if newsletters.count() %}
+            <div class="col-md col-sm-6 col-xs-12">
+                <div class="card-container text-center">
+                    <a href="#newsletters" title="Newsletter">
+                        <div class="card_border"><span class="card_image_container"  style="background: url({{'Newsletter.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/newsletters" title="Newsletter"></span></div>
+                        <span class="media_label">Newsletter</span>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+
+
+            {% if videos.count() %}
+            <div class="col-md col-sm-6 col-xs-12">
+                <div class="card-container text-center">
+                    <a href="#videos" title="Videos">
+                        <div class="card_border"><span class="card_image_container" style="background: url({{'Videos.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/videos" title="Videos"></span></div>
+                        <span class="media_label">Videos</span>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+
+
+
+            {% if presentations.count() %}
+            <div class="col-md col-sm-6 col-xs-12">
+                <div class="card-container text-center">
+                    <a href="#others" title="Others">
+                        <div class="card_border"><span class="card_image_container"  style="background: url({{'other.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/others" title="Others"></span></div>
+                        <span class="media_label">Others</span>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+
+
+        </div>
+        <!--tabs content	-->
+        {% if logos.count() %}
+        <div class="row card-container-row start-xs logo" id="logo" style="display: none;">
+            {% for record in logos %}
+            {# Use spaceless tag to remove spaces inside the A tag. #}
+            {% spaceless %}
+            {% if record.logo_image %}
+            <div class="col-md-3 col-xs-12 center-xs mb-4">
+                <p class="logo_container"><img src="{{record.logo_image.path}}" title="{{record.name}}"></p>
+                <div class="col-xs-12">
+                    <div class="text-center">
+                        <div class="card_title">Download {{record.name}}</div>
+                        {% if record.file_jpg %}
+                        {{form_open({ request: 'onDownloadFile' }) }}
+                        <input type="hidden" value="{{record.file_jpg.id}}" name="id">
+                        <button type="submit" class="btn btn-primary" data-attach-loading>JPG <i class="pr p-download"></i></button>
+                        {{ form_close() }}
+
+                        {% endif %}
+                        {% if record.file_png %}
+                        {{form_open({ request: 'onDownloadFile' }) }}
+                        <input type="hidden" value="{{record.file_png.id}}" name="id">
+                        <button type="submit" class="btn btn-primary" data-attach-loading>PNG <i class="pr p-download"></i></button>
+                        {{ form_close() }}
+                        {% endif %}
+                        {% if record.file_eps %}
+                        {{form_open({ request: 'onDownloadFile' }) }}
+                        <input type="hidden" value="{{record.file_eps.id}}" name="id">
+                        <button type="submit" class="btn btn-primary" data-attach-loading>SVG <i class="pr p-download"></i></button>
+                        {{ form_close() }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% endspaceless %}
+            {% else %}
+            {{ noRecordsMessage }}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+
+        {% if flyers.count() %}
+        <div class="row card-container-row start-xs flyer" id="promotional-materials" style="display: none;">
+            {% for record in flyers %}
+            {# Use spaceless tag to remove spaces inside the A tag. #}
+            {% spaceless %}
+            {% if record.flyer_image %}
+            <div class="col-md-4 col-xs-12 center-xs mb-4">
+                <h3><b>{{record.name}}</b></h3>
+                <p class="logo_container"><img src="{{record.flyer_image.path}}" title="{{record.name}}"></p>
+
+                {% if record.file %}
+                <div class="col-xs-12">
+                    <div class="text-center">
+
+                        {{form_open({ request: 'onDownloadFile' }) }}
+                        <input type="hidden" value="{{record.file.id}}" name="id">
+                        <button type="submit" class="btn btn-primary" data-attach-loading> Download <i class="pr p-download"></i></button>
+                        {{ form_close() }}
+
+                    </div>
+                </div>
+                {% endif %}
+
+            </div>
+
+
+            {% endif %}
+
+            {% endspaceless %}
+            {% else %}
+            {{ noRecordsMessage }}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if pressreleases.count() %}
+        <div class="row card-container-row start-xs press-releases press-relieses-container" id="press-releases" style="display: none;">
+            {% for record in pressreleases %}
+            <div class="col-xs-12 mb-4">
+                <div class="press-relies-item">
+                    <span class="date"> {{record.date |date('d F Y')}}</span> <br><br>
+                    <span class="card_title">{{record.name}}</span><br><br>
+
+                    <div class="body">{{record.description | raw}}</div>
+                    <div class="row link">
+                        {% for link in record.link %}
+                        <a href="{{link.url}}" target="_blank" class="btn btn-primary">{{link.text}}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if newsletters.count() %}
+        <div class="row card-container-row start-xs newsletters" id="newsletters" style="display: none;">
+            {% for record in newsletters %}
+            <div class="col-md-3 col-xs-12 newsletter_item mb-4">
+                <div class="text-center">
+                    <div class="date">{{record.date |date('F Y')}}</div>
+                    <span class="card_title" style="min-height: 100px;">{{record.name}}</span>
+                    {{form_open({ request: 'onDownloadFile' }) }}
+                    <input type="hidden" value="{{record.file.id}}" name="id">
+                    <button type="submit" class="btn btn-primary" data-attach-loading> Download <i class="pr p-download"></i></button>
+                    {{ form_close() }}
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if videos.count() %}
+        <div class="row card-container-row start-xs videos" id="videos" style="display: none;">
+            {% for record in videos %}
+            <div class="col-md-6 col-xs-12">
+                <div class="">
+                    <div class="card_title" style="height: 4em">{{record.name}}</div>
+                    {% if record.file %}
+                    <video controls="" width="100%"><source src="{{record.file.path}}" type="video/mp4"></video>
+
+                    <p>Attachment: {{record.file.file_name}}, {{record.file.size}}</p>
+
+                    {{form_open({ request: 'onDownloadFile' }) }}
+                    <input type="hidden" value="{{record.file.id}}" name="id">
+                    <button type="submit" class="btn btn-primary" data-attach-loading> Download <i class="pr p-download"></i></button>
+                    {{ form_close() }}
+
+
+                    {% endif %}
+
+                    {% if record.youtube_url %}
+                    <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{record.youtube_url}}" width="100%" height="422"></iframe>
+
+                    <p>&nbsp;</p>
+                    {% endif %}
+
+                    {% if record.vimeo_url %}
+                    <iframe width="100%" height="422" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            src="{{record.vimeo_url}}">
+                    </iframe>
+                    <p>&nbsp;</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>

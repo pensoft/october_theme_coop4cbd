@@ -1,0 +1,190 @@
+[menu]
+start = "id-1"
+activeNode = 0
+listItemClasses = "nav-item"
+primaryClasses = "navbar-nav"
+secondaryClasses = "dropdown-menu"
+numberOfLevels = 2
+
+[menu login]
+start = "id-13"
+activeNode = 0
+listItemClasses = "item"
+primaryClasses = "nav nav-pills"
+secondaryClasses = "dropdown-menu"
+numberOfLevels = 2
+
+[jumbotron]
+jumbotron = "intro"
+background = "transperant"
+templates = "template1"
+description_limit = 0
+==
+<?php
+use Pensoft\Articles\Models\Article;
+function onStart(){
+    $this['news'] = Article::news()->where('published_at', '<=', 'now()')->where('published', 'true')->orderBy('published_at', 'DESC')->take(10)->get();
+}
+?>
+==
+{% if user %}
+    {% set is_external = false %}
+    {% for group in user.groups %}
+        {% if group.code == 'external-users' %}
+            {% set is_external = true %}
+        {% endif %}
+    {% endfor %}
+
+<nav class="fixed navbar-loggedin-user ">
+    <div class="navbar-collapse collapse row middle-xs">
+        <div class="col-xs-12 col-md-9">{% if not is_external %} {% component 'login' %} {% endif %}</div>
+        <div class="col-xs-2 end-xs  col-md-3">
+            {% if user.avatar %}
+            <a href="/profile" class="profile_name"><span>{{ user.name }} {{ user.surname }} &nbsp; &nbsp; </span><img alt="{{ user.name }} {{ user.surname }}" src="{{user.avatar.getThumb(30,30, { mode : 'crop' } )}}" style="border-radius: 50%; margin-right:20px;" align="right"> </a>
+            {% else %}
+
+            <a href="/profile" class="profile_name"><span>{{ user.name }} {{ user.surname }} &nbsp; &nbsp; </span><img alt="{{ user.name }} {{ user.surname }}" src="{{ 'CMS_icons_avatar_white.svg'|media }}" width="30" height="30" style="margin-right:20px;" align="right"></a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+{% endif %}
+<nav class="navbar fixed pr-1 pl-1" id="headernavbar" {% if user %} style="margin-top: 58px;" {% endif %}>
+    <a href="{{'home'|page}}" class="navbar-brand" id="navbar-brand" style="background: url('{{ this.theme.site_logo.getPath() }}') no-repeat; background-position: center; background-size: contain; "></a>
+    <div class="navbar-collapse collapse end-xs" id="headerNavbarNav" style="display: none;">
+
+
+        {% component 'menu' %}
+
+        {% if this.theme.facebook and this.theme.facebook_url %}
+        <a href="{{this.theme.facebook_url}}" target="_blank" class="pr p-secondary p-facebook big" target="_blank"></a>
+        {% endif %}
+        {% if this.theme.twitter and this.theme.twitter_url %}
+        <a href="{{this.theme.twitter_url}}" target="_blank" class="pr p-secondary p-twitter big" target="_blank"></a>
+        {% endif %}
+        {% if this.theme.linkedin and this.theme.linkedin_url %}
+        <a  href="{{this.theme.linkedin_url}}" target="_blank" class="pr p-secondary p-linkedin big" target="_blank"></a>
+        {% endif %}
+        {% if this.theme.youtube and this.theme.youtube_url %}
+        <a  href="{{this.theme.youtube_url}}" target="_blank" class="pr p-secondary p-youtube big" target="_blank"></a>
+        {% endif %}
+        {% if this.theme.instagram and this.theme.instagram_url %}
+        <a  href="{{this.theme.instagram_url}}" target="_blank" class="pr p-secondary p-instagram big" target="_blank"></a>
+        {% endif %}
+        {% if this.theme.researchgate and this.theme.researchgate_url %}
+        <a  href="{{this.theme.researchgate_url}}" target="_blank" class="pr p-secondary p-researchgate big" target="_blank"></a>
+        {% endif %}
+
+        <div id="headerNavbarLogin">
+            <ul class="navbar-nav" style="padding: 0; margin: 0;">
+
+            </ul>
+        </div>
+    </div>
+    <div id="menuToggle">
+        <input type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+        {% component 'menu' %}
+    </div>
+    <a class="pr p-search middle search-btn" onclick="showSearchForm();"></a>
+    <div id="search" class="search" style="display: none;">
+        <div class="close-search" onclick="hideSearchForm();">&#x2715;</div>
+        <form class="input-group align-items-start" action="{{ url('search')}}" method="get">
+            <input class="form-control search_input" style="color: #000;" name="q" type="text" autocomplete="on" placeholder="Search">
+            <button class="btn btn-link pr p-search big text-grey-search-btn" type="submit"></button>
+        </form>
+    </div>
+
+</nav>
+
+{% if this.theme.header_image and page_id == 'home' %}
+<div class="container-fluid homepage-background">
+    <div class="container">
+        <div class="header-image {% if page_id != 'search' %} {{page_id}} {% endif %}">
+
+    <div class="header-image-bar" style="background: url('{{this.theme.header_image.getPath()}}') no-repeat;"></div>
+    <div class="jumbotron" data-aos="fade-right">
+        {% if page_id != 'home' and page_id != 'search' %}
+        <h1 class="underline white" {% if user %} style="margin-top:35px;"{% endif %}>
+            {%if page_title%} {{page_title}} {%else%} {{site_name}} {%endif%}</h1>
+        {%endif%}
+        {% if page_id == 'home' and tag_line%}
+        <div class="container">
+            <div class="intro">
+                <div class="logo_main"></div>
+                <p>{{tag_line|raw}}</p>
+                <div class="intro-text">
+                    {% component 'jumbotron' %}
+                </div>
+                <div class="intro_btn"><a href="{{'about'|page}}">More about the project <i></i> </a> </div>
+            </div>
+        </div>
+        {% endif %}
+        <div class="scrollDownIcon">
+            <a onclick="$('html, body').animate({ scrollTop: $('.header-image-bar').height() }, 500);"></a>
+        </div>
+
+    </div>
+
+</div>
+        <!-- latest from news -->
+        <div class="container highlights-news">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1 class="base_heading highlight_new_template_3">Latest News</h1>
+                </div>
+            </div>
+            <div class="row newslist">
+                <div class="col-xs-12">
+                    {% if news.count > 3 %}
+                    <div id="slick">
+                    {% endif %}
+                        {% for highlight in news %}
+                        <div class="slide">
+                            <div class="col-xs-12 col-md-4 news-item item-{{highlight.slug}}">
+
+
+                                <div class="row news_column">
+                                    <a href="{{'news'|page}}/{{highlight.slug}}">
+                                        <div class="news_image">
+                                            <img class="news-img-top" src="{{ highlight.cover|crop_image|resize(376, 224, {'mode': 'crop'}) }}" />
+                                        </div>
+                                        <div class="news-container">
+                                            <div class="news-title">
+                                                <h3 class="card-title">{{highlight.title}}</h3>
+                                            </div>
+                                            <div class="read_more">Read more</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% if news.count > 3 %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container-fluid">
+    <div class="header-image {% if page_id != 'search' %} {{page_id}} {% endif %}">
+        <div class="header-image-bar" style="background: url('{{'about-header.jpg'|media}}') center no-repeat; {% if user %}margin-top:142px!important;{% endif %}">
+            <h1 class="underline white">
+                {%if page_title%} {{page_title}} {%else%} {{site_name}} {%endif%}</h1>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+{% if user %}
+<script>$(document).trigger('profile')</script>
+<script>$(document).trigger('signout')</script>
+{% else %}
+<script>$(document).trigger('signin')</script>
+{% endif %}

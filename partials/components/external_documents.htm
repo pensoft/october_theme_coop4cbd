@@ -1,0 +1,36 @@
+<div class="library-item external_library_item">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="row mb-3">
+                <div class="col-md-6 col-xs-12">
+                    <div class="library-type-label type_color_{{record.papertype_id}}">
+                        <span class="doc_type">{{record.papertype}}</span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12 end-xs">
+                    {% if user %}
+                        {% set is_external = false %}
+                        {% for group in user.groups %}
+                            {% if group.code == 'external-users' %}
+                                {% set is_external = true %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if user and is_external %}
+                        <a href="http://bdj.kremena.pensoft.com/login.php?autolog_hash={{autolog_hash}}&document_id={{ record.document_id }}&view_role=5" target="_blank" class="read_more">Review this document</a>
+                    {% else %}
+                        <a href="/login" target="_blank" class="read_more">Review this document</a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <h3 class="card-title">{{ record.name|raw }}</h3>
+            <div class="body">
+                <b>Authors:</b> {{record.authors_list|raw}}
+            </div>
+        </div>
+
+    </div>
+
+</div>

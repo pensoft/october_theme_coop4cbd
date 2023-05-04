@@ -1,0 +1,396 @@
+.fc-toolbar {
+    flex-direction: column;
+}
+.breakpoint-large({
+    .fc-toolbar {
+        flex-direction: row;
+    }
+});
+
+.fc-button-primary:disabled{
+    visibility: hidden;
+    .breakpoint-large-down({
+        display: none;
+    })
+}
+
+.fc-button-group > .fc-button, .fc-button-group > .fc-button:not(:first-child), .fc-button-group > .fc-button:not(:last-child){
+    background: @link-color!important;
+    color: @white-color!important;
+    border: 1px solid @link-color;
+    border-radius: 20px;
+}
+
+.fc-button-group > .fc-today-button, .fc-button-group > fc-prev-button{
+    //border-radius: 0;
+}
+
+.fc-button-group > .fc-button:hover, .fc-button-group > .fc-button:not(:first-child):hover, .fc-button-primary:not(:disabled).fc-button-active{
+    background: @dark-color!important;
+    color:@white-color!important;
+    border: 1px solid @dark-color!important;
+}
+
+.fc-button-group > .fc-button{
+    .breakpoint-large-down({
+        margin: 50px 3px;
+    });
+
+}
+
+.fc-toolbar.fc-header-toolbar{
+    display: flex;
+}
+
+.fc-left{
+    order: 2;
+    position: absolute;
+    margin-left: 320px;
+    .breakpoint-large-down({
+        //order: 1;
+        position: unset;
+        margin-left: 0px;
+    });
+}
+
+.fc-center{
+    order: 1;
+    h2{
+        text-transform: none;
+    }
+}
+
+.fc-right{
+    order: 3;
+}
+.fc-button{
+    .breakpoint-large-down({
+        margin: 20px 5px 10px 5px!important;
+    });
+
+}
+
+.fc-left .fc-button{
+    padding: 6px;
+    margin: 0 10px;
+}
+
+.fc-right .fc-button{
+    padding: 5px 6px;
+    margin: 0 10px;
+    width: 80px;
+}
+
+.fc-right .fc-button:nth-of-type(3){
+    margin: 0 0 0 10px;
+}
+
+.fc-event{
+    background: @green-color!important;
+    border-color: @green-color!important;
+    padding: 10px!important;
+}
+
+.fc-view-container{
+    background: @white-color;
+    padding: 0px;
+}
+
+.fc-day-grid-event .fc-time{
+    display: none;
+}
+
+.event-date{
+    font-weight: 500;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background:@link-color ;
+    color: @white-color!important;
+    width: 220px;
+    height: 48px;
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.event-place{
+    color: @dark-color;
+    font-weight: 500;
+}
+
+.events .tabs{
+    justify-content: center;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    .breakpoint-large-down({
+        width: fit-content;
+        margin: 0 auto;
+    });
+
+    a{
+        width: fit-content;
+        font-weight: bold;
+        cursor: pointer;
+        color: @link-color;
+        padding-left: 30px;
+        float: left;
+        .breakpoint-large-down({
+            margin-left: 0px;
+        });
+
+        &:first-of-type{
+            background: url("../../assets/images/List-view.svg") left no-repeat;
+            background-size: 20px;
+            height: 25px;
+            line-height: 25px;
+
+            border-right: 3px solid #7887a0;
+            padding-right: 20px;
+            &.active{
+                background: url("../../assets/images/List-view-grey.svg") left no-repeat;
+                background-size: 20px;
+                color: #cfd6e3;
+            }
+        }
+
+        &:last-of-type{
+            background: url("../../assets/images/calendar-icon-blue.svg") left no-repeat;
+            background-size: 22px;
+            height: 25px;
+            line-height: 25px;
+            margin-left: 20px;
+            &.active{
+                background: url("../../assets/images/calendar-icon.svg") left no-repeat;
+                background-size: 22px;
+                color: #cfd6e3;
+            }
+        }
+
+    }
+
+}
+
+.events{
+    .tabs + div.row{
+        width: 100%;
+    }
+}
+
+
+.events{
+
+    .container{
+        padding: 45px 20px;
+    }
+
+    .container:first-of-type{
+        position: relative;
+
+    }
+    .some_news_background{
+        background: url("../../assets/images/news-graphic.svg") top left no-repeat;
+        background-size: 200px;
+        left: -250px;
+        width: 200px;
+        height: 400px;
+        position: absolute;
+    }
+    .some_news_background2{
+        background: url("../../assets/images/news-graphic-2.svg") top right no-repeat;
+        background-size: 200px;
+        right: -150px;
+        width: 200px;
+        height: 500px;
+        position: absolute;
+        .breakpoint-huge-down({
+            display: none;
+        });
+    }
+
+    .newslist .col-xs-12:first-child{
+        display: unset!important;
+    }
+
+    .news-title {
+        margin-left: 0;
+    }
+    .content{
+        margin-left: 0;
+    }
+    img{
+        width: unset;
+        margin: 0;
+    }
+    .single-news-item{
+        .event-date{
+            color: @dark-color;
+            margin: 0px 0 0px 0px;
+        }
+    }
+    h1{
+        //margin-top: 50px;
+    }
+}
+
+
+.fc-listYear-button.fc-button.fc-button-primary{
+    display: none;
+}
+
+.fc-button-primary{
+    background: @default-color!important;
+    border-radius: 3px!important;
+    &:hover{
+        cursor: pointer;
+        background: @dark-color!important;
+    }
+}
+
+.events_list_container{
+    width: 100%;
+    h1{
+        color: @text-color-default;
+    }
+    .entry_item{
+        color: @text-color-default;
+        font-size: 20px;
+        font-weight: normal;
+        background: @secondary-color;
+        border-radius: 3px;
+        padding: 25px;
+
+        .date_container{
+            background: url("../../assets/images/Events-rectangle.svg") center no-repeat;
+            background-size: contain;
+            color: @white-color;
+            text-align: center;
+            padding: 22px 44px;
+            max-width: fit-content;
+            margin-right: 20px;
+        }
+
+
+        span{
+            line-height: 26px;
+            width: 100%;
+            display: block;
+        }
+
+        .content_text{
+            display: flex;
+            align-items: self-start;
+            flex-direction: column;
+        }
+
+        .date_week{
+            font-size: 24px;
+            color: @text-color-default;
+            font-weight: bold;
+            text-align: left!important;
+            margin-bottom: 20px;
+            .breakpoint-large-down({
+                text-align: center!important;
+            });
+        }
+
+        .date_day{
+            font-size: 27px;
+            font-weight: bold;
+            width: 100%;
+        }
+        .date_month{
+            font-size: 27px;
+            font-weight: bold;
+            width: 100%;
+            text-transform: uppercase;
+        }
+        .date_year{
+            font-size: 27px;
+            font-weight: bold;
+            width: 100%;
+        }
+        .read_more{
+            border-top: none;
+            background: url("../../assets/images/arrow-right.svg") right no-repeat;
+            background-size: 15px;
+            padding-right: 25px;
+            &:hover{
+                opacity: 0.6;
+            }
+        }
+    }
+}
+
+
+.upcoming_events_container{
+    background: url("../../assets/images/events-background.png") no-repeat;
+    background-size: cover;
+    padding: 52px 48px!important;
+    border-radius: 3px;
+    .breakpoint-huge-down({
+        background-size: cover!important;
+        border-radius: 3px;
+    });
+
+    .date_and_location{
+        color: @green-color;
+    }
+    h1{
+        color: @white-color;
+        a{
+            color: @white-color;
+            &:hover{
+                opacity: 0.7;
+            }
+        }
+    }
+    a{
+        .entry_item{
+            color: @white-color;
+            font-size: 22px;
+            font-weight: normal;
+            padding: 40px 0;
+            border-bottom: 1px solid @white-color;
+
+
+            span{
+                line-height: 26px;
+            }
+
+
+            h3{
+                font-size: 24px;
+                color: @white-color;
+                font-weight: bold;
+                text-align: left!important;
+                .breakpoint-large-down({
+                    text-align: center!important;
+                });
+            }
+
+            .date_day{
+                font-size: 30px;
+                font-weight: bold;
+            }
+            .date_month{
+                font-size: 20px;
+                font-weight: bold;
+            }
+            .date_year{
+                font-size: 16px;
+                font-weight: bold;
+            }
+        }
+
+        &:last-of-type{
+            .entry_item{
+                border-bottom: none!important;
+                padding-bottom: 0!important;
+            }
+        }
+    }
+
+}

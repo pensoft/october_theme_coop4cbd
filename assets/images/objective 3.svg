@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="83" height="83" viewBox="0 0 83 83">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#94a4c4"/>
+      <stop offset="1" stop-color="#4bdba3"/>
+    </linearGradient>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_3388" data-name="Rectangle 3388" width="83" height="83" transform="translate(0 0.46)" fill="url(#linear-gradient)"/>
+    </clipPath>
+    <linearGradient id="linear-gradient-3" y1="4.696" x2="0.161" y2="-4.961" xlink:href="#linear-gradient"/>
+  </defs>
+  <g id="Group_65" data-name="Group 65" transform="translate(0.075 -0.975)">
+    <g id="Group_64" data-name="Group 64" transform="translate(-0.075 0.515)" clip-path="url(#clip-path)">
+      <path id="Path_96" data-name="Path 96" d="M84.3,14.533,70.183.414a1.4,1.4,0,0,0-1-.4V0H18.356a1.411,1.411,0,0,0-1.412,1.412V2.824H1.413a1.409,1.409,0,0,0-1,2.4c.085.085,3.784,4.01,7.667,14.543H1.413a1.417,1.417,0,0,0-1.271.8,1.385,1.385,0,0,0,.169,1.483c.169.212,16.11,20.7,16.618,59.4.014.607.014,1.228.014,1.85a1.411,1.411,0,0,0,1.412,1.412H83.3A1.411,1.411,0,0,0,84.716,83.3V15.531H84.7a1.4,1.4,0,0,0-.4-1M4.152,22.591H9.065A136.554,136.554,0,0,1,14.29,44.969,87.818,87.818,0,0,0,4.152,22.591M16.944,43.448a139.6,139.6,0,0,0-4.829-20.858c-.311-.988-.635-1.934-.946-2.824A59.891,59.891,0,0,0,4.321,5.648H16.944ZM70.6,4.82l9.3,9.3H70.6Zm11.3,77.071H19.768V2.824h48V15.531a1.411,1.411,0,0,0,1.412,1.412H81.892Z" transform="translate(-0.334 -0.42)" fill="url(#linear-gradient)"/>
+      <rect id="Rectangle_3371" data-name="Rectangle 3371" width="19" height="3" transform="translate(21 5.46)" fill="url(#linear-gradient-3)"/>
+      <rect id="Rectangle_3372" data-name="Rectangle 3372" width="44" height="2" transform="translate(21 11.46)" fill="url(#linear-gradient-3)"/>
+      <rect id="Rectangle_3373" data-name="Rectangle 3373" width="44" transform="translate(21 17.46)" fill="url(#linear-gradient)"/>
+      <rect id="Rectangle_3374" data-name="Rectangle 3374" width="57" height="1" transform="translate(21 22.46)" fill="url(#linear-gradient-3)"/>
+      <rect id="Rectangle_3375" data-name="Rectangle 3375" width="57" height="4" transform="translate(21 27.46)" fill="url(#linear-gradient-3)"/>
+      <rect id="Rectangle_3376" data-name="Rectangle 3376" width="57" height="1" transform="translate(21 35.46)" fill="url(#linear-gradient-3)"/>
+      <rect id="Rectangle_3377" data-name="Rectangle 3377" width="57" height="4" transform="translate(21 38.46)" fill="url(#linear-gradient-3)"/>
+      <rect id="Rectangle_3378" data-name="Rectangle 3378" width="57" transform="translate(21 46.46)" fill="url(#linear-gradient)"/>
+      <rect id="Rectangle_3379" data-name="Rectangle 3379" width="57" height="4" transform="translate(21 49.46)" fill="url(#linear-gradient-3)"/>
+      <rect id="Rectangle_3380" data-name="Rectangle 3380" width="57" height="5" transform="translate(21 54.46)" fill="url(#linear-gradient-3)"/>
+      <rect id="Rectangle_3381" data-name="Rectangle 3381" width="18" height="3" transform="translate(60 74.46)" fill="url(#linear-gradient)"/>
+      <rect id="Rectangle_3382" data-name="Rectangle 3382" width="57" height="3" transform="translate(21 61.46)" fill="url(#linear-gradient-3)"/>
+      <rect id="Rectangle_3383" data-name="Rectangle 3383" width="19" height="1" transform="translate(21 69.46)" fill="url(#linear-gradient)"/>
+      <rect id="Rectangle_3384" data-name="Rectangle 3384" width="2" height="2" transform="translate(60 70.46)" fill="url(#linear-gradient)"/>
+      <rect id="Rectangle_3385" data-name="Rectangle 3385" width="1" height="2" transform="translate(65 70.46)" fill="url(#linear-gradient)"/>
+      <rect id="Rectangle_3386" data-name="Rectangle 3386" width="1" height="2" transform="translate(71 70.46)" fill="url(#linear-gradient)"/>
+      <rect id="Rectangle_3387" data-name="Rectangle 3387" width="2" height="2" transform="translate(76 70.46)" fill="url(#linear-gradient)"/>
+    </g>
+  </g>
+</svg>

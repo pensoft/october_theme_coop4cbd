@@ -1,0 +1,83 @@
+url = "/resources/gallery"
+layout = "default"
+title = "Resources"
+is_hidden = 0
+meta_description = "Gallery"
+seo_keywords = "keywords"
+robot_index = "index"
+robot_follow = "follow"
+
+[siteSearchInclude]
+
+[jumbotron intro]
+jumbotron = "gallery"
+title = 1
+background = "#ffffff"
+templates = "template1"
+description_limit = 0
+==
+<?php
+use Pensoft\Articles\Models\Article;
+use System\Models\File;
+
+function onStart(){
+	$this['galleyList'] =  Article::where('type', 2)->get();
+	if(get('download')){
+		$file = File::find((int)get('download'));
+		$file_name = $file->getLocalPath();
+
+$ext= $file->getExtension();
+$recordName = get('file_name') ? get('file_name') : 'UrbanTreeGuard_gallery.'.$ext;
+
+if (file_exists($file_name)) {
+header('Content-Description: File Transfer');
+header('Content-Type: application/octet-stream');
+header("Content-Type: application/force-download");
+header('Content-Disposition: atntachment; filename='.$recordName);
+header('Content-Transfer-Encoding: binary');
+header('Expires: 0');
+header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+header('Pragma: public');
+header('Content-Length: ' . filesize($file_name));
+ob_clean();
+flush();
+readfile($file_name);
+exit();
+}
+return Redirect::to('/resources/gallery');
+}
+}
+?>
+==
+{% component 'siteSearchInclude' %}
+<div class="container">
+    <div class="row middle-xs">
+        <div class="col-md-6 col-xs-12">
+             <div class="intro">
+                 {% component 'intro' %}
+             </div>
+        </div>
+        
+    </div>
+    
+</div>
+<div class="container">
+	<div class="row top-xs gallery-container between-md around-xs">
+		{% for i, gallery in galleyList %}
+		<div class="col-lg-3 col-md-6 col-xs-12 gallery-item">
+			<img src="{{gallery.cover.path}}">
+			<a
+					href="{{ ''| page }}?{{queries}}&download={{gallery.cover.id}}&file_name={{gallery.cover.file_name|replace({' ': '_'})}}"
+					title="{{gallery.title}}"
+					class="download-gallery"></a>
+			<span class="description">{{gallery.content|raw}}</span>
+			{% if gallery.keywords %}
+			{% set foo = gallery.keywords|split(',') %}
+			{% set keywords = foo|join(', ') %}
+			<span class="keywords"><b>Keywords:</b> {{keywords}}</span>{% endif %}
+			<span class="camera">{{gallery.title}}</span>
+		</div>
+		{% endfor %}
+	</div>
+
+</div>

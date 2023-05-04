@@ -1,0 +1,37 @@
+{% for profile in profiles %}
+
+<div class="accordion-border key_{{i}}"><!-- 1 --><!-- css 1 -->
+	<div class="row middle-xs accordion-toggle">
+		<div class="col-xs start-xs title_container">
+			{% if profile.avatar %}
+			<img alt="{{ profile.names }}" src="{{profile.avatar.getThumb(25,25, { mode : 'crop' } )}}">
+			{% else %}
+			<img alt="{{ profile.names }}" src="{{ 'person.svg'|media }}">
+			{% endif %}
+
+			{{profile.names}}</div>
+		<div class="col-xs-2 end-xs plusminus"><span class="plus"></span></div>
+	</div>
+	<div class="row accordion-content" style="display: none;">
+		<div class="col-lg-3 col-sm-6 col-xs-12 mb-2">
+			{%if profile.department %}{{profile.department}}<br> {%endif%}
+			{%if profile.address %}{{profile.address}}<br>{%endif%}
+			{%if profile.phone %}{{profile.phone}}<br>{%endif%}
+			{%if profile.email %}<a href="mailto:{{profile.email}}">{{profile.email}}</a><br>{%endif%}
+		</div>
+		<div class="col-lg-3 col-sm-6 col-xs-12 mb-2">
+			<h4>Participating actions</h4>
+			{{profile.content|raw}}
+		</div>
+		<div class="col-lg-3 col-sm-6 col-xs-12 mb-2">
+			<h4>Working Groups</h4>
+			<!--{{wg.getWG(profile.category_id).name}}-->
+			{{profile.position}}
+		</div>
+		<div class="col-lg-3 col-sm-6 col-xs-12 mb-2">
+			<h4>Country</h4>
+			{{country.getCountry(profile.country_id).name}}
+		</div>
+	</div>
+</div>
+{% endfor %}

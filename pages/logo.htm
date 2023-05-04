@@ -1,0 +1,90 @@
+title = "Logo"
+url = "/media-center/logo"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[builderList mediaLogosList]
+modelClass = "pensoft\Media\Models\MediaLogos"
+scope = "-"
+scopeValue = "{{ :scope }}"
+displayColumn = "name"
+noRecordsMessage = "No records found"
+detailsPage = "-"
+detailsUrlParameter = "id"
+pageNumber = "{{ :page }}"
+==
+<?php
+use Pensoft\Media\Models\MediaLogos;
+use System\Models\File;
+
+function onStart(){
+	$this['mediaLogosList'] =  MediaLogos::get();
+	if(get('download')){
+		$file = File::find((int)get('download'));
+		$file_name = $file->getLocalPath();
+
+$ext= $file->getExtension();
+$recordName = get('file_name') ? get('file_name') : 'COOP4CBD_logo.'.$ext;
+
+if (file_exists($file_name)) {
+header('Content-Description: File Transfer');
+header('Content-Type: application/octet-stream');
+header("Content-Type: application/force-download");
+header('Content-Disposition: atntachment; filename='.$recordName);
+header('Content-Transfer-Encoding: binary');
+header('Expires: 0');
+header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+header('Pragma: public');
+header('Content-Length: ' . filesize($file_name));
+ob_clean();
+flush();
+readfile($file_name);
+exit();
+}
+return Redirect::to('/media-center/logo');
+}
+}
+?>
+==
+<div class="container">
+
+
+    {% set records = mediaLogosList %}
+    {% set displayColumn = mediaLogosList.displayColumn %}
+    {% set noRecordsMessage = mediaLogosList.noRecordsMessage %}
+    {% set detailsPage = mediaLogosList.detailsPage %}
+    {% set detailsKeyColumn = mediaLogosList.detailsKeyColumn %}
+    {% set detailsUrlParameter = mediaLogosList.detailsUrlParameter %}
+
+    <div class="row card-container-row mb-4 start-xs">
+        {% for record in records %}
+        {# Use spaceless tag to remove spaces inside the A tag. #}
+        {% spaceless %}
+        {% if record.logo_image %}
+        <div class="col-md-3 col-xs-12 center-xs">
+            <p class="logo_container"><img src="{{record.logo_image.path}}" title="{{record.name}}"></p>
+            <div class="col-xs-12">
+                <div class="text-center">
+                    <b>Download {{record.name}}</b> <br><br>
+                    {% if record.file_jpg %}
+                    <a href="{{ ''| page }}?{{queries}}&download={{record.file_jpg.id}}&file_name={{record.file_jpg.file_name|replace({' ': '_'})}}" title="Logo pack" class="btn btn-primary"><i class="pr p-download"></i>  JPG</a> &nbsp;
+                    {% endif %}
+                    {% if record.file_png %}
+                    <a href="{{ ''| page }}?{{queries}}&download={{record.file_png.id}}&file_name={{record.file_png.file_name|replace({' ': '_'})}}" title="Logo pack" class="btn btn-primary"><i class="pr p-download"></i>  PNG</a> &nbsp;
+                    {% endif %}
+                    {% if record.file_eps %}
+                    <a href="{{ ''| page }}?{{queries}}&download={{record.file_eps.id}}&file_name={{record.file_eps.file_name|replace({' ': '_'})}}" title="Logo pack" class="btn btn-primary"><i class="pr p-download"></i>  SVG</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% endspaceless %}
+        {% else %}
+        {{ noRecordsMessage }}
+        {% endfor %}
+    </div>
+</div>

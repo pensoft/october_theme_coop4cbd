@@ -1,0 +1,58 @@
+url = "/internal-repository/:slug?|[a-zA-Z\-0-9]/:parent_id?|[0-9]"
+layout = "default"
+title = "INTERNAL REPOSITORY"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[session]
+security = "user"
+allowedUserGroups[] = "internal-users"
+allowedUserGroups[] = "registered"
+allowedUserGroups[] = "guest"
+redirect = "login"
+
+[internalrepository]
+==
+<?php
+use Pensoft\Internaldocuments\Models\Subfolders;
+use System\Models\File;
+
+function onStart(){
+
+if(get('download')){
+$file = File::find((int)get('download'));
+$file_name = $file->getLocalPath();
+$ext= $file->getExtension();
+$recordName = $file->file_name ? $file->file_name : 'COOP4CBD_file.'.$ext;
+
+
+if (file_exists($file_name)) {
+header('Content-Description: File Transfer');
+header('Content-Type: application/octet-stream');
+header("Content-Type: application/force-download");
+header('Content-Disposition: atntachment; filename='.$recordName);
+header('Content-Transfer-Encoding: binary');
+header('Expires: 0');
+header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+header('Pragma: public');
+header('Content-Length: ' . filesize($file_name));
+ob_clean();
+flush();
+readfile($file_name);
+exit();
+}
+return Redirect::back();
+}
+
+
+}
+?>
+==
+{% component 'session' %}
+<div class="container">
+
+	{% component 'internalrepository' %}
+
+
+</div>

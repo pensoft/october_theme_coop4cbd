@@ -1,0 +1,69 @@
+title = "JPI Climate"
+layout = "default"
+url = "/jpi-climate"
+
+[siteSearchInclude]
+
+[jumbotron what]
+jumbotron = "what-jpi-climate"
+title = 1
+background = "unset"
+templates = "template1"
+description_limit = 0
+
+[jumbotron jpi_what_image]
+jumbotron = "jpi-climate-image"
+background = "unset"
+templates = "template1"
+description_limit = 0
+
+[jumbotron jpi_with_image]
+jumbotron = "magica-within-jpi-climate-image"
+background = "unset"
+templates = "template1"
+description_limit = 0
+
+[jumbotron with]
+jumbotron = "magica-within-jpi-climate"
+title = 1
+background = "unset"
+templates = "template1"
+description_limit = 0
+==
+{% component 'siteSearchInclude' %}
+<div class="container-fluid timeline_container left">
+    <div class="blue_line"></div>
+    <div class="container jpi">
+        <div class="row top-xs mt-4">
+            <div class="col-md-6 col-xs-12">
+                <div class="jpi-what">
+
+                    {% component 'what' %}
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <div class="jpi-what-image">
+                    {% component 'jpi_what_image' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid timeline_container right">
+    <div class="blue_line"></div>
+    <div class="container jpi">
+        <div class="row top-xs">
+            <div class="col-md-6 col-xs-12">
+                <div class="jpi-with-image">
+                    {% component 'jpi_with_image' %}
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <div class="jpi-with">
+
+                    {% component 'with' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

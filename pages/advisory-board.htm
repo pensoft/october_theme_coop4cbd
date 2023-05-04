@@ -1,0 +1,38 @@
+url = "/advisory-board"
+layout = "default"
+title = "Advisory board"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[siteSearchInclude]
+==
+<?php
+use Pensoft\Cardprofiles\Models\Profiles as Profiles;
+
+function onStart(){
+
+
+
+$this['advisory_board'] = Profiles::where('category_id', 3)->get();
+
+}
+?>
+==
+{% component 'siteSearchInclude' %}
+
+<div class="container">
+    <div class="row between-md around-xs partners_list_container">
+        {% for profile in advisory_board %}
+        <div class="col-xs-12 col-md-6 accordion-border" style="cursor: unset;">
+            <div class="accordion-content">
+                <b>{{profile.names}}</b>{% if profile.position %}, {{profile.position}}{% endif %}{% if profile.address %}, {{profile.address}}{% endif %}
+                {% if profile.email %}
+                <br><a class="email" href="mailto:{{profile.email}}">{{profile.email}}</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>

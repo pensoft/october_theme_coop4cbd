@@ -1,0 +1,67 @@
+url = "/media-center/announcements"
+layout = "default"
+title = "Announcements"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[builderList mediaPressReleasesList]
+modelClass = "pensoft\Media\Models\Pressreleases"
+scope = "-"
+scopeValue = "{{ :scope }}"
+displayColumn = "name"
+noRecordsMessage = "No records found"
+detailsPage = "-"
+detailsUrlParameter = "id"
+pageNumber = "{{ :page }}"
+
+[jumbotron]
+jumbotron = "under-construction"
+title = 1
+background = "transperant"
+templates = "template1"
+description_limit = 0
+==
+<?php
+use Pensoft\Media\Models\Pressreleases;
+
+function onStart(){
+	$this['mediaPressreleasesList'] =  Pressreleases::orderBy('date', 'desc')->get();
+}
+?>
+==
+{% set records = mediaPressreleasesList %}
+
+{% if records.count %}
+<div class="container">
+
+    <div class="row press-relieses-container">
+
+
+        {% for record in records %}
+        {# Use spaceless tag to remove spaces inside the A tag. #}
+        {% spaceless %}
+        <div class="col-xs-12">
+            <div class="press-relies-item">
+                <span class="date"> {{record.date |date('d F Y')}}</span> <br><br>
+                <span class="card_title">{{record.name}}</span><br><br>
+
+                <div class="body">{{record.description | raw}}</div>
+                <div class="row link">
+                    {% for link in record.link %}
+                    <a href="{{link.url}}" target="_blank" class="btn btn-primary">{{link.text}}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
+        {% endspaceless %}
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+<div class="container-fluid bg-secondary coming_soon">
+    {% component 'jumbotron' %}
+</div>
+{% endif %}

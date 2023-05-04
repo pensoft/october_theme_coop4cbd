@@ -1,0 +1,169 @@
+url = "/events/:slug?|[a-zA-Z\-0-9]"
+layout = "default"
+title = "Events"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+header_image = "partners.jpg"
+
+[calendar]
+default = "true"
+limit = "null"
+category = "null"
+language = "en"
+redirect_to_detailed_page = "false"
+==
+<?php
+use Pensoft\Calendar\Models\Entry;
+
+function onStart(){
+
+    if($this->param('slug')){
+$this['entry'] =  Entry::select(
+'*',
+'title',
+'place',
+'description',
+'url',
+
+DB::raw("to_char(\"start\", 'DD') as start_day"),
+DB::raw("to_char(\"start\", 'YYYY') as start_year"),
+DB::raw("to_char(\"end\", 'DD') as end_day"),
+DB::raw("to_char(\"end\", 'YYYY') as end_year"),
+DB::raw("to_char(\"start\", 'month') as start_month"),
+DB::raw("to_char(\"end\", 'month') as end_month"),
+DB::raw("
+\"end\" is not null as has_end
+")
+
+
+)->where('slug', $this->param('slug'))->first();
+
+
+
+\BennoThommo\Meta\Meta::set('twitter:card', 'summary');
+\BennoThommo\Meta\Meta::set('twitter:title', $this['entry']['title']);
+\BennoThommo\Meta\Meta::set('twitter:description', str_limit(Html::strip($this['entry']['description']), 255));
+\BennoThommo\Meta\Meta::set('og:title', $this['entry']['title']);
+\BennoThommo\Meta\Meta::set('og:description', str_limit(Html::strip($this['entry']['description']), 255) );
+\BennoThommo\Meta\Meta::set('og:type', 'article');
+\BennoThommo\Meta\Meta::set('og:url', $this->pageUrl(''));
+if($this['entry']['cover_image']){
+\BennoThommo\Meta\Meta::set('twitter:image', $this['entry']['cover_image']->getThumb(300, 300, ['mode' => 'crop']));
+
+\BennoThommo\Meta\Meta::set('og:image', $this['entry']['cover_image']->getThumb(600, 314, ['mode' => 'crop']));
+\BennoThommo\Meta\Meta::set('og:image:width', 600);
+\BennoThommo\Meta\Meta::set('og:image:height', 314);
+}
+
+}
+$this['page_url'] = $this->pageUrl('');
+$this['entries'] = Entry::orderBy('start', 'desc')->paginate(20);
+
+$this['slug'] = $this->param('slug');
+}
+?>
+==
+{% if not slug %}
+<div class="container">
+    <div class="tabs">
+        <a class="" href="#listView">List view</a>
+        <a class="" href="#calendarView">Calendar view</a>
+
+    </div>
+</div>
+<!--tabs content	-->
+<div class="container-fluid">
+    <div class="container">
+
+        <div class="row" id="listView">
+            <div class="events_list_container">
+                {% for entry in entries %}
+                {% set url = entry.url ?  entry.url : '/events/' ~ entry.slug %}
+
+                <div class="row entry_item middle-xs">
+                    <div class="col-md-2 col-xs-12 date_container">
+                        <span class="date_day">{{entry.start|date("d")}}</span>
+                        <span class="date_month">{{entry.start|date("M")}}</span>
+                        <span class="date_year">{{entry.start|date("Y")}}</span>
+                    </div>
+                    <div class="col-md-7 col-xs-12 content_text">
+                        <span class="date_week mb-1">{{entry.start|date("l")}}</span>
+                        {{entry.title|raw}}
+                    </div>
+                    <div class="col-md-3 col-xs-12 end-md center-xs">
+                        <a href="{{'events'|page}}/{{entry.slug}}" class="read_more">Read more</a>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+            {% if entries.count > 20 %}
+            <div class="row container">
+                {{ entries.fragment('listView').render|raw }}
+            </div>
+            {% endif %}
+
+        </div>
+        <div class="row" id="calendarView">
+            {% component 'calendar' %}
+        </div>
+
+    </div>
+
+</div>
+
+
+{% else %}
+
+{% if entry %}
+<div class="container" style="max-width: 950px;">
+    <div class="row single-news-item">
+        {% if entry.image %}
+        <div class="col-md col-xs-12">
+            <img class="content left" src="{{ entry.image|crop_image|resize(555, auto, { mode: 'crop' }) }}" />
+        </div>
+        {% endif %}
+
+        <div class="col-md col-xs-12">
+            <div class="news-title">
+                <h1 class="single-new-title">{{entry.title}}</h1>
+            </div>
+            <div class="text-published">{{entry.start|date("d M Y")}} - {{entry.end|date("d M Y")}}</div>
+            <div class="text-place">{{entry.place}}</div>
+
+        </div>
+        <div class="col-xs-12">
+            <div class="content">
+                {{entry.description|raw}}
+            </div>
+
+        </div>
+        <div class="col-xs-12">
+
+            {% if entry.url %}
+            <br><br><a href="{{entry.url}}" class="read_more" target="_blank">Go to event website</a>
+            {% endif %}
+
+
+
+            <div class="row share_container middle-xs">
+                <div class="col-lg-1 col-xs-2 start-xs">Share</div>
+                <div class="col-xs-10">
+                    <a href="http://twitter.com/share?text={{entry.title}}&url={{page_url}}" target="_blank" class="btn p-primary pr p-twitter medium"></a>
+
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{page_url}}&amp;src=sdkpreparse" target="_blank" class="btn pr p-primary p-facebook medium"></a>
+
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{page_url}}" target="_blank" class="btn pr p-primary p-linkedin medium"></a>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
+{% endif %}

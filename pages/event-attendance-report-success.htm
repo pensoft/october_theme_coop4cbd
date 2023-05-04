@@ -1,0 +1,22 @@
+url = "/event-attendance-planner-success"
+layout = "default"
+title = "Event attendance planner success"
+
+[session]
+security = "user"
+redirect = "home"
+==
+{% component 'session' %}
+<div class="container">
+
+    {% flash %}
+    <div class="thank_you_success">
+        {{ message }}
+    </div>
+    {% endflash %}
+
+    <a href="{{'event-attendance-report'|page}}" class="btn btn-primary">Add event</a> &nbsp; &nbsp;
+    <a href="{{'event-attendance-form'|page}}" class="btn btn-primary">Add attendance</a>
+    <a href="{{'event-attendees'|page}}" class="btn btn-primary" style="margin: 20px">&#10094;&nbsp; Back to events</a>
+
+</div>

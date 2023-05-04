@@ -1,0 +1,103 @@
+url = "/media-center/videos"
+layout = "default"
+title = "Videos"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[builderList mediaVideosList]
+modelClass = "pensoft\Media\Models\Videos"
+scope = "-"
+scopeValue = "{{ :scope }}"
+displayColumn = "name"
+noRecordsMessage = "No records found"
+detailsPage = "-"
+detailsUrlParameter = "id"
+pageNumber = "{{ :page }}"
+
+[jumbotron]
+jumbotron = "under-construction"
+title = 1
+background = "transperant"
+templates = "template1"
+description_limit = 0
+==
+<?php
+use Pensoft\Media\Models\Videos;
+use System\Models\File;
+
+function onStart(){
+	$this['mediaVideosList'] =  Videos::where('pensoft_media_videos.parent_id', null)->get();
+if(get('download')){
+$file = File::find((int)get('download'));
+$file_name = $file->getLocalPath();
+$recordName = get('file_name') ? get('file_name') : 'COOP4CBD_video';
+$ext= $file->getExtension();
+
+if (file_exists($file_name)) {
+header('Content-Description: File Transfer');
+header('Content-Type: application/octet-stream');
+header("Content-Type: application/force-download");
+header('Content-Disposition: attachment; filename='.$recordName .'.'. $ext);
+header('Content-Transfer-Encoding: binary');
+header('Expires: 0');
+header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+header('Pragma: public');
+header('Content-Length: ' . filesize($file_name));
+ob_clean();
+flush();
+readfile($file_name);
+exit();
+}
+return Redirect::to('/media-center/videos');
+}
+}
+?>
+==
+
+{% set records = mediaVideosList %}
+
+{% if records.count %}
+<div class="container">
+    <div class="row">
+        {% for record in records %}
+        {# Use spaceless tag to remove spaces inside the A tag. #}
+        {% spaceless %}
+        <div class="col-md-6 col-xs-12">
+            <div class="">
+                <p class="card_title font-weight-bold">{{record.name}}</p>
+                {% if record.file %}
+                <video controls="" width="100%"><source src="{{record.file.path}}" type="video/mp4"></video>
+
+                <p>Attachment: {{record.file.file_name}}, {{record.file.size}}</p>
+
+                <p><a class=" btn btn-primary" href="{{ ''| page }}?{{queries}}&download={{record.file.id}}&file_name={{record.name|replace({' ': '_'})}}">Download</a></p>
+
+                {% endif %}
+
+                {% if record.youtube_url %}
+                <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{record.youtube_url}}" width="100%" height="422"></iframe>
+
+                <p>&nbsp;</p>
+                {% endif %}
+
+                {% if record.vimeo_url %}
+                <iframe width="100%" height="422" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        src="{{record.vimeo_url}}">
+                </iframe>
+                <p>&nbsp;</p>
+                {% endif %}
+            </div>
+        </div>
+
+
+
+
+        {% endspaceless %}
+
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+
+{% endif %}

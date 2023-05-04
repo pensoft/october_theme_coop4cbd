@@ -1,0 +1,22 @@
+{
+    "name": "october/pensoft-coop4cbd-theme",
+    "type": "october-theme",
+    "description": "Pensoft COOP4CBD October CMS theme",
+    "keywords": ["october", "cms", "coop4cbd", "theme"],
+    "authors": [
+        {
+            "name": "Kremena Kaleva",
+            "email": "k.kaleva@pensoft.net",
+            "role": "Dev"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "composer/installers": "~1.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}

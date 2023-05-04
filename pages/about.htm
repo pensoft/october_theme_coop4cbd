@@ -1,0 +1,59 @@
+url = "/about"
+layout = "default"
+title = "About"
+is_hidden = 0
+meta_description = "about page"
+seo_keywords = "keywords"
+robot_index = "index"
+robot_follow = "follow"
+
+[siteSearchInclude]
+
+[jumbotron background]
+jumbotron = "background"
+title = 0
+background = "transperant"
+templates = "template1"
+description_limit = 0
+
+[jumbotron backgroundblue]
+jumbotron = "background-blue"
+background = "transperant"
+templates = "template1"
+description_limit = 0
+
+[jumbotron background3]
+jumbotron = "background-3"
+background = "transperant"
+templates = "template1"
+description_limit = 0
+
+[jumbotron background4]
+jumbotron = "background-4"
+background = "transperant"
+templates = "template1"
+description_limit = 0
+==
+<?php
+use Pensoft\Accordions\Models\Item;
+
+function onStart(){
+    $this['accorions'] = Item::where('category_id', 1)->get();
+}
+?>
+==
+{% component 'siteSearchInclude' %}
+
+<h1 class="display-1 aos-init aos-animate" data-aos="fade-up">BACKGROUND</h1>
+<div class="about-background">
+    {% component 'background' %}
+</div>
+<div class="about-background-blue">
+    {% component 'backgroundblue' %}
+</div>
+<div class="about-background-3">
+    {% component 'background3' %}
+</div>
+<div class="about-background-4">
+    {% component 'background4' %}
+</div>
