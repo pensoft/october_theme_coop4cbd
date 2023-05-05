@@ -86,8 +86,8 @@
 }
 
 .fc-event{
-    background: @green-color!important;
-    border-color: @green-color!important;
+    background: @green-color;
+    border-color: @green-color;
     padding: 10px!important;
 }
 
@@ -270,6 +270,18 @@
             padding: 22px 44px;
             max-width: fit-content;
             margin-right: 20px;
+            .breakpoint-large-down({
+                background: @green-color;
+                border-radius: 3px;
+                color: #ffffff;
+                text-align: center;
+                padding: 23px 44px;
+                max-width: none;
+                margin-bottom: 34px;
+                margin-right: 20px;
+                display: flex;
+                justify-content: center;
+            });
         }
 
 
@@ -300,17 +312,33 @@
             font-size: 27px;
             font-weight: bold;
             width: 100%;
+            .breakpoint-large-down({
+                font-size: 22px;
+                float: left;
+                width: auto;
+            });
         }
         .date_month{
             font-size: 27px;
             font-weight: bold;
             width: 100%;
             text-transform: uppercase;
+            .breakpoint-large-down({
+                font-size: 22px;
+                float: left;
+                width: auto;
+                margin: 0 13px;
+            });
         }
         .date_year{
             font-size: 27px;
             font-weight: bold;
             width: 100%;
+            .breakpoint-large-down({
+                font-size: 22px;
+                float: left;
+                width: auto;
+            });
         }
         .read_more{
             border-top: none;
