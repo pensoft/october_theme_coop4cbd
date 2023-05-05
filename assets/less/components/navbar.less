@@ -33,11 +33,12 @@
     &.fixed {
         position: fixed;
         z-index: @zindex-fixed;
+        background: @white-color;
     }
 
-    //&.scrolled {
-    //    background-color: @navbar-bkg-color !important;
-    //}
+    &.scrolled {
+        background: @white-color;
+    }
 
     .navbar-brand {
         display: flex;
@@ -256,6 +257,7 @@
 
     .breakpoint-large-down({
         position: fixed;
+        background: @white-color;
         left: 0;
         z-index: 9;
     });
@@ -264,9 +266,24 @@
 .home{
     .navbar-brand {
         visibility: hidden;
+        .breakpoint-large-down({
+            visibility: visible;
+        });
+        &.scrolled{
+            visibility: visible;
+            display: flex!important;
+            background: @white-color;
+        }
+
     }
     .navbar{
-        background: none!important;
+        &.fixed {
+            background: none!important;
+            &.scrolled {
+                background: @white-color!important;
+            }
+        }
+
     }
 }
 
@@ -543,45 +560,45 @@ nav .pr.p-search.middle.search-btn{
         display: inline-flex;
     }
 }
-
-.nav-item.social{
-    a{
-        color: @link-color;
-        display: inline-flex;
-        margin: 0 3px;
-        &:hover{
-            opacity: 0.7!important;
-        }
-        &.p-twitter{
-            margin-top: 2px!important;
-            &:before{
-                .breakpoint-large-down({
-                    color: @link-color;
-                });
-            }
-
-        }
-        &.p-instagram{
-            margin-top: 2px!important;
-            &:before{
-                .breakpoint-large-down({
-                    color: @link-color;
-                });
-            }
-
-        }
-        &.p-linkedin{
-            background: url("../../assets/images/linkedin.svg") no-repeat;
-            width: 20px;
-            height: 20px;
-            background-size: contain;
-            margin-top: -2px;
-            &:before{
-                content: " ";
-            }
-        }
-    }
-}
+//
+//.nav-item.social{
+//    a{
+//        color: @link-color;
+//        display: inline-flex;
+//        margin: 0 3px;
+//        &:hover{
+//            opacity: 0.7!important;
+//        }
+//        &.p-twitter{
+//            margin-top: 2px!important;
+//            &:before{
+//                .breakpoint-large-down({
+//                    color: @link-color;
+//                });
+//            }
+//
+//        }
+//        &.p-instagram{
+//            margin-top: 2px!important;
+//            &:before{
+//                .breakpoint-large-down({
+//                    color: @link-color;
+//                });
+//            }
+//
+//        }
+//        &.p-linkedin{
+//            background: url("../../assets/images/linkedin.svg") no-repeat;
+//            width: 20px;
+//            height: 20px;
+//            background-size: contain;
+//            margin-top: -2px;
+//            &:before{
+//                content: " ";
+//            }
+//        }
+//    }
+//}
 
 .search-and-social-media{
     ul{
@@ -594,5 +611,20 @@ nav .pr.p-search.middle.search-btn{
             align-items: center;
             justify-content: space-between;
         }
+    }
+}
+
+
+
+.nav-item.search_field{
+    a{
+        .breakpoint-huge-down({
+            margin: 0px auto 0px auto;
+            background: url('../../assets/images/search_white.svg') center no-repeat;
+            background-size: contain;
+            width: 40px;
+            height: 40px;
+            display: block;
+        });
     }
 }
