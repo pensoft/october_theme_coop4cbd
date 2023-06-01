@@ -104,7 +104,7 @@ function onStart(){
     <div class="container">
         <div class="header-image {% if page_id != 'search' %} {{page_id}} {% endif %}">
 
-    <div class="header-image-bar" style="background: url('{{this.theme.header_image.getPath()}}') no-repeat;"></div>
+    <div class="header-image-bar" style="background: url('{{this.theme.header_image.getPath()}}') right center no-repeat;"></div>
     <div class="jumbotron" data-aos="fade-right">
         {% if page_id != 'home' and page_id != 'search' %}
         <h1 class="underline white" {% if user %} style="margin-top:35px;"{% endif %}>

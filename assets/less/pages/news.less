@@ -253,39 +253,62 @@ nav:not(.navbar){
 
 
 .home{
-    .newslist .col-xs-12:first-child{
-        display: flex;
-        justify-content: space-around;
-        padding: 0;
-        margin: 0;
-        .breakpoint-large-down({
-            display: unset;
-        });
+    .newslist{
+        height: 450px;
+        .slide{
+            //.news-item{
+                margin-top: 0!important;
+                transition: all 0.5s;
 
-        .card-title{
-            color: @heading-text-color!important;
-            font-size: 20px;
-            line-height: 1.4em;
-            font-weight: bold;
-        }
-        .text-published{
-            display: none;
-        }
+                &.slick-slide{
+                    position: absolute;
+                    width: 100%;
+                    top: 0;
+                    height: 100%;
+                    overflow: hidden;
 
-        .card-description{
-            display: none;
-        }
+                    &:hover{
+                       
+                        top: -20px;
+                        height: 0;
+                    }
+                }
 
-        .news-container{
-            padding: 20px 0 0 0;
-        }
 
-        .news-img-top{
-            //width: 287px;
-            //height: 235px;
-            //object-fit: contain;
+                &:hover{
+                    margin-top: -20px!important;
+                    
+                }
+            //}
         }
-    }
+        .col-xs-12:first-child{
+            display: flex;
+            justify-content: space-around;
+            padding: 0;
+            margin: 0;
+            .breakpoint-large-down({
+                display: unset;
+            });
+
+            .card-title{
+                color: @heading-text-color!important;
+                font-size: 20px;
+                line-height: 1.4em;
+                font-weight: bold;
+            }
+            .text-published{
+                display: none;
+            }
+
+            .card-description{
+                display: none;
+            }
+
+            .news-container{
+                padding: 20px 0 0 0;
+            }
+        }               
+    } 
 }
 
 .home .news-item{
@@ -302,7 +325,7 @@ nav:not(.navbar){
         img{
             margin: 0px auto;
             width: 318px;
-            height: 168px;
+            // height: 168px;
             max-width: 100%;
             object-fit: cover;
             border-radius: 3px;

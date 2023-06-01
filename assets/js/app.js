@@ -225,8 +225,8 @@ $(document).ready(function() {
 
 
     $('<div class="col-xs-12 col-sm-3 card internal no-border" style="margin-bottom: 15px">\n' +
-        '<a class="folder-background" style="display:flex; background: url(/storage/app/media/working-documents-live.svg) center center no-repeat; background-size: 100px; height: 200px" href="/internal-repository/living-documents" title="Working documents (live)"></a>\n' +
-        '<h3 class="card-header"><a href="/internal-repository/living-documents" title="Working documents (live)">Working documents (live)</a></h3>\n' +
+        '<a class="folder-background" style="display:flex; background: url(/storage/app/media/working-documents-live.svg) center center no-repeat; background-size: 100px; height: 200px" href="https://fondationbiodiversite.sharepoint.com/sites/CO-OP4CBD/Documents%20partages/Forms/AllItems.aspx" target="_blank" title="Working documents (live)"></a>\n' +
+        '<h3 class="card-header"><a href="https://fondationbiodiversite.sharepoint.com/sites/CO-OP4CBD/Documents%20partages/Forms/AllItems.aspx" target="_blank" title="Working documents (live)">Working documents (live)</a></h3>\n' +
         '</div>').insertAfter($('.card.internal').last());
 
     $('<div class="col-xs-12 col-sm-3 card internal no-border" style="margin-bottom: 15px">\n' +
@@ -326,7 +326,7 @@ $(document).ready(function() {
                 	}, speed);
                 }
 
-                $('.library-item .btn.btn-primary').text('Download');
+                $('.library .library-item .btn.btn-primary').text('Download');
                 // Prevent the anchor\'s default click action
                 e.preventDefault();
             });
@@ -380,7 +380,7 @@ $(document).ready(function() {
         });
     }
 
-    $('.library-item .btn.btn-primary').text('Download');
+    $('.library .library-item .btn.btn-primary').text('Download');
 
 
 });

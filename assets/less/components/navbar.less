@@ -277,12 +277,18 @@
 
     }
     .navbar{
+        position: absolute!important;
         &.fixed {
             background: none!important;
             &.scrolled {
                 background: @white-color!important;
             }
         }
+
+        .breakpoint-large-down({
+            position: fixed!important;
+            
+        });
 
     }
 }
