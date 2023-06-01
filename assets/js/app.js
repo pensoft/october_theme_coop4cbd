@@ -256,7 +256,9 @@ $(document).ready(function() {
         // If no match is found, use the first link as the initial active tab.
         $active = $($links.filter("[href=\'"+location.hash+"\']")[0] || $links[0]);
 
-        $active.addClass('active');
+        if($(this).parent().parent().hasClass('events')){
+            $active.addClass('active');
+        }
 
         $content = $($active[0].hash);
 
