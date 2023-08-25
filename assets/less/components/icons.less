@@ -22,6 +22,18 @@
   font-display: block;
 }
 
+@font-face {
+  font-family: 'x-icon';
+  src:  url('../fonts/icons/x-icon/icomoon.eot?o4q3va');
+  src:  url('../fonts/icons/x-icon/icomoon.eot?o4q3va#iefix') format('embedded-opentype'),
+    url('../fonts/icons/x-icon/icomoon.ttf?o4q3va') format('truetype'),
+    url('../fonts/icons/x-icon/icomoon.woff?o4q3va') format('woff'),
+    url('../fonts/icons/x-icon/icomoon.svg?o4q3va#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
 .p, .pb, .pd, .pl, .pr, .ps {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
@@ -239,7 +251,8 @@
     content: "\eaf1";
 }
 .p-twitter:before {
-    content: "\eaf2";
+  font-family: 'x-icon';
+  content: "\e901";
 }
 .p-youtube:before {
     content: "\eaf3";

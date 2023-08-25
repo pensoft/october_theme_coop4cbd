@@ -42,10 +42,30 @@ function onStart(){
 
         <div class="col-lg-5 col-xs-12 social_media_conainer">
             <h1 class="base_heading">Follow COOP4CBD</h1>
-            <div class="twitter-widget">
+            <div class="row subscribe-items start-md center-xs">
+                {% if this.theme.twitter %}
+                <a href="{{this.theme.twitter_url}}" target="_blank" class="btn p-primary pr p-twitter medium"></a>
+                {% endif %}
+                {% if this.theme.facebook %}
+                <a href="{{this.theme.facebook_url}}" target="_blank" class="btn pr p-primary p-facebook medium"></a>
+                {% endif %}
+                {% if this.theme.linkedin %}
+                <a href="{{this.theme.linkedin_url}}" target="_blank" class="btn pr p-primary p-linkedin medium"></a>
+                {% endif %}
+                {% if this.theme.youtube %}
+                <a href="{{this.theme.youtube_url}}" target="_blank" class="btn pr p-primary p-youtube medium"></a>
+                {% endif %}
+                {% if this.theme.instagram %}
+                <a href="{{this.theme.instagram_url}}" target="_blank" class="btn pr p-primary p-instagram medium"></a>
+                {% endif %}
+                {% if this.theme.researchgate %}
+                <a href="{{this.theme.researchgate_url}}" target="_blank" class="btn pr p-primary p-researchgate medium"></a>
+                {% endif %}
+            </div>
+            <!-- <div class="twitter-widget">
                 <a class="twitter-timeline" href="https://twitter.com/coop4cbd?ref_src=twsrc%5Etfw">Tweets by @coop4cbd</a>
                 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-            </div>
+            </div> -->
         </div>
 
 	</div>
