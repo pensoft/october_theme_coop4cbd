@@ -24,7 +24,6 @@ window.addEventListener('scroll', function (e) {
 
 });
 
-
 $(document).ready(function() {
     // $("nav").removeClass("no-transition");
 	/* MENU */
@@ -103,8 +102,6 @@ $(document).ready(function() {
                 });
             }
         });
-
-
         // $('.work_packages_container .col-md').on("click", function () {
         //     $('.work_packages_container .wp_content').hide();
         //     if(!$(this).next('.wp_content').is(':visible')){
@@ -133,22 +130,23 @@ $(document).ready(function() {
     $("nav").removeClass("no-transition");
 
 
-    $('body').on('click', '.work_packages .accordion-toggle, .partners_list_container .accordion-toggle, .messages .accordion-toggle', function () {
+    $('body').on('click', '.work_packages, .training-head, .accordion-toggle, .partners_list_container .accordion-toggle, .messages .accordion-toggle', function () {
         $('.ui-accordion-header').show();
-        if ($(this).next(".accordion-content").is(':visible')) {
-            $(this).next(".accordion-content").slideUp(300);
-            $(this).children().find(".plusminus").text('+');
+        if ($(this).next(".accordion-content, .training-body").is(':visible')) {
+            $(this).next(".accordion-content, .training-body").slideUp(300);
+            // $(this).children().find(".plusminus").text('+');
             $(this).children(".plusminus").html('<span class="plus"></span>');
         } else {
-            $(this).next(".accordion-content").slideDown(300);
-            $(this).children().find(".plusminus").text('-');
+            $(this).next(".accordion-content, .training-body").slideDown(300);
+            // $(this).children().find(".plusminus").text('-');
             $(this).children(".plusminus").html('<span class="minus"></span>');
         }
     });
 
-    $('.work_packages .accordion-content, .partners_list_container .accordion-toggle, .messages .accordion-toggle').each(function( index, value ) {
+    $('.work_packages, .accordion-content, .partners_list_container .accordion-toggle, .messages .accordion-toggle').each(function( index, value ) {
         $(value).find('a').attr( "onclick", "window.open(this.href, '_blank');" )
     });
+
 
 	onHashChange();
 	$(window).on("hashchange", function() {
