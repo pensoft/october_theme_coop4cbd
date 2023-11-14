@@ -233,8 +233,10 @@ return Response::download($pathToFile, $fileName, $headers);
             {% for record in newsletters %}
             <div class="col-md-3 col-xs-12 newsletter_item mb-4">
                 <div class="text-center">
-                    <div class="date">{{record.date |date('F Y')}}</div>
-                    <span class="card_title" style="min-height: 100px;">{{record.name}}</span>
+                <span class="card_title" style="min-height: 100px;">{{record.name}}</span>
+                    
+                    <p class="logo_container" style="background: url({{record.newsletter_image.path}}) center center no-repeat; height: 260px; background-size: contain;" title="{{record.name}}"></p>
+                    <div class="date">{{record.date |date('F Y')}}</div><br>
                     {{form_open({ request: 'onDownloadFile' }) }}
                     <input type="hidden" value="{{record.file.id}}" name="id">
                     <button type="submit" class="btn btn-primary" data-attach-loading> Download <i class="pr p-download"></i></button>

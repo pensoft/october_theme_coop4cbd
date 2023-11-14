@@ -130,7 +130,7 @@ $(document).ready(function() {
     $("nav").removeClass("no-transition");
 
 
-    $('body').on('click', '.work_packages, .training-head, .accordion-toggle, .partners_list_container .accordion-toggle, .messages .accordion-toggle', function () {
+    $('body').on('click', '.work_packages .accordion-toggle, .partners_list_container .accordion-toggle, .messages .accordion-toggle, .training-head', function () {
         $('.ui-accordion-header').show();
         if ($(this).next(".accordion-content, .training-body").is(':visible')) {
             $(this).next(".accordion-content, .training-body").slideUp(300);
