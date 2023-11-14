@@ -21,7 +21,7 @@ if($this['is_detail_page']){
 $this['page_url'] = $this->pageUrl('');
 $this['encoded_title'] = urlencode($this['article']['title']);
 $this['slug'] = $this['article']['slug'];
-\BennoThommo\Meta\Meta::set('twitter:card', 'summary');
+\BennoThommo\Meta\Meta::set('twitter:card', 'summary_large_image');
 \BennoThommo\Meta\Meta::set('twitter:title', $this['article']['title']);
 \BennoThommo\Meta\Meta::set('twitter:description', str_limit(Html::strip($this['article']['content']), 255));
 \BennoThommo\Meta\Meta::set('og:title', $this['article']['title']);
@@ -29,7 +29,7 @@ $this['slug'] = $this['article']['slug'];
 \BennoThommo\Meta\Meta::set('og:type', 'article');
 \BennoThommo\Meta\Meta::set('og:url', $this->pageUrl(''));
 if($this['article']['cover']){
-\BennoThommo\Meta\Meta::set('twitter:image', $this['article']['cover']->getThumb(300, 300, ['mode' => 'crop']));
+\BennoThommo\Meta\Meta::set('twitter:image', $this['article']['cover']->getThumb(600, null, ['mode' => 'auto']));
 
 \BennoThommo\Meta\Meta::set('og:image', $this['article']['cover']->getThumb(600, 314, ['mode' => 'crop']));
 \BennoThommo\Meta\Meta::set('og:image:width', 600);
