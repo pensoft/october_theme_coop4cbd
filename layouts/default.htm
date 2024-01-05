@@ -52,7 +52,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-PWW5NKQ');</script>
 <!-- End Google Tag Manager -->
 
-    {% component 'metaList' %}
+    {% if this.page.id == 'news' and is_detail_page %}
+        {% component 'metaList' includePageMeta=false %}
+    {% else %}
+        {% component 'metaList' %}
+    {% endif %}
+
     {% framework extras %}
     {% styles %}
     {% scripts %}
