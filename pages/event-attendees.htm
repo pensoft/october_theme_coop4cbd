@@ -12,6 +12,7 @@ limit = "null"
 category = "null"
 language = "en"
 redirect_to_detailed_page = 1
+default_view = "dayGridMonth"
 ==
 <?php
 use Pensoft\EventReporting\Models\EventsreportingData as Data;
@@ -76,7 +77,7 @@ function onStart(){
                             </div>
                             {% endif %}
                             <div>
-                                <span class="text-bold">SELINA organised/involved/relevant:</span>
+                                <span class="text-bold">CO-OP4CBD organised/involved/relevant:</span>
                                 {% set arrayOrganised = {'1': 'organised', '2': 'involved', '3': 'relevant'} %}
                                 <span class="text-ligth">{{arrayOrganised[event.identifier]}}</span>
                             </div>
