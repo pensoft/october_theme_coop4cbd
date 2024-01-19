@@ -1,4 +1,4 @@
-name: "COOP4CBD"
+name: "CO-OP4CBD"
 author: "Pensoft"
 homepage: "https://pensoft.net"
 code: "Pensoft-COOP4CBD"
@@ -288,4 +288,11 @@ form:
                 default: '#F0F0F0'
                 type: colorpicker
                 assetVar: 'secondary-color'
+                tab: 'Colors'
+            internal_events_color:
+                label: 'Internal events background color'
+                comment: Select a custom color to use as Internal events background color
+                default: '#0000FF'
+                type: colorpicker
+                assetVar: 'events-color'
                 tab: 'Colors'
