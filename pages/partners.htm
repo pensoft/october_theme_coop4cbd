@@ -94,7 +94,7 @@ return Profiles::where('partner_id', $id)->where('category_id',  2)->get();
                                 <div class="col-xs-12 coordinator_image">
                                     {% if profile.avatar %}
                                     <!--                            <img alt="{{ profile.names }}" src="{{profile.avatar.thumb(175,145,{'mode':'crop'})}}">-->
-                                    <img alt="{{ profile.names }}" src="{{profile.avatar.thumb(119,119,{'mode':'crop'})}}">
+                                    <img alt="{{ profile.names }}" src="{{profile.avatar|crop_image}}">
                                     {% else %}
                                     <img alt="{{ profile.names }}" src="{{ 'avatar.svg'|media }}" width="119" height="119" class="no-image">
                                     {% endif %}

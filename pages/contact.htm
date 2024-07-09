@@ -30,7 +30,7 @@ function onStart(){
 
             <div class="contact_info row center-xs">
                 <div class="coordinator_image aos-init aos-animate" data-aos="fade-up">
-                    <img src="{{profile.avatar.thumb(191, 191, {'mode':'crop'})}}"></div>
+                    <img src="{{profile.avatar|crop_image}}"></div>
                 <div class="coordinator_info">
                     <h3>{{profile.names}}</h3>
                     {% if profile.position %}<p class="card_title">{{profile.position}}</p>{% endif %}

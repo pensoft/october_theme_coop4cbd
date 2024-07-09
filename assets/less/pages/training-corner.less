@@ -137,3 +137,59 @@
     color: #575757;
     opacity: 1;
 }
+.training-body-intro{
+    width: 100%;
+    padding: 20px 20px;
+    color: #575757;
+    .intro-h{
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .summery{
+        display: flex;
+        align-items: center;
+        .breakpoint-large-down({
+            margin-bottom: 18px;
+        });
+    }
+    .keywords{
+        margin:26px 0;
+    }
+
+}
+.training-corner .search-bar{
+    margin-bottom: 40px;
+    .search-wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 360px !important;
+        .breakpoint-large-down({
+            width: 100% !important;
+        });
+        input{
+            border: 1px solid #AFB8BC!important;
+            font-size: 18px;
+            padding: 0.7rem 1rem;
+            width: 100% !important;
+        }
+        button{
+            padding: 0 !important;
+            position: absolute;
+            right: -6px;
+            width: fit-content;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &::before{
+               content: '';
+               height: 47px;
+               width: 67px;
+               background: url(../../assets/images/search_grey.svg) center no-repeat;
+               background-size: 26px; 
+            }
+        }
+    }
+}

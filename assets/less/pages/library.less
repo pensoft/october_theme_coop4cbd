@@ -20,6 +20,16 @@
     .rounded(3px);
     position: relative;
 
+    .body-description{
+        .desc-item{
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        word-break: break-word;
+        white-space: normal;
+    }
 
     .library-type-label {
         font-weight: bold;
@@ -262,13 +272,13 @@
         margin: 0 0 0 0;
         width: 95%!important;
         display: unset;
-    })
+    });
 }
 
 .library .tabs{
     margin-bottom: 40px;
     width: 100%;
-    display: block;
+    display: flex;
     float: left;
 
     .breakpoint-large-down({
@@ -280,6 +290,7 @@
             margin: 10px auto 40px auto;
             float: unset;
     });
+
     .btn-primary{
         .breakpoint-small-down({
             margin-bottom: 20px;
@@ -323,4 +334,3 @@
     }
 
 }
-

@@ -317,7 +317,7 @@ g:has(.fill_default){
     img{
         width: 119px;
         max-height: fit-content;
-        object-fit: contain;
+        object-fit: cover;
         .breakpoint-large-down({
             width: auto;
             margin: 0 auto;
@@ -329,6 +329,7 @@ g:has(.fill_default){
          .coordinator_image{
              width: 119px;
              height: 119px;
+             object-fit: cover;
              display: flex;
              align-items: center;
              img{
