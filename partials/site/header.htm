@@ -51,6 +51,7 @@ function onStart(){
 {% endif %}
 <nav class="navbar pr-1 pl-1" id="headernavbar">
     <a href="{{'home'|page}}" class="navbar-brand" id="navbar-brand" style="background: url('{{ this.theme.site_logo.getPath() }}') no-repeat; background-position: center; background-size: contain; "></a>
+    
     <div class="navbar-collapse collapse end-xs" id="headerNavbarNav" style="display: none;">
 
 
@@ -81,6 +82,7 @@ function onStart(){
             </ul>
         </div>
     </div>
+    
     <div id="menuToggle">
         <input type="checkbox" />
         <span></span>
@@ -96,7 +98,15 @@ function onStart(){
             <button class="btn btn-link pr p-search big text-grey-search-btn" type="submit"></button>
         </form>
     </div>
+    <div id="google_translate_element"></div>
 
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+    </script>
 </nav>
 
 {% if this.theme.header_image and page_id == 'home' %}

@@ -56,13 +56,33 @@
 }
 
 .document-cover, .video-cover{
-    width: 515px;
+    width: 500px;
     height: 294px;
     padding: 20px;
 
     .breakpoint-huge-down({
-        width: fit-content;
-        height: fit-content;
+        width: 393px !important;
+        height: 221px !important;
+    });
+
+    .breakpoint-small-down({
+        width: 100% !important;
+        height: 100% !important;
+    });
+}
+
+.video-cover iframe{
+    width: 500px !important;
+    height: 294px !important;
+
+    .breakpoint-huge-down({
+        width: 393px !important;
+        height: 221px !important;
+    });
+
+    .breakpoint-small-down({
+        width: 100% !important;
+        height: 100% !important;
     });
 }
 
