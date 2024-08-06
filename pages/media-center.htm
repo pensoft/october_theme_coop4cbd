@@ -25,6 +25,7 @@ function onStart(){
 	$this['presentations'] =  Presentations::get();
 	$this['pressreleases'] =  Pressreleases::get();
 	$this['videos'] =  Videos::get();
+	$this['graphics'] =  Graphic::get();
 }
 
 
@@ -51,7 +52,7 @@ return Response::download($pathToFile, $fileName, $headers);
             {% if logos.count() %}
             <div class="col-md col-sm-6 col-xs-12">
                 <div class="card-container text-center">
-                    <a href="#logo" title="Logo">
+                    <a  href="{{url('media-center')}}/logo" title="Logo">
                         <div class="card_border"><span class="card_image_container"  style="background: url({{'Logo.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/logo" title="Logo"></span></div>
                         <span class="media_label">Logo</span>
                     </a>
@@ -62,20 +63,9 @@ return Response::download($pathToFile, $fileName, $headers);
             {% if flyers.count() %}
             <div class="col-md col-sm-6 col-xs-12">
                 <div class="card-container text-center">
-                    <a href="#promotional-materials" title="Promotional materials">
+                    <a href="{{url('media-center')}}/brochure" title="Promotional materials">
                         <div class="card_border"><span class="card_image_container"  style="background: url({{'Promotional-materials.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/promotional-materials" title="Promotional materials"></span></div>
                         <span class="media_label">Promotional materials</span>
-                    </a>
-                </div>
-            </div>
-            {% endif %}
-
-            {% if graphics.count() %}
-            <div class="col-md col-sm-6 col-xs-12">
-                <div class="card-container text-center">
-                    <a href="#poster" title="Poster">
-                        <div class="card_border"><span class="card_image_container"  style="background: url({{'poster.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/poster" title="Poster"></span></div>
-                        <span class="media_label">Poster</span>
                     </a>
                 </div>
             </div>
@@ -84,17 +74,18 @@ return Response::download($pathToFile, $fileName, $headers);
             {% if pressreleases.count() %}
             <div class="col-md col-sm-6 col-xs-12">
                 <div class="card-container text-center">
-                    <a href="#press-releases" title="Press releases">
+                    <a href="{{url('media-center')}}/press-releases" title="Press releases">
                         <div class="card_border"><span class="card_image_container"  style="background: url({{'Press-releases.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/press-releases" title="Press releases"></span></div>
                         <span class="media_label">Press releases</span>
                     </a>
                 </div>
             </div>
             {% endif %}
+
             {% if newsletters.count() %}
             <div class="col-md col-sm-6 col-xs-12">
                 <div class="card-container text-center">
-                    <a href="#newsletters" title="Newsletter">
+                    <a href="{{url('media-center')}}/newsletters" title="Newsletter">
                         <div class="card_border"><span class="card_image_container"  style="background: url({{'Newsletter.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/newsletters" title="Newsletter"></span></div>
                         <span class="media_label">Newsletter</span>
                     </a>
@@ -106,7 +97,7 @@ return Response::download($pathToFile, $fileName, $headers);
             {% if videos.count() %}
             <div class="col-md col-sm-6 col-xs-12">
                 <div class="card-container text-center">
-                    <a href="#videos" title="Videos">
+                    <a href="{{url('media-center')}}/videos" title="Videos">
                         <div class="card_border"><span class="card_image_container" style="background: url({{'Videos.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/videos" title="Videos"></span></div>
                         <span class="media_label">Videos</span>
                     </a>
@@ -115,6 +106,16 @@ return Response::download($pathToFile, $fileName, $headers);
             {% endif %}
 
 
+            {% if graphics.count() %}
+            <div class="col-md col-sm-6 col-xs-12">
+                <div class="card-container text-center">
+                    <a href="{{url('media-center')}}/brand-manual" title="Brand Manual">
+                        <div class="card_border"><span class="card_image_container"  style="background: url({{'brand-manual.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/brand-manual" title="Brand Manual"></span></div>
+                        <span class="media_label">Brand Manual</span>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
 
             {% if presentations.count() %}
             <div class="col-md col-sm-6 col-xs-12">
