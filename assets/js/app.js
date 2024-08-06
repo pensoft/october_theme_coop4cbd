@@ -221,7 +221,9 @@ $(document).ready(function() {
         return (innerWidth - $('.container').width())/2 + more;
     });
 
-
+    // Open in new tab
+    $('.training-body a').attr('target', '_blank');
+    
     $('<div class="col-xs-12 col-sm-3 card internal no-border" style="margin-bottom: 15px">\n' +
         '<a class="folder-background" style="display:flex; background: url(/storage/app/media/working-documents-live.svg) center center no-repeat; background-size: 100px; height: 200px" href="https://fondationbiodiversite.sharepoint.com/sites/CO-OP4CBD/Documents%20partages/Forms/AllItems.aspx" target="_blank" title="Working documents (live)"></a>\n' +
         '<h3 class="card-header"><a href="https://fondationbiodiversite.sharepoint.com/sites/CO-OP4CBD/Documents%20partages/Forms/AllItems.aspx" target="_blank" title="Working documents (live)">Working documents (live)</a></h3>\n' +
