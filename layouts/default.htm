@@ -78,7 +78,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Matomo Code -->
 </head>
 
-<body>
+<body {% if this.page.id == 'home' %} onload="openCop16ModalBtn();" {% endif %}>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PWW5NKQ"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -98,6 +98,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- Content -->
     <section id="layout-content" class="{{this.page.id}}">
+    
+        {% if this.page.id == 'home' %}
+        <!-- popup markup -->
+        <a data-toggle="modal" href="#content-confirmation" class="openCop16ModalBtn" style="display: none;">Launch Confirmation dialog</a>
+
+        <div class="control-popup modal fade" id="content-confirmation" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content center-xs">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <img src="{{'COP16 LOGO COLOR.svg'|media}}">
+                    <div class="cop16-date">21 OCT - 1 NOV 2024</div>
+                    <div class="cop16-tagline">Peace with Nature</div>
+                    <div class="cop16-title">Science-policy Interface for Supporting Biodiversity</div>
+                    <div class="news"><a class="read_more" href="{{'cop16'|page}}">Read more</a></div>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+
         {% page %}
         {% component 'googleTracker' %}
     </section>

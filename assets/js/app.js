@@ -265,94 +265,7 @@ $(document).ready(function() {
                             .append(externalResources);
     }
 
-    // $('.tabs').each(function(){
-    //     // For each set of tabs, we want to keep track of
-    //     // which tab is active and its associated content
-    //     var $active, $content, $links = $(this).find('a');
-    //     var speed = "fast";
-    //     var activeTab = $(location.hash);
-    //     // If the location.hash matches one of the links, use that as the active tab.
-    //     // If no match is found, use the first link as the initial active tab.
-    //     $active = $($links.filter("[href=\'"+location.hash+"\']")[0] || $links[0]);
-
-    //     if($(this).parent().parent().hasClass('events')){
-    //         $active.addClass('active');
-    //     }
-
-    //     $content = $($active[0].hash);
-
-    //     // Hide the remaining content
-    //     $links.not($active).each(function () {
-    //         $(this.hash).hide();
-    //     });
-
-    //     if(activeTab.length){
-    //         $content.slideDown(speed);
-    //         //scroll to element
-    //         $('html, body').animate({
-    //             scrollTop:  activeTab.offset().top + $('header').height()
-    //         }, speed);
-    //     }
-
-    //     // Bind the click event handler
-    //     $(this).find("a").click(function (e) {
-
-    //             if($(this).hasClass('active')) {
-    //                 $content.slideDown({
-    //                     scrollTop: $content.offset().top - $('header').height()
-    //                 }, speed);
-    //                 var screenSize = getScreenSize();
-    //                 if (screenSize.width < 800) {
-    //                     // scroll to element
-    //                     $('html, body').animate({
-    //                         scrollTop: $content.offset().top - $('header').height() + 200  // mobile
-    //                     }, speed);
-    //                 }else{
-    //                     //scroll to element icons top
-    //                     $('html, body').animate({
-    //                         scrollTop:  $content.offset().top + $('header').height() + 800
-    //                     }, speed);
-    //                 }
-    //                 e.preventDefault();
-    //                 return false;
-    //             }
-    //             // Make the old tab inactive.
-    //             $active.removeClass('active');
-    //             // $content.slideUp({
-    //             // 	scrollTop: $content.offset().top - $('header').height() - $('.left_sidebar').height()
-    //             // }, speed);
-    //             $content.hide();
-
-    //             // Update the variables with the new link and content
-    //             $active = $(this);
-    //             $content = $(this.hash);
-
-    //             location.hash = $active[0].hash;
-
-    //             // Make the tab active.
-    //             $active.addClass('active');
-    //             $content.slideDown({
-    //                 scrollTop: $content.offset().top - $('header').height()
-    //             }, speed);
-    //             var screenSize = getScreenSize();
-    //             if (screenSize.width < 800) {
-    //             	// scroll to element
-    //             	$('html, body').animate({
-    //             		scrollTop: $content.offset().top - $('header').height() + 200 // mobile
-    //             	}, speed);
-    //             }else{
-    //             	//scroll to element icons top
-    //             	$('html, body').animate({
-    //             		scrollTop:  $content.offset().top - $('header').height() + 300
-    //             	}, speed);
-    //             }
-
-    //             $('.library .library-item .btn.btn-primary').text('Download');
-    //             // Prevent the anchor\'s default click action
-    //             e.preventDefault();
-    //         });
-
-    // });
+   
 
     // bootstrap 3 breakpoints
     const breakpoint = {
@@ -476,6 +389,13 @@ function expandReadMore(el){
 
     // prevent jump-down
     return false;
+}
+
+
+function openCop16ModalBtn(){
+    setTimeout(function() {
+        $(".openCop16ModalBtn").trigger("click");
+    },10);
 }
 
 
