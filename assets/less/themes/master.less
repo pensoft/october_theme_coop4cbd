@@ -1410,9 +1410,10 @@ now override the 3.3 new styles for modern browsers & apply opacity
 
         .date{
             font-weight: bold;
-            background: url("../../assets/images/calendar.svg") left no-repeat;
-            background-size: contain;
-            padding-left: 40px;
+            background: url("../../assets/images/calendar-check.svg") left no-repeat;
+            background-size: 19px;
+            padding-left: 28px;
+            padding-top: 2px;
             color: #4bdba3;
             margin-bottom: 20px;
         }
@@ -1450,10 +1451,23 @@ now override the 3.3 new styles for modern browsers & apply opacity
         &.pavilion{
             background: url("../../assets/images/blue_bg.png") center no-repeat;
             background-size: 100%;
+            font-weight: bold;
         }
         &.cop16_official{
             background: url("../../assets/images/green_bg.png") center no-repeat;
             background-size: 100%;
+            font-weight: bold;
+        }
+
+        .btn{
+            width:140px;
+            height: 47px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-left: 20px;
+            padding-right: 20px;
+            float: right;
         }
     }
 
@@ -1474,8 +1488,9 @@ now override the 3.3 new styles for modern browsers & apply opacity
         .organiser_name{
             font: normal normal medium 18px/32px Jost;
             letter-spacing: 0px;
+            line-height: 1em;
             color: #35393E;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         .organiser_email{
             a{
@@ -1526,6 +1541,23 @@ now override the 3.3 new styles for modern browsers & apply opacity
                     align-items: center;
                     justify-content: center;
                     flex-direction: row;
+                    &:hover{
+                        background: #1a43ba;
+                    }
+
+                    &.p-twitter{
+                        font-size: 17px;
+                    }
+
+                    &.p-website{
+                        background: #4BDBA3 url("../../assets/images/globe-2-svgrepo-com.svg") center no-repeat;
+                        background-size: 17px;
+                    }
+
+                    &.p-website:hover{
+                        background: #1a43ba url("../../assets/images/globe-2-svgrepo-com.svg") center no-repeat;
+                        background-size: 17px;
+                    }
                 }
             }
         }
@@ -1533,7 +1565,7 @@ now override the 3.3 new styles for modern browsers & apply opacity
 
 
     .more_info{
-        background: url("../../assets/images/green_bg.png") center no-repeat;
+        background: url("../../assets/images/communication_bg.png") center no-repeat;
         background-size: cover;
         padding: 40px;
         display: flex;
@@ -1546,6 +1578,17 @@ now override the 3.3 new styles for modern browsers & apply opacity
             font: normal normal bold 21px/32px Jost;
             letter-spacing: 0px;
             color: #FFFFFF;
+
+            .btn{
+                width:140px;
+                height: 47px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding-left: 20px;
+                padding-right: 20px;
+                float: right;
+            }
         }
     }
 }
