@@ -1,0 +1,26 @@
+url = "/cop16"
+layout = "default"
+title = "COP16"
+
+[siteSearchInclude]
+
+[jumbotron cop]
+jumbotron = "cop16"
+background = "transperant"
+templates = "template3"
+description_limit = 0
+==
+{% component 'siteSearchInclude' %}
+<div class="container-fluid colibri">
+    <div class="container-fluid plant">
+        <div class="container">
+            <div class="row cop16_intro">
+                <div class="col-md-6 col-xs-12"><img src="{{'COP16 LOGO COLOR.svg'|media}}"></div>
+                <div class="col-md-6 col-xs-12"><img src="{{'eu_pavilion.png'|media}}"></div>
+                <div class="col-md-12 col-xs-12 cop16-page-title">SCIENCE-POLICY INTERFACE FOR SUPPORTING BIODIVERSITY RESTORATION</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% component 'cop' %}
