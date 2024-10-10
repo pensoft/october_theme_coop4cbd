@@ -51,7 +51,7 @@ function onStart(){
 {% endif %}
 <nav class="navbar pr-1 pl-1" id="headernavbar">
     <a href="{{'home'|page}}" class="navbar-brand" id="navbar-brand" style="background: url('{{ this.theme.site_logo.getPath() }}') no-repeat; background-position: center; background-size: contain; "></a>
-    
+
     <div class="navbar-collapse collapse end-xs" id="headerNavbarNav" style="display: none;">
 
 
@@ -82,7 +82,7 @@ function onStart(){
             </ul>
         </div>
     </div>
-    
+
     <div id="menuToggle">
         <input type="checkbox" />
         <span></span>
@@ -114,7 +114,15 @@ function onStart(){
     <div class="container">
         <div class="header-image {% if page_id != 'search' %} {{page_id}} {% endif %}">
 
-    <div class="header-image-bar" style="background: url('{{this.theme.header_image.getPath()}}') right center no-repeat;"></div>
+    <div class="header-image-bar" style="background: url('{{this.theme.header_image.getPath()}}') right center no-repeat;">
+        <div class="cop16_banner">
+            <a href="{{'cop16'|page}}">
+                <img src="{{'cop16_white.svg'|media}}">
+                21 Oct 1–Nov 2024
+                <span class="arrow_icon"></span>
+            </a>
+        </div>
+    </div>
     <div class="jumbotron" data-aos="fade-right">
         {% if page_id != 'home' and page_id != 'search' %}
         <h1 class="underline white" {% if user %} style="margin-top:35px;"{% endif %}>
