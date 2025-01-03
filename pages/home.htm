@@ -59,6 +59,12 @@ function onStart(){
                 {% if this.theme.researchgate %}
                 <a href="{{this.theme.researchgate_url}}" target="_blank" class="btn pr p-primary p-researchgate medium"></a>
                 {% endif %}
+                {% if this.theme.bluesky %}
+                <a href="{{this.theme.bluesky_url}}" target="_blank" class="btn pr p-primary p-bluesky medium"></a>
+                {% endif %}
+                {% if this.theme.threads %}
+                <a href="{{this.theme.threads_url}}" target="_blank" class="btn pr p-primary p-threads medium"></a>
+                {% endif %}
             </div>
             <!-- <div class="twitter-widget">
                 <a class="twitter-timeline" href="https://twitter.com/coop4cbd?ref_src=twsrc%5Etfw">Tweets by @coop4cbd</a>

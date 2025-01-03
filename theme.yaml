@@ -244,6 +244,38 @@ form:
                     action: show
                     field: researchgate
                     condition: checked
+            bluesky_section:
+                label: BlueSky
+                type: section
+                tab: 'Social Media'
+            bluesky:
+                label: Enable link to BlueSky profile
+                type: switch
+                default: false
+                tab: 'Social Media'
+            bluesky_url:
+                label: Input the url to your BlueSky page.
+                tab: 'Social Media'
+                trigger:
+                    action: show
+                    field: bluesky
+                    condition: checked
+            threads_section:
+                label: Threads
+                type: section
+                tab: 'Social Media'
+            threads:
+                label: Enable link to Threads profile
+                type: switch
+                default: false
+                tab: 'Social Media'
+            threads_url:
+                label: Input the url to your Threads page.
+                tab: 'Social Media'
+                trigger:
+                    action: show
+                    field: threads
+                    condition: checked
             font_size:
                 label: Font size
                 tab: 'Typography'
