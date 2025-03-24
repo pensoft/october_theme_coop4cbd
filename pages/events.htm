@@ -12,6 +12,7 @@ limit = "null"
 category = "null"
 language = "en"
 redirect_to_detailed_page = "false"
+default_view = "dayGridMonth"
 ==
 <?php
 use Pensoft\Calendar\Models\Entry;
@@ -159,9 +160,9 @@ $this['slug'] = $this->param('slug');
             <div class="row share_container middle-xs">
                 <div class="col-lg-1 col-xs-2 start-xs">Share</div>
                 <div class="col-xs-10">
-                    <a href="http://twitter.com/share?text={{entry.title}}&url={{page_url}}" target="_blank" class="btn p-primary pr p-twitter medium"></a>
+                    <a href="https://bsky.app/intent/compose?text={{entry.title}}20%{{page_url}}" target="_blank" class="btn p-primary pr p-bluesky medium" style="font-size: 20px !important;font-weight: 600;"></a>
 
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{page_url}}&amp;src=sdkpreparse" target="_blank" class="btn pr p-primary p-facebook medium"></a>
+                    
 
                     <a href="https://www.linkedin.com/sharing/share-offsite/?url={{page_url}}" target="_blank" class="btn pr p-primary p-linkedin medium"></a>
 
