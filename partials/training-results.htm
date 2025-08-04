@@ -1,0 +1,38 @@
+{% for training in trainings %}
+<div class="training-card">
+    <div class="row">
+        <div class="col-md-6 col-xs-12 training-info">
+            <h3 class="training-title">{{training.name}}</h3>
+            <div class="training-summery">{{training.summery|raw}}</div>
+            <div class="training-date">{{training.start_date|date('d M Y')}} - {{training.end_date|date('d M Y')}}</div>
+            <div class="training-duration">{{training.duration}}</div>
+            <div class="training-keywords">
+                {% set keywords = training.training_keywords is iterable ? training.training_keywords : (training.training_keywords ? training.training_keywords|split(',') : []) %}
+                {% for keyword in keywords %}
+                    <span class="training-keyword">{{ keyword|trim }}</span>
+                {% endfor %}
+            </div>
+            <a href="{{'training-corner'|page}}/{{ training.id }}" class="training-button">Find our more</a>
+        </div>
+        <div class="col-md-6 col-xs-12 training-carousel">
+            {% if training.carousel_images|length > 0 %}
+            <div class="training-carousel-slick">
+                {% set images = training.carousel_images|default([]) %}
+                {% if images|length == 0 and training.cover_image %}
+                    {% set images = [training.cover_image] %}
+                {% endif %}
+                {% for image in images %}
+                    <div class="training-carousel-item">
+                        <img src="{{ image.path }}" alt="Training image" />
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="training-carousel-arrows">
+                <button class="training-carousel-arrow training-carousel-prev" type="button">&lt;</button>
+                <button class="training-carousel-arrow training-carousel-next" type="button">&gt;</button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endfor %}

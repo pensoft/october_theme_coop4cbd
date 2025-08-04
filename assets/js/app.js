@@ -60,26 +60,6 @@ $(document).ready(function() {
                 $("#menuToggle input").prop("checked", false);
             }
         });
-
-        // if (width >= 1024) {
-        //     $('.work_packages_container .col-md').on("click", function () {
-        //         $('.work_packages_container .wp_content').hide();
-        //         if(!$(this).next('.wp_content').is(':visible')){
-        //             $(this).next('.wp_content').show();
-        //         }
-        //     });
-        // }
-
-        // $('.work_packages_container .col-md').on("mouseover", function () {
-        //     $('.work_packages_container .wp_content').hide();
-        //     $(this).next('.wp_content').show();
-        // });
-        // $('.work_packages_container .col-md').on("mouseout", function () {
-        //     $('.work_packages_container .wp_content').hide();
-        // });
-
-
-
     }
 
     if (width < 990) { // mobile
@@ -102,13 +82,6 @@ $(document).ready(function() {
                 });
             }
         });
-        // $('.work_packages_container .col-md').on("click", function () {
-        //     $('.work_packages_container .wp_content').hide();
-        //     if(!$(this).next('.wp_content').is(':visible')){
-        //         $(this).next('.wp_content').show();
-        //     }
-        // });
-
     }
 
     var loggedInMenuNavbar = $('.navbar-loggedin-user');
@@ -134,12 +107,10 @@ $(document).ready(function() {
         $('.ui-accordion-header').show();
         if ($(this).next(".accordion-content, .training-body").is(':visible')) {
             $(this).next(".accordion-content, .training-body").slideUp(300);
-            // $(this).children().find(".plusminus").text('+');
-            $(this).children(".plusminus").html('<span class="plus"></span>');
+            $(this).children(".plusminus").removeClass('active');
         } else {
             $(this).next(".accordion-content, .training-body").slideDown(300);
-            // $(this).children().find(".plusminus").text('-');
-            $(this).children(".plusminus").html('<span class="minus"></span>');
+            $(this).children(".plusminus").addClass('active');
         }
     });
 
@@ -313,6 +284,11 @@ $(document).ready(function() {
 
     $('.library .library-item .btn.btn-primary').text('Download');
 
+    // Initialize training corner functionality
+    initializeTrainingCorner();
+    
+    // Initialize training carousels
+    initializeTrainingCarousels();
 
 });
 
@@ -379,11 +355,6 @@ function expandReadMore(el){
 
         // $up.slideUp();
     }
-
-
-
-
-
     // fade out read-more
     // $up.fadeOut();
 
@@ -493,13 +464,6 @@ function isBreakpointLarge() {
 
 
 function showSearchForm(){
-    // if ($(".search").is(':visible')) {
-    // 	$('#menu').show();
-    // } else {
-    // 	$(".search").slideDown(300);
-    // 	$('#menu').hide();
-    // }
-    // $('#menu').hide();
     $('#layout-header').toggleClass('full-width');
     $('#search').toggle();
     $('#menu').hide();
@@ -514,13 +478,6 @@ function hideSearchForm(){
     $('nav a').show();
     $(`#google_translate_element`).show();
 }
-
-// function requestFormLibrary() {
-// 	$('#mylibraryForm').on('click', 'a', function () {
-// 		var $form = $(this).closest('form');
-// 		$form.request();
-// 	})
-// }
 
 function requestFormPartners() {
 	$('#myPartnersForm').on('click', 'a', function () {
@@ -928,6 +885,140 @@ function initMailingTooltip(){
     $('.group-holder').eq(0).prepend( "<p style='margin-left: 10px; width: 100%;'>Prior to sending group emails, please make sure that all individuals you want to contact have been included in the respective group by clicking on the group icon.</p><p></p>" );
     $('.group-holder').eq(1).prepend( "<p style='margin-left: 10px; width: 100%;'>To see each person’s email, click on the account icon.</p><p></p>" );
 
+}
+
+function initializeTrainingCorner() {
+    // Check if we're on the training corner page
+    if (!$('.training-container-records').length) {
+        return;
+    }
+
+    // Initialize Selectize on all filter dropdowns
+    $('.filter-dropdown').each(function() {
+        var $select = $(this);
+        var placeholderText = $select.find('option[selected][disabled]').text();
+        $select.selectize({
+            allowEmptyOption: true,
+            placeholder: placeholderText,
+            onChange: function(value) {
+                filterTrainings();
+            }
+        });
+    });
+
+    // Search functionality
+    $('#trainingSearch').on('input', function() {
+        searchTrainings();
+    });
+
+    $('#searchBtn').on('click', function() {
+        searchTrainings();
+    });
+}
+
+function searchTrainings() {
+    var query = document.getElementById('trainingSearch').value;
+    var filters = getActiveFilters();
+    
+    $.request('onFilterTrainings', {
+        data: { 
+            query: query,
+            session: filters.session,
+            audience: filters.audience,
+            topic: filters.topic,
+            keywords: filters.keywords
+        },
+        complete: function(data) {
+            // Reinitialize carousels after DOM update is complete
+            setTimeout(function() {
+                if (typeof initializeTrainingCarousels === 'function') {
+                    initializeTrainingCarousels();
+                }
+            }, 100);
+        }
+    });
+}
+
+function filterTrainings() {
+    var query = document.getElementById('trainingSearch').value;
+    var filters = getActiveFilters();
+    
+    $.request('onFilterTrainings', {
+        data: { 
+            query: query,
+            session: filters.session,
+            audience: filters.audience,
+            topic: filters.topic,
+            keywords: filters.keywords
+        },
+        complete: function(data) {
+            // Reinitialize carousels after DOM update is complete
+            setTimeout(function() {
+                if (typeof initializeTrainingCarousels === 'function') {
+                    initializeTrainingCarousels();
+                }
+            }, 100);
+        }
+    });
+}
+
+function getActiveFilters() {
+    var sessionValue = $('#filter-session')[0].selectize ? $('#filter-session')[0].selectize.getValue() : '';
+    var audienceValue = $('#filter-audience')[0].selectize ? $('#filter-audience')[0].selectize.getValue() : '';
+    var topicValue = $('#filter-topic')[0].selectize ? $('#filter-topic')[0].selectize.getValue() : '';
+    var keywordsValue = $('#filter-keywords')[0].selectize ? $('#filter-keywords')[0].selectize.getValue() : '';
+    
+    return {
+        session: (sessionValue && sessionValue !== 'Training session' && sessionValue !== 'all') ? sessionValue : '',
+        audience: (audienceValue && audienceValue !== 'Target audience' && audienceValue !== 'all') ? audienceValue : '',
+        topic: (topicValue && topicValue !== 'Topic' && topicValue !== 'all') ? topicValue : '',
+        keywords: (keywordsValue && keywordsValue !== 'Keywords' && keywordsValue !== 'all') ? keywordsValue : ''
+    };
+}
+
+function initializeTrainingCarousels() {
+    // Destroy existing carousels first to avoid conflicts
+    $('.training-carousel-slick').each(function() {
+        if ($(this).hasClass('slick-initialized')) {
+            $(this).slick('unslick');
+        }
+    });
+
+    // Initialize Slick carousel for training carousels
+    if ($('.training-carousel-slick').length) {
+        $('.training-carousel-slick').slick({
+            slidesToShow: 2.3,
+            slidesToScroll: 1,
+            arrows: true,
+            dots: false,
+            infinite: false,
+            responsive: [
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1,
+                        arrows: false,
+                        dots: true
+                    }
+                }
+            ]
+        });
+
+        // Remove any existing click handlers to avoid duplicates
+        $('.training-carousel-arrows').off('click', '.training-carousel-prev, .training-carousel-next');
+
+        // Custom arrow controls below carousel
+        $('.training-carousel-arrows').each(function() {
+            var $arrows = $(this);
+            var $carousel = $arrows.siblings('.training-carousel-slick');
+            $arrows.find('.training-carousel-prev').off('click').on('click', function() {
+                $carousel.slick('slickPrev');
+            });
+            $arrows.find('.training-carousel-next').off('click').on('click', function() {
+                $carousel.slick('slickNext');
+            });
+        });
+    }
 }
 
 function init() {

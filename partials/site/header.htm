@@ -194,7 +194,7 @@ function onStart(){
         </div>
     </div>
 </div>
-{% else %}
+{% elseif page_id != 'training-corner' or not is_detail_page %}
 <div class="container-fluid">
     <div class="header-image {% if page_id != 'search' %} {{page_id}} {% endif %}">
         <div class="header-image-bar" style="background: url('{{'about-header.jpg'|media}}') center no-repeat;">

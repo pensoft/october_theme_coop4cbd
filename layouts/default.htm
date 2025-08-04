@@ -33,10 +33,15 @@ update_selector = "#gdpr-reload"
     <script src="{{ 'assets/js/popper.min.js'|theme }}"></script>
     <script src="{{ 'assets/js/tippy-bundle.umd.min.js'|theme}}"></script>
     <script src="{{ 'assets/js/app.js'|theme }}"></script>
+    <script src="{{ 'assets/js/training-filters.js'|theme }}"></script>
     <script src="{{ 'assets/js/jquery-ui.js'|theme }}"></script>
     <script src="{{ 'assets/vendor/bootstrap/js/modal.js'|theme  }}"></script>
+    
+    <!-- Selectize.js for enhanced dropdowns -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"></script>
 
-    {% if this.page.id == 'home' %}
+    {% if this.page.id == 'home' or this.page.id == 'training-corner' %}
         <script type="text/javascript" src="{{ 'assets/js/slick.min.js'|theme }}"></script>
     {% endif %}
 
@@ -88,12 +93,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0" nonce="X0nPVr3s"></script>
     <!-- Header -->
     <header id="layout-header">
-        {% partial 'site/header'
-        site_name=this.theme.site_name
-        tag_line=this.theme.tag_line
-        page_title=this.page.title
-        page_id=this.page.id
-        %}
+            {% partial 'site/header'
+    site_name=this.theme.site_name
+    tag_line=this.theme.tag_line
+    page_title=this.page.title
+    page_id=this.page.id
+    is_detail_page=is_detail_page
+    %}
     </header>
 
     <!-- Content -->

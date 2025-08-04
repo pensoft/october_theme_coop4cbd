@@ -1,13 +1,290 @@
-url = "/training-corner"
+url = "/training-corner/:id?|[a-zA-Z\-0-9]"
 layout = "default"
 title = "Training corner"
+is_hidden = 0
 
 [siteSearchInclude]
 [TrainingCorner]
 
 ==
+<?php
+use Pensoft\TrainingCorner\Models\Training;
+
+function onStart()
+{
+    // Check if we're on a detail page
+    $trainingId = $this->param('id');
+    $this['training'] = null;
+    $this['is_detail_page'] = false;
+    
+    if ($trainingId && is_numeric($trainingId)) {
+        $this['training'] = Training::with(['videos' => function($query) {
+            $query->orderBy('sort_order', 'asc');
+        }, 'documents' => function($query) {
+            $query->orderBy('sort_order', 'asc');
+        }, 'modules' => function($query) {
+            $query->orderBy('sort_order', 'asc');
+        }])->where('id', $trainingId)->first();
+        
+        $this['is_detail_page'] = $this['training'] ? true : false;
+        
+        if ($this['is_detail_page']) {
+            $this['page_url'] = $this->pageUrl('');
+        }
+    }
+}
+?>
+==
 {% component 'siteSearchInclude' %}
 
-<div class="container">
-    {% component 'TrainingCorner' %}
-</div>  
+{% if is_detail_page %}
+<div class="container-fluid detailed-training">
+    <div class="training-intro">
+        <div class="container intro-container">
+            <div class="training-intro-container">
+                {% if training.name %} 
+                <div class="training-detailed-header">
+                    <h1>{{training.name}}</h1>
+                </div>
+                {% endif %}
+                <div class="header-keywords">
+                    {% set keywords = training.training_keywords is iterable ? training.training_keywords : (training.training_keywords ? training.training_keywords|split(',') : []) %}
+                    {% for keyword in keywords %}
+                        <span class="training-keyword">{{ keyword|trim }}</span>
+                    {% endfor %}
+                </div>
+                <div class="training-date">
+                    {{training.start_date|date('d M Y')}} - {{training.end_date|date('d M Y')}}
+                </div>
+                {% if training.duration %}
+                <div class="training-duration">{{training.duration}}</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="container detailed-content">
+        <div class="training-section about-section">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    {% if training.about %}
+                    <h2 class="section-title">About</h2>
+                    <div class="about-content">{{training.about|raw}}</div>
+                    {% endif %}
+                </div>
+                <div class="col-md-6 col-xs-12 training-cover-image">
+                    <img src="{{ training.cover_image.path }}" alt="{{training.name}}" />
+                </div>
+            </div>
+        </div>
+        {% if training.organiser %}
+        <div class="training-section organizer-section">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <h2 class="section-title">Organizer</h2>
+                    <div class="organizer-content">{{training.organiser}}</div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if training.modules %}
+        <div class="training-section content-section">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <h2 class="section-title">Course content</h2>
+                    <div class="course-modules">
+                        {% for module in training.modules %}
+                        <div class="module-item">
+                            <div class="training-head">
+                                <h3 class="module-title">{{ module.module_name }}</h3>
+                                <span class="plusminus"></span>
+                            </div>
+                            <div class="training-body" style="display: none;">
+                                {% if module.module_text %}
+                                <div class="module-content">
+                                    {{ module.module_text|raw }}
+                                </div>
+                                {% endif %}
+
+                                {% if module.videos or module.module_youtube_urls %}
+                                <div class="module-videos">
+                                    <h4>Videos</h4>
+                                </div>
+                                {% endif %}
+
+                                {% if module.videos %}
+                                <div class="module-attached-videos">
+                                    <div class="attached-video-list">
+                                        {% for video in module.videos %}
+                                        <div class="attached-video-item">
+                                            <a href="{{ video.path }}" target="_blank">{{ video.file_name }}</a>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+
+                                {% if module.module_youtube_urls %}
+                                <div class="module-videos">
+                                    <div class="video-list">
+                                        {% for video_url in module.getEmbeddableYouTubeUrls() %}
+                                        <div class="video-item">
+                                            {% if video_url.title %}
+                                                <h5 class="video-title">{{ video_url.title }}</h5>
+                                            {% endif %}
+                                            <div class="video-iframe-container">
+                                                <iframe 
+                                                    src="{{ video_url.embed_url }}" 
+                                                    frameborder="0" 
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                                    allowfullscreen
+                                                    loading="lazy">
+                                                </iframe>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                
+                                {% if module.slideshares %}
+                                <div class="module-slideshares">
+                                    <h4>Slideshares</h4>
+                                    <div class="slideshare-list">
+                                        {% for slideshare in module.getEmbeddableSlideshares() %}
+                                        <div class="slideshare-item">
+                                            {% if slideshare.title %}
+                                                <h5 class="slideshare-title">{{ slideshare.title }}</h5>
+                                            {% endif %}
+                                            <div class="slideshare-iframe-container">
+                                                <iframe 
+                                                    src="{{ slideshare.embeddable_url }}" 
+                                                    frameborder="0" 
+                                                    allowfullscreen
+                                                    loading="lazy">
+                                                </iframe>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if module.module_documents %}
+                                <div class="module-documents">
+                                    <h4>Documents</h4>
+                                    <div class="document-list">
+                                        {% for document in module.module_documents %}
+                                        <a href="{{ document.path }}" target="_blank">
+                                            <div class="document-item">
+                                                <div class="document-info">
+                                                    <div class="pdf-icon"></div>
+                                                    <span>{{ document.title }}</span>
+                                                </div>
+                                                <div class="download-icon"></div>
+                                            </div>
+                                        </a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if training.documents %}
+        <div class="training-section documents-section">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <h2 class="section-title">Relevant documents</h2>
+                    <div class="documents-list">
+                        {% for document in training.documents %}
+                        <a href="{{ document.document.path }}" target="_blank">
+                            <div class="document-item">
+                                <div class="document-info">
+                                    <div class="pdf-icon"></div>
+                                    <span>{{document.name}}</span>
+                                </div>
+                                <div class="download-icon"></div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <!-- <div class="videos-section">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <h2 class="section-title">Relevant videos</h2>
+                    <div class="videos-list">
+                        {% for video in training.videos %}
+                            <div class="video-item">
+                                <a href="{{video.url}}" target="_blank">{{video.name}}</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+{% else %}
+<div class="container training-container-records">
+    <div class="training-filters">
+        <div class="filters-bar row">
+            <div class="filters-left">
+                <div class="filter-group">
+                    <select id="filter-session" class="filter-dropdown">
+                        <option selected disabled>Training session</option>
+                        <option value="all">All training sessions</option>
+                        {% for key, value in TrainingCorner.trainingOptions %}
+                            <option value="{{ key }}">{{ value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <select id="filter-audience" class="filter-dropdown">
+                        <option selected disabled>Target audience</option>
+                        <option value="all">All target audiences</option>
+                        {% for key, value in TrainingCorner.targetAudienceOptions %}
+                            <option value="{{ key }}">{{ value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <select id="filter-topic" class="filter-dropdown">
+                        <option selected disabled>Topic</option>
+                        <option value="all">All topics</option>
+                        {% for key, value in TrainingCorner.topicOptions %}
+                            <option value="{{ key }}">{{ value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <select id="filter-keywords" class="filter-dropdown">
+                        <option selected disabled>Keywords</option>
+                        <option value="all">All keywords</option>
+                        {% for key, value in TrainingCorner.keywordsOptions %}
+                            <option value="{{ key }}">{{ value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="filter-group search-group">
+                <div class="search-wrapper">
+                    <input type="text" id="trainingSearch" placeholder="Search">
+                    <button class="btn" id="searchBtn"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="training-results" id="trainingResults">
+        {% partial 'training-results' trainings=TrainingCorner.trainings %}
+    </div>
+</div>
+{% endif %}
