@@ -16,7 +16,7 @@ include_css = 1
 update_selector = "#gdpr-reload"
 ==
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -36,7 +36,7 @@ update_selector = "#gdpr-reload"
     <script src="{{ 'assets/js/training-filters.js'|theme }}"></script>
     <script src="{{ 'assets/js/jquery-ui.js'|theme }}"></script>
     <script src="{{ 'assets/vendor/bootstrap/js/modal.js'|theme  }}"></script>
-    
+
     <!-- Selectize.js for enhanced dropdowns -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"></script>
@@ -104,7 +104,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- Content -->
     <section id="layout-content" class="{{this.page.id}}">
-    
+
         {% if this.page.id == 'home' %}
         <!-- popup markup -->
         <a data-toggle="modal" href="#content-confirmation" class="openCop16ModalBtn" style="display: none;">Launch Confirmation dialog</a>
@@ -113,7 +113,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="modal-dialog">
                 <div class="modal-content center-xs">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <img src="{{'COP16 LOGO COLOR.svg'|media}}">
+                    <img src="{{'COP16 LOGO COLOR.svg'|media}}" alt="Featured image for COP16 LOGO" role="img">
                     <div class="cop16-date">21 OCT - 1 NOV 2024</div>
                     <div class="cop16-tagline">Peace with Nature</div>
                     <div class="cop16-title">Science-policy Interface for Supporting Biodiversity</div>

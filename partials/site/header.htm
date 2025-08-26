@@ -186,7 +186,9 @@ function onStart(){
        aria-label="Open search form"
        aria-expanded="false"
        aria-controls="search"
-       title="Search the website"><span class="sr-only">Search</span></a>
+       title="Search the website">
+        <span class="sr-only">Search</span>
+    </a>
     <div id="search" class="search" style="display: none;">
         <div class="close-search" onclick="hideSearchForm();"
              aria-label="Close search form"
@@ -230,7 +232,7 @@ function onStart(){
                  role="banner">
             </div>
 
-            <div class="jumbotron" data-aos="fade-right" role="region" aria-labelledby="hero-content">
+            <div class="jumbotron" data-aos="fade-right" role="region" aria-label="hero content and intro">
                 {% if page_id != 'home' and page_id != 'search' %}
                 <h1 id="hero-content" class="underline white" {% if user %} style="margin-top:35px;"{% endif %}>
                     {%if page_title%} {{page_title}} {%else%} {{site_name}} {%endif%}
@@ -256,7 +258,11 @@ function onStart(){
                 </div>
                 {% endif %}
         <div class="scrollDownIcon">
-            <a onclick="$('html, body').animate({ scrollTop: $('.header-image-bar').height() }, 500);"></a>
+            <a onclick="$('html, body').animate({ scrollTop: $('.header-image-bar').height() }, 500);"
+               aria-label="Scroll down to main content"
+               title="Scroll to content">
+                <span class="sr-only">Scroll down</span>
+            </a>
         </div>
 
             </div>
@@ -272,7 +278,7 @@ function onStart(){
             <div class="row newslist">
                 <div class="col-xs-12">
                     {% if news.count > 3 %}
-                    <div id="slick" role="region" aria-labelledby="news-carousel-heading">
+                    <div id="slick" role="region" aria-label="news carousel slider heading">
                         {% endif %}
                         {% for highlight in news %}
                         <div class="slide">
