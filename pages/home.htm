@@ -43,29 +43,26 @@ function onStart(){
         <div class="col-lg-5 col-xs-12 social_media_conainer">
             <h2 class="base_heading">Follow COOP4CBD</h2>
             <div class="row subscribe-items start-md center-xs">
-                {% if this.theme.twitter %}
-                <a href="{{this.theme.twitter_url}}" target="_blank" rel="noopener noreferrer" class="btn p-primary pr p-twitter medium" aria-label="Follow us on Twitter"></a>
+                {% if this.theme.bluesky_url %}
+                <a href="{{this.theme.bluesky_url}}" target="_blank" rel="noopener noreferrer" class="btn p-primary pr p-bluesky medium" aria-label="Visit our Bluesky (opens in a new tab)"><span class="visually-hidden">Bluesky</span></a>
                 {% endif %}
-                {% if this.theme.facebook %}
-                <a href="{{this.theme.facebook_url}}" target="_blank" rel="noopener noreferrer" class="btn pr p-primary p-facebook medium" aria-label="Follow us on Facebook"></a>
+                {% if this.theme.facebook_url %}
+                <a href="{{this.theme.facebook_url}}" target="_blank" rel="noopener noreferrer" class="btn p-primary pr p-facebook medium" aria-label="Visit our Facebook (opens in a new tab)"><span class="visually-hidden">Facebook</span></a>
                 {% endif %}
-                {% if this.theme.linkedin %}
-                <a href="{{this.theme.linkedin_url}}" target="_blank" rel="noopener noreferrer" class="btn pr p-primary p-linkedin medium" aria-label="Connect with us on LinkedIn"></a>
+                {% if this.theme.linkedin_url %}
+                <a  href="{{linkedin_url}}" target="_blank" rel="noopener noreferrer" class="btn p-primary pr p-linkedin medium" aria-label="Visit our LinkedIn (opens in a new tab)"><span class="visually-hidden">LinkedIn</span></a>
                 {% endif %}
-                {% if this.theme.youtube %}
-                <a href="{{this.theme.youtube_url}}" target="_blank" rel="noopener noreferrer" class="btn pr p-primary p-youtube medium" aria-label="Subscribe to our YouTube channel"></a>
+                {% if this.theme.youtube_url %}
+                <a  href="{{this.theme.youtube_url}}" target="_blank" rel="noopener noreferrer" class="btn p-primary pr p-youtube medium" aria-label="Visit our YouTube (opens in a new tab)"><span class="visually-hidden">YouTube</span></a>
                 {% endif %}
-                {% if this.theme.instagram %}
-                <a href="{{this.theme.instagram_url}}" target="_blank" rel="noopener noreferrer" class="btn pr p-primary p-instagram medium" aria-label="Follow us on Instagram"></a>
+                {% if this.theme.instagram_url %}
+                <a  href="{{this.theme.instagram_url}}" target="_blank" rel="noopener noreferrer" class="btn p-primary pr p-instagram medium" aria-label="Visit our Instagram (opens in a new tab)"><span class="visually-hidden">Instagram</span></a>
                 {% endif %}
-                {% if this.theme.researchgate %}
-                <a href="{{this.theme.researchgate_url}}" target="_blank" rel="noopener noreferrer" class="btn pr p-primary p-researchgate medium" aria-label="View our ResearchGate profile"></a>
+                {% if this.theme.twitter_url %}
+                <a href="{{this.theme.twitter_url}}" target="_blank" rel="noopener noreferrer" class="btn p-primary pr p-twitter medium" aria-label="Visit our X (Twitter) (opens in a new tab)"><span class="visually-hidden">X (Twitter)</span></a>
                 {% endif %}
-                {% if this.theme.bluesky %}
-                <a href="{{this.theme.bluesky_url}}" target="_blank" rel="noopener noreferrer" class="btn pr p-primary p-bluesky medium" aria-label="Follow us on Bluesky"></a>
-                {% endif %}
-                {% if this.theme.threads %}
-                <a href="{{this.theme.threads_url}}" target="_blank" rel="noopener noreferrer" class="btn pr p-primary p-threads medium" aria-label="Follow us on Threads"></a>
+                {% if this.theme.threads_url %}
+                <a href="{{this.theme.threads_url}}" target="_blank" rel="noopener noreferrer" class="btn p-primary pr p-threads medium" aria-label="Visit our Threads (opens in a new tab)"><span class="visually-hidden">Threads</span></a>
                 {% endif %}
             </div>
         </div>

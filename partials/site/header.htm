@@ -81,85 +81,26 @@ function onStart(){
         {% component 'menu' %}
 
         <div class="social-media-links" role="navigation" aria-label="Social media links">
-            {% if this.theme.facebook and this.theme.facebook_url %}
-            <a href="{{this.theme.facebook_url}}"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="pr p-secondary p-facebook big"
-               aria-label="Follow us on Facebook"
-               title="Follow us on Facebook (opens in new window)">
-                <span class="sr-only">Facebook (opens in new window)</span>
-            </a>
+            {% if this.theme.bluesky_url %}
+            <a href="{{this.theme.bluesky_url}}" target="_blank" rel="noopener noreferrer" class="pr p-secondary p-bluesky normal" aria-label="Visit our Bluesky (opens in a new tab)"><span class="visually-hidden">Bluesky</span></a>
             {% endif %}
-            {% if this.theme.twitter and this.theme.twitter_url %}
-            <a href="{{this.theme.twitter_url}}"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="pr p-secondary p-twitter normal"
-               aria-label="Follow us on Twitter"
-               title="Follow us on Twitter (opens in new window)">
-                <span class="sr-only">Twitter (opens in new window)</span>
-            </a>
+            {% if this.theme.facebook_url %}
+            <a href="{{this.theme.facebook_url}}" target="_blank" rel="noopener noreferrer" class="pr p-secondary p-facebook normal" aria-label="Visit our Facebook (opens in a new tab)"><span class="visually-hidden">Facebook</span></a>
             {% endif %}
-            {% if this.theme.linkedin and this.theme.linkedin_url %}
-            <a href="{{this.theme.linkedin_url}}"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="pr p-secondary p-linkedin big"
-               aria-label="Connect with us on LinkedIn"
-               title="Connect with us on LinkedIn (opens in new window)">
-                <span class="sr-only">LinkedIn (opens in new window)</span>
-            </a>
+            {% if this.theme.linkedin_url %}
+            <a  href="{{linkedin_url}}" target="_blank" rel="noopener noreferrer" class="pr p-secondary p-linkedin normal" aria-label="Visit our LinkedIn (opens in a new tab)"><span class="visually-hidden">LinkedIn</span></a>
             {% endif %}
-            {% if this.theme.youtube and this.theme.youtube_url %}
-            <a href="{{this.theme.youtube_url}}"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="pr p-secondary p-youtube big"
-               aria-label="Subscribe to our YouTube channel"
-               title="Subscribe to our YouTube channel (opens in new window)">
-                <span class="sr-only">YouTube (opens in new window)</span>
-            </a>
+            {% if this.theme.youtube_url %}
+            <a  href="{{this.theme.youtube_url}}" target="_blank" rel="noopener noreferrer" class="pr p-secondary p-youtube normal" aria-label="Visit our YouTube (opens in a new tab)"><span class="visually-hidden">YouTube</span></a>
             {% endif %}
-            {% if this.theme.instagram and this.theme.instagram_url %}
-            <a href="{{this.theme.instagram_url}}"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="pr p-secondary p-instagram big"
-               aria-label="Follow us on Instagram"
-               title="Follow us on Instagram (opens in new window)">
-                <span class="sr-only">Instagram (opens in new window)</span>
-            </a>
+            {% if this.theme.instagram_url %}
+            <a  href="{{this.theme.instagram_url}}" target="_blank" rel="noopener noreferrer" class="pr p-secondary p-instagram normal" aria-label="Visit our Instagram (opens in a new tab)"><span class="visually-hidden">Instagram</span></a>
             {% endif %}
-            {% if this.theme.researchgate and this.theme.researchgate_url %}
-            <a href="{{this.theme.researchgate_url}}"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="pr p-secondary p-researchgate big"
-               aria-label="View our ResearchGate profile"
-               title="View our ResearchGate profile (opens in new window)">
-                <span class="sr-only">ResearchGate (opens in new window)</span>
-            </a>
+            {% if this.theme.twitter_url %}
+            <a href="{{this.theme.twitter_url}}" target="_blank" rel="noopener noreferrer" class="pr p-secondary p-twitter normal" aria-label="Visit our X (Twitter) (opens in a new tab)"><span class="visually-hidden">X (Twitter)</span></a>
             {% endif %}
-            {% if this.theme.bluesky and this.theme.bluesky_url %}
-            <a href="{{this.theme.bluesky_url}}"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="pr p-secondary p-bluesky normal"
-               aria-label="Follow us on Bluesky"
-               title="Follow us on Bluesky (opens in new window)">
-                <span class="sr-only">Bluesky (opens in new window)</span>
-            </a>
-            {% endif %}
-            {% if this.theme.threads and this.theme.threads_url %}
-            <a href="{{this.theme.threads_url}}"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="pr p-secondary p-threads big"
-               aria-label="Follow us on Threads"
-               title="Follow us on Threads (opens in new window)">
-                <span class="sr-only">Threads (opens in new window)</span>
-            </a>
+            {% if this.theme.threads_url %}
+            <a href="{{this.theme.threads_url}}" target="_blank" rel="noopener noreferrer" class="pr p-secondary p-threads normal" aria-label="Visit our Threads (opens in a new tab)"><span class="visually-hidden">Threads</span></a>
             {% endif %}
         </div>
 
