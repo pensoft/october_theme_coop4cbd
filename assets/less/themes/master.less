@@ -824,7 +824,7 @@ a{
       }
   }
 
-  
+
   &.p-bluesky{
       &::before{
           font-size: 0.7em;
@@ -1787,5 +1787,35 @@ now override the 3.3 new styles for modern browsers & apply opacity
 
 }
 
+
+
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+.sr-only-focusable:focus {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 0.75rem 1rem !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    clip: auto !important;
+    white-space: normal !important;
+    background-color: #000000;
+    color: #ffffff;
+    text-decoration: none;
+    z-index: 1001;
+    border: 2px solid #ffffff;
+    font-weight: bold;
+}
 
 
