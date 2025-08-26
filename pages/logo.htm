@@ -60,28 +60,45 @@ return Redirect::to('/media-center/logo');
 
     <div class="row card-container-row mb-4 start-xs">
         {% for record in records %}
-        {# Use spaceless tag to remove spaces inside the A tag. #}
         {% spaceless %}
         {% if record.logo_image %}
         <div class="col-md-3 col-xs-12 center-xs">
-            <p class="logo_container"><img src="{{record.logo_image.path}}" title="{{record.name}}"></p>
+            <p class="logo_container">
+                <img src="{{record.logo_image.path}}"
+                     alt="{{record.name}} logo preview"
+                     role="img">
+            </p>
             <div class="col-xs-12">
                 <div class="text-center">
-                    <b>Download {{record.name}}</b> <br><br>
+                    <strong>Download {{record.name}}</strong> <br><br>
                     {% if record.file_jpg %}
-                    <a href="{{ ''| page }}?{{queries}}&download={{record.file_jpg.id}}&file_name={{record.file_jpg.file_name|replace({' ': '_'})}}" title="Logo pack" class="btn btn-primary"><i class="pr p-download"></i>  JPG</a> &nbsp;
+                    <a href="{{ ''| page }}?{{queries}}&download={{record.file_jpg.id}}&file_name={{record.file_jpg.file_name|replace({' ': '_'})}}"
+                       class="btn btn-primary"
+                       aria-label="Download {{record.name}} logo in JPG format"
+                       download="{{record.file_jpg.file_name}}">
+                        <i class="pr p-download" aria-hidden="true"></i> JPG
+                    </a> &nbsp;
                     {% endif %}
                     {% if record.file_png %}
-                    <a href="{{ ''| page }}?{{queries}}&download={{record.file_png.id}}&file_name={{record.file_png.file_name|replace({' ': '_'})}}" title="Logo pack" class="btn btn-primary"><i class="pr p-download"></i>  PNG</a> &nbsp;
+                    <a href="{{ ''| page }}?{{queries}}&download={{record.file_png.id}}&file_name={{record.file_png.file_name|replace({' ': '_'})}}"
+                       class="btn btn-primary"
+                       aria-label="Download {{record.name}} logo in PNG format"
+                       download="{{record.file_png.file_name}}">
+                        <i class="pr p-download" aria-hidden="true"></i> PNG
+                    </a> &nbsp;
                     {% endif %}
                     {% if record.file_eps %}
-                    <a href="{{ ''| page }}?{{queries}}&download={{record.file_eps.id}}&file_name={{record.file_eps.file_name|replace({' ': '_'})}}" title="Logo pack" class="btn btn-primary"><i class="pr p-download"></i>  SVG</a>
+                    <a href="{{ ''| page }}?{{queries}}&download={{record.file_eps.id}}&file_name={{record.file_eps.file_name|replace({' ': '_'})}}"
+                       class="btn btn-primary"
+                       aria-label="Download {{record.name}} logo in SVG format"
+                       download="{{record.file_eps.file_name}}">
+                        <i class="pr p-download" aria-hidden="true"></i> SVG
+                    </a>
                     {% endif %}
                 </div>
             </div>
         </div>
         {% endif %}
-
         {% endspaceless %}
         {% else %}
         {{ noRecordsMessage }}

@@ -65,25 +65,40 @@ return Redirect::to('/media-center/videos');
         {% spaceless %}
         <div class="col-md-6 col-xs-12">
             <div class="">
-                <p class="card_title font-weight-bold">{{record.name}}</p>
+                <h3 class="card_title font-weight-bold">{{record.name}}</h3>
                 {% if record.file %}
-                <video controls="" width="100%"><source src="{{record.file.path}}" type="video/mp4"></video>
+                <video controls width="100%" aria-label="{{record.name}} video">
+                    <source src="{{record.file.path}}" type="video/mp4">
+                    <p>Your browser does not support the video element. <a href="{{record.file.path}}">Download the video file</a>.</p>
+                </video>
 
                 <p>Attachment: {{record.file.file_name}}, {{record.file.size}}</p>
 
-                <p><a class=" btn btn-primary" href="{{ ''| page }}?{{queries}}&download={{record.file.id}}&file_name={{record.name|replace({' ': '_'})}}">Download</a></p>
+                <p><a class="btn btn-primary"
+                      href="{{ ''| page }}?{{queries}}&download={{record.file.id}}&file_name={{record.name|replace({' ': '_'})}}"
+                      aria-label="Download {{record.name}} video file"
+                      download>Download</a></p>
 
                 {% endif %}
 
                 {% if record.youtube_url %}
-                <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{record.youtube_url}}" width="100%" height="422"></iframe>
+                <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        frameborder="0"
+                        src="{{record.youtube_url}}"
+                        width="100%"
+                        height="422"
+                        title="{{record.name}} YouTube video"></iframe>
 
                 <p>&nbsp;</p>
                 {% endif %}
 
                 {% if record.vimeo_url %}
-                <iframe width="100%" height="422" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        src="{{record.vimeo_url}}">
+                <iframe width="100%"
+                        height="422"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        src="{{record.vimeo_url}}"
+                        title="{{record.name}} Vimeo video">
                 </iframe>
                 <p>&nbsp;</p>
                 {% endif %}

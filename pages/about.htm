@@ -44,16 +44,20 @@ function onStart(){
 ==
 {% component 'siteSearchInclude' %}
 
-<h1 class="display-1 aos-init aos-animate" data-aos="fade-up">BACKGROUND</h1>
-<div class="about-background">
+<h1 id="background-heading" class="display-1 aos-init aos-animate" data-aos="fade-up">BACKGROUND</h1>
+
+<section class="about-background" aria-labelledby="background-heading">
     {% component 'background' %}
-</div>
-<div class="about-background-blue">
+</section>
+
+<section class="about-background-blue" aria-labelledby="background-heading">
     {% component 'backgroundblue' %}
-</div>
-<div class="about-background-3">
+</section>
+
+<section class="about-background-3" aria-labelledby="background-heading">
     {% component 'background3' %}
-</div>
-<div class="about-background-4">
+</section>
+
+<section class="about-background-4" aria-labelledby="background-heading">
     {% component 'background4' %}
-</div>
+</section>

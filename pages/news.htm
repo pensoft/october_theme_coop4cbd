@@ -96,86 +96,94 @@ $this['related'] = $related;
 ?>
 ==
 {% if is_detail_page %}
-<div class="container">
-    <div class="some_news_background2"></div>
-    <div class="some_news_background"></div>
-    <div class="row single-news-item">
+<main class="container" role="main">
+    <div class="some_news_background2" aria-hidden="true"></div>
+    <div class="some_news_background" aria-hidden="true"></div>
+    <article class="row single-news-item">
         {% if article.cover %}
         <div class="col-md-6 col-xs-12">
-            <img class="content left" src="{{ article.cover|crop_image|resize(542, auto, { mode: 'crop' }) }}" />
+            <img class="content left"
+                 src="{{ article.cover|crop_image|resize(542, auto, { mode: 'crop' }) }}"
+                 alt="Featured image for {{article.title}}"
+                 role="img" />
             {% if article.caption %}
-            {{article.caption|raw}}
+            <figcaption>{{article.caption|raw}}</figcaption>
             {% endif %}
         </div>
         {% endif %}
 
-        <div class="col-md-6 col-xs-12">
+        <header class="col-md-6 col-xs-12">
             <div class="news-title">
                 <h1 class="single-new-title">{{article.title}}</h1>
             </div>
-            <div class="text-published">{{article.published_at|date("d M Y")}}</div>
+            <time class="text-published" datetime="{{article.published_at|date('c')}}">{{article.published_at|date("d M Y")}}</time>
+        </header>
 
-        </div>
         <div class="col-xs-12">
             <div class="content">
                 {{article.content|raw}}
             </div>
         </div>
+
         <div class="col-xs-12">
-
-
             <div class="row share_container middle-xs">
                 <div class="col-lg-1 col-xs-2 start-xs">Share</div>
                 <div class="col-xs-10">
-                    <a href="https://bsky.app/intent/compose?text={{article.title}}20%{{page_url}}" target="_blank" class="btn p-primary pr p-bluesky medium" style="font-size: 20px !important;font-weight: 600;"></a>
+                    <a href="https://bsky.app/intent/compose?text={{article.title}}20%{{page_url}}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="btn p-primary pr p-bluesky medium"
+                       style="font-size: 20px !important;font-weight: 600;"
+                       aria-label="Share on Bluesky"></a>
 
-
-                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{page_url}}" target="_blank" class="btn pr p-primary p-linkedin small"></a>
-
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{page_url}}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="btn pr p-primary p-linkedin small"
+                       aria-label="Share on LinkedIn"></a>
                 </div>
             </div>
-
-
         </div>
-    </div>
-</div>
+    </article>
+</main>
+
 {% else %}
-<div class="container">
+<main class="container" role="main">
     <div class="row">
         {% for record in records %}
         {% spaceless %}
-        <div class="col-xs-12 news-item">
+        <article class="col-xs-12 news-item">
             <div class="row news_column">
-
-                <a href="{{'news'|page}}/{{record.slug}}">
+                <a href="{{'news'|page}}/{{record.slug}}" aria-label="Read article: {{record.title}}">
                     {% if record.cover %}
                     <div class="news-image col-xs-12 center-xs">
-                        <img class="news-img-top" src="{{record.cover.getThumb(288, 218, {'mode': 'crop'})}}">
+                        <img class="news-img-top"
+                             src="{{record.cover.getThumb(288, 218, {'mode': 'crop'})}}"
+                             alt="Featured image for {{record.title}}"
+                             role="img">
                     </div>
                     {% endif %}
                     <div class="news-container col-xs-12">
-
                         <div class="news-title">
-                            <h3 class="card-title" style="margin-top: 0!important;">{{record.title}}</h3>
+                            <h2 class="card-title" style="margin-top: 0!important;">{{record.title}}</h2>
                         </div>
-                        <div class="text-published">{{record.published_at | date('d F Y') }}</div>
+                        <time class="text-published" datetime="{{record.published_at|date('c')}}">{{record.published_at | date('d F Y') }}</time>
 
                         <div class="body">{{ record.content|length > 200 ? record.content|striptags|slice(0, 200)|replace({"&nbsp;": " ", ".": ". "}) ~ '...' : record.content|striptags|replace({"&nbsp;": " ", ".": ". "})  }}</div>
-                        <span class="read_more">Read more</span>
+                        <span class="read_more" aria-hidden="true">Read more</span>
                     </div>
                 </a>
             </div>
-
-        </div>
-
+        </article>
         {% endspaceless %}
         {% else %}
-        No news
+        <div class="col-xs-12">
+            <p>No news articles available at this time.</p>
+        </div>
         {% endfor %}
     </div>
     <div class="row container">
         {{ records.render|raw }}
     </div>
-
-</div>
+</main>
 {% endif %}

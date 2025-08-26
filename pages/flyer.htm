@@ -62,17 +62,23 @@ return Redirect::to('/media-center/flyer');
         {% spaceless %}
         {% if record.flyer_image %}
         <div class="col-md-3 col-xs-12 center-xs">
-            <p class="logo_container"><img src="{{record.flyer_image.path}}" title="{{record.name}}"></p>
+            <p class="logo_container">
+                <img src="{{record.flyer_image.path}}"
+                     alt="{{record.name}} preview image"
+                     role="img">
+            </p>
 
             {% if record.file %}
             <div class="col-xs-12">
                 <div class="text-center">
-                    <h3><b>{{record.name}}</b></h3>
-                    <a href="{{ ''| page }}?{{queries}}&download={{record.file.id}}&file_name={{record.file.file_name|replace({' ': '_'})}}" title="{{record.name}}" class="btn btn-primary">Download</a>
+                    <h3><strong>{{record.name}}</strong></h3>
+                    <a href="{{ ''| page }}?{{queries}}&download={{record.file.id}}&file_name={{record.file.file_name|replace({' ': '_'})}}"
+                       class="btn btn-primary"
+                       aria-label="Download {{record.name}}"
+                       download="{{record.file.file_name}}">Download</a>
                 </div>
             </div>
             {% endif %}
-
         </div>
 
 

@@ -44,7 +44,8 @@ templates = "template4"
 ==
 {% component 'siteSearchInclude' %}
 
-<div class="container">
+
+<section class="container">
     <div class="row middle-xs">
         <div class="col-md-6 col-xs-12 mission">
             {% component 'mission' %}
@@ -53,16 +54,21 @@ templates = "template4"
             {% component 'goals' %}
         </div>
     </div>
-</div>
+</section>
 
-<div class="container numbers_container">
+<section class="container numbers_container" aria-labelledby="numbers-heading">
+    <h2 id="numbers-heading" class="sr-only">Key Statistics</h2>
     {% component 'numbers' %}
-</div>
-<div class="container objectives mt-4 mb-2">
+</section>
+
+<section class="container objectives mt-4 mb-2" aria-labelledby="objectives-heading">
+    <h2 id="objectives-heading" class="sr-only">Project Objectives</h2>
     {% component 'objectives' %}
-</div>
-<div class="container-fluid work_packages">
+</section>
+
+<section class="container-fluid work_packages" aria-labelledby="work-packages-heading">
+    <h2 id="work-packages-heading" class="sr-only">Work Packages</h2>
     <div class="container">
         {% component 'accordion' %}
     </div>
-</div>
+</section>
