@@ -80,7 +80,7 @@ function onStart()
         <div class="training-section organizer-section">
             <div class="row">
                 <div class="col-md-6 col-xs-12">
-                    <h2 class="section-title">Organizer</h2>
+                    <h2 class="section-title">Organiser</h2>
                     <div class="organizer-content">{{training.organiser}}</div>
                 </div>
             </div>
@@ -95,8 +95,14 @@ function onStart()
                         {% for module in training.modules %}
                         <div class="module-item">
                             <div class="training-head">
-                                <h3 class="module-title">{{ module.module_name }}</h3>
-                                <span class="plusminus"></span>
+                                <div class="row module-head-row">
+                                    <div class="col-xs-10 col-md-11 col-title">
+                                        <h3 class="module-title">{{ module.module_name }}</h3>
+                                    </div>
+                                    <div class="col-xs-2 col-md-1 col-icon">
+                                        <span class="plusminus" aria-hidden="true"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="training-body" style="display: none;">
                                 {% if module.module_text %}
@@ -154,7 +160,7 @@ function onStart()
                                 
                                 {% if module.slideshares %}
                                 <div class="module-slideshares">
-                                    <h4>Presentation</h4>
+                                    <h4>Presentations</h4>
                                     <div class="slideshare-list">
                                         {% for slideshare in module.getEmbeddableSlideshares() %}
                                         <div class="slideshare-item">

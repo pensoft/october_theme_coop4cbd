@@ -77,6 +77,7 @@ $(document).ready(function() {
             }else{
                 $('#menu').hide();
                 $('#search').hide();
+                $('#layout-header').removeClass('full-width');
                 $('body', 'html').css({
                     'overflow': 'auto'
                 });
@@ -107,10 +108,10 @@ $(document).ready(function() {
         $('.ui-accordion-header').show();
         if ($(this).next(".accordion-content, .training-body").is(':visible')) {
             $(this).next(".accordion-content, .training-body").slideUp(300);
-            $(this).children(".plusminus").removeClass('active');
+            $(this).find(".plusminus").removeClass('active');
         } else {
             $(this).next(".accordion-content, .training-body").slideDown(300);
-            $(this).children(".plusminus").addClass('active');
+            $(this).find(".plusminus").addClass('active');
         }
     });
 
@@ -141,6 +142,7 @@ $(document).ready(function() {
             }else{
                 $('#menu').hide("slide", { direction: "right" }, 400);
                 $('#search').hide();
+                $('#layout-header').removeClass('full-width');
                 $('body', 'html').css({
                     'overflow': 'auto'
                 });

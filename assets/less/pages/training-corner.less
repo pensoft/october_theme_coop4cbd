@@ -491,6 +491,20 @@
                         justify-content: space-between;
                         align-items: center;
                         transition: all 0.3s ease;
+                        .module-head-row{
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                        }
+                        .col-title{
+                            display: flex;
+                            align-items: center;
+                        }
+                        .col-icon{
+                            display: flex;
+                            align-items: center;
+                            justify-content: flex-end;
+                        }
                         
                         &:hover{
                             background: #E0E6F0;
@@ -504,13 +518,17 @@
                             font-size: 18px;
                             font-weight: 600;
                             color: #7C868F;
+                            overflow-wrap: anywhere; // allow breaking long, unspaced strings
+                            word-break: break-word; // fallback for older browsers
+                            hyphens: auto;
                         }
 
                         .plusminus{
-                            width: 13px;
-                            height: 7px;
+                            width: 24px;
+                            height: 24px;
+                            flex: 0 0 24px;
                             background-image: url(../images/chevron-green.svg);
-                            background-size: contain;
+                            background-size: 13px 7px;
                             background-repeat: no-repeat;
                             background-position: center;
                             transition: transform 0.3s ease;

@@ -113,15 +113,13 @@ function onStart(){
     <div id="menuToggle" role="button"
          aria-label="Toggle mobile menu"
          aria-expanded="false"
-         aria-controls="mobile-menu"
+         aria-controls="menu"
          tabindex="0">
         <input type="checkbox" aria-hidden="true" tabindex="-1" />
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
-        <div id="mobile-menu" role="menu">
-            {% component 'menu' %}
-        </div>
+        {% component 'menu' %}
     </div>
     <a class="pr p-search middle search-btn" onclick="showSearchForm();"
        aria-label="Open search form"
