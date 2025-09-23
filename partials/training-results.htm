@@ -5,7 +5,6 @@
             <h3 class="training-title">{{training.name}}</h3>
             <div class="training-summery">{{training.summery|raw}}</div>
             <div class="training-date">{{training.start_date|date('d M Y')}} - {{training.end_date|date('d M Y')}}</div>
-            <div class="training-duration">{{training.duration}}</div>
             <div class="training-keywords">
                 {% set keywords = training.training_keywords is iterable ? training.training_keywords : (training.training_keywords ? training.training_keywords|split(',') : []) %}
                 {% for keyword in keywords %}

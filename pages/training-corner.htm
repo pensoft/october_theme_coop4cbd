@@ -56,9 +56,6 @@ function onStart()
                 <div class="training-date">
                     {{training.start_date|date('d M Y')}} - {{training.end_date|date('d M Y')}}
                 </div>
-                {% if training.duration %}
-                <div class="training-duration">{{training.duration}}</div>
-                {% endif %}
             </div>
         </div>
     </div>
