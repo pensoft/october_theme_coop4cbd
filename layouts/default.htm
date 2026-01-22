@@ -83,7 +83,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Matomo Code -->
 </head>
 
-<body>
+<body {% if this.page.id == 'home' %} onload="openJoinModalBtn();" {% endif %}>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PWW5NKQ"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -107,17 +107,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         {% if this.page.id == 'home' %}
         <!-- popup markup -->
-        <a data-toggle="modal" href="#content-confirmation" class="openCop16ModalBtn" style="display: none;">Launch Confirmation dialog</a>
+        <a data-toggle="modal" href="#content-confirmation" class="openJoinModalBtn" style="display: none;">Launch Confirmation dialog</a>
 
-        <div class="control-popup modal fade" id="content-confirmation" tabindex="-1" role="dialog">
+        <div class="control-popup modal fade joinModal" id="content-confirmation" tabindex="-1" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content center-xs">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <img src="{{'COP16 LOGO COLOR.svg'|media}}" alt="Featured image for COP16 LOGO" role="img">
-                    <div class="cop16-date">21 OCT - 1 NOV 2024</div>
-                    <div class="cop16-tagline">Peace with Nature</div>
-                    <div class="cop16-title">Science-policy Interface for Supporting Biodiversity</div>
-                    <div class="news"><a class="read_more" href="{{'cop16'|page}}">Read more</a></div>
+                    <img src="{{'pop-up image.png'|media}}" alt="Featured image for COP16 LOGO" role="img">
+                    <div class="event_info">
+                        <div class="title">JOIN CO-OP4CBD’S DEDICATED EXPERT DATABASE, SUPPORTING THE CONVENTION AND ITS PROCESSES</div>
+                        <div class="tagline">CO-OP4CBD invites experts from EU Member States and Associated Countries to join its dedicated database of experts supporting the UN Convention on Biological Diversity (CBD).</div>
+                        <a class="btn btn-primary" href="https://coop4cbd-expert-database.limesurvey.net/236295?lang=en&newtest=Y" target="_blank" alt="Opens CO-OP4CBD’S DEDICATED EXPERT DATABASE in a new tab">Join now</a>
+                    </div>
+
                 </div>
             </div>
         </div>

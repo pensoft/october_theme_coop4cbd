@@ -1318,58 +1318,46 @@ now override the 3.3 new styles for modern browsers & apply opacity
 
 .home{
     .control-popup.modal{
-        background: #010F21B9;
+        background: #FFFFFF0F;
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+
         .modal-dialog{
-            width: 346px;
+            width: 437px;
+            height: 394px;
             .modal-content{
-                padding: 28px 48px;
                 .close{
-                    color: #0042B7;
-                    font-size: 2em;
+                    background: #FFFFFF;
+                    color: #4BDBA3;
+                    font-size: 1.5em;
                     top: 9px;
                     right: 8px;
-                    width: 1em;
-                    height: 1em;
+                    width: 29px;
+                    height: 29px;
+                    border-radius: 50%;
                     display: flex;
                     align-items: center;
                     justify-content: center;
                 }
 
                 img{
-                    width: 176px;
-                    height: 102px;
+                    width: 100%;
+                    //width: 437px;
+                    height: 139px;
                     object-fit: contain;
-                    margin: 15px auto;
+                    margin: 0 0 19px 0;
                 }
 
-                .cop16-date{
-                    font: normal normal 600 18px/24px Jost;
-                    letter-spacing: 0px;
-                    color: #4BDBA3;
-                    margin: 10px auto 6px auto;
-                }
-
-                .cop16-tagline{
+                .tagline{
                     font: normal normal 300 15px/21px Jost;
                     letter-spacing: 0px;
                     color: #001B4B;
                     opacity: 1;
+                    margin-bottom: 19px;
                 }
 
-                .cop16-title{
-                    font: normal normal bold 18px/18px Jost;
-                    letter-spacing: 0px;
-                    color: #35393E;
-                    margin: 30px 0 18px 0;
-                    padding: 10px 0;
-                    line-height: 1.4em;
-                    border-top: 1px solid #BCD8DB;
-                }
-
-                .read_more{
-                    background-size: 14px;
-                    background-position-y: 16px;
-                    padding-right: 25px;
+                .event_info{
+                    padding: 0 34px 34px 34px;
                 }
             }
 
