@@ -65,8 +65,10 @@ $this['page_url'] = $this->pageUrl('');
 $user = Auth::getUser();
 if($user){
 $this['entries'] = Entry::where('start', '>', Carbon::now())->orderBy('start', 'asc')->paginate(20);
+$this['past_entries'] = Entry::where('start', '<=', Carbon::now())->orderBy('start', 'desc')->paginate(20);
 }else{
 $this['entries'] = Entry::where('start', '>', Carbon::now())->where('is_internal', false)->orderBy('start', 'asc')->paginate(20);
+$this['past_entries'] = Entry::where('start', '<=', Carbon::now())->where('is_internal', false)->orderBy('start', 'desc')->paginate(20);
 }
 
 
@@ -114,6 +116,40 @@ $this['slug'] = $this->param('slug');
             <div class="row container">
                 {{ entries.fragment('listView').render|raw }}
             </div>
+            {% endif %}
+
+            {% if past_entries|length %}
+            <h2 class="past_events_title">Past events</h2>
+            <div class="events_list_container past_events_list">
+                {% for entry in past_entries %}
+                {% set url = entry.url ?  entry.url : '/events/' ~ entry.slug %}
+
+                <article class="row entry_item middle-xs">
+                    <div class="col-md-2 col-xs-12 date_container">
+                        <time datetime="{{entry.start|date('c')}}">
+                            <span class="date_day">{{entry.start|date("d")}}</span>
+                            <span class="date_month">{{entry.start|date("M")}}</span>
+                            <span class="date_year">{{entry.start|date("Y")}}</span>
+                        </time>
+                    </div>
+                    <div class="col-md-7 col-xs-12 content_text">
+                        <span class="date_week mb-1">{{entry.start|date("l")}}</span>
+                        <h3>{{entry.title|raw}}</h3>
+                    </div>
+                    <div class="col-md-3 col-xs-12 end-md center-xs">
+                        <a href="{{'events'|page}}/{{entry.slug}}"
+                           class="read_more"
+                           aria-label="Read more about {{entry.title}}">Read more</a>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+
+            {% if past_entries.count > 20 %}
+            <div class="row container">
+                {{ past_entries.fragment('listView').render|raw }}
+            </div>
+            {% endif %}
             {% endif %}
         </div>
 
