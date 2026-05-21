@@ -251,8 +251,13 @@
 
 .events_list_container{
     width: 100%;
+    margin-bottom: 1.5em;
     h1{
         color: @text-color-default;
+    }
+
+    &{
+        background: #EFF2F880;
     }
     .entry_item{
         color: @text-color-default;
@@ -348,6 +353,30 @@
             &:hover{
                 opacity: 0.6;
             }
+        }
+    }
+}
+
+
+.past_events_list{
+    .entry_item{
+        position: relative;
+        overflow: hidden;
+
+        &::after{
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #EFF2F880 0% 0% no-repeat padding-box;
+            pointer-events: none;
+        }
+
+        .read_more{
+            position: relative;
+            z-index: 1;
         }
     }
 }
