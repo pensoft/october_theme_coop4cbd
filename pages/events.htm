@@ -119,7 +119,7 @@ $this['slug'] = $this->param('slug');
             {% endif %}
 
             {% if past_entries|length %}
-            <h2 class="past_events_title">Past events</h2>
+<!--            <h2 class="past_events_title">Past events</h2>-->
             <div class="events_list_container past_events_list">
                 {% for entry in past_entries %}
                 {% set url = entry.url ?  entry.url : '/events/' ~ entry.slug %}
