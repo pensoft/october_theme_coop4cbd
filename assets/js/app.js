@@ -369,14 +369,14 @@ $(document).ready(function() {
 
 
     // Adjust the selector to match your modal's close button/event
-    $(document).on('click', '.joinModal .close, .joinModal [data-dismiss="modal"]', function() {
-        setCookie('joinModalClosed', 'true', 30);
-    });
+    // $(document).on('click', '.joinModal .close, .joinModal [data-dismiss="modal"]', function() {
+    //     //setCookie('joinModalClosed', 'true', 30);
+    // });
 
     // Or if using Bootstrap modal events
-    $('.joinModal').on('hidden.bs.modal', function() {
-        setCookie('joinModalClosed', 'true', 30);
-    });
+    // $('.joinModal').on('hidden.bs.modal', function() {
+    //     //setCookie('joinModalClosed', 'true', 30);
+    // });
 
 });
 
@@ -452,9 +452,9 @@ function expandReadMore(el){
 
 
 function openJoinModalBtn(){
-    if (getCookie('joinModalClosed')) {
-        return; // Don't open if cookie is set
-    }
+    // if (getCookie('joinModalClosed')) {
+    //     return; // Don't open if cookie is set
+    // }
 
     setTimeout(function() {
         $(".openJoinModalBtn").trigger("click");

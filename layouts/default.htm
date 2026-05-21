@@ -10,10 +10,6 @@ includePageMeta = 1
 escape = 1
 
 [googleTracker]
-
-[cookieBanner]
-include_css = 1
-update_selector = "#gdpr-reload"
 ==
 <!DOCTYPE html>
 <html lang="en">
@@ -48,6 +44,8 @@ update_selector = "#gdpr-reload"
     <link rel="stylesheet" href="{{ 'assets/css/aos.css'|theme }}">
     <script src="{{ 'assets/js/aos.js'|theme }}"></script>
     <script src="{{ 'assets/js/ckeditor/ckeditor.js'|theme}}"></script>
+
+    <script src="https://cdn.userway.org/widget.js" data-account="dHcqEw1u9a"></script>
 
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -115,8 +113,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <img src="{{'pop-up image.png'|media}}" alt="Featured image for COP16 LOGO" role="img">
                     <div class="event_info">
-                        <div class="title">JOIN CO-OP4CBD’S DEDICATED EXPERT DATABASE, SUPPORTING THE CONVENTION AND ITS PROCESSES</div>
-                        <div class="tagline">CO-OP4CBD invites experts from EU Member States and Associated Countries to join its dedicated database of experts supporting the UN Convention on Biological Diversity (CBD).</div>
+                        <div class="title">JOIN CO-OP4CBD’S DEDICATED EXPERT DATABASE SUPPORTING THE CONVENTION AND ITS PROCESSES</div>
+                        <div class="tagline">CO-OP4CBD invites experts from EU Member States and Associated Countries to join its dedicated database of experts supporting the UN Convention on Biological Diversity (UN CBD).</div>
                         <a class="btn btn-primary" href="https://coop4cbd-expert-database.limesurvey.net/236295?lang=en&newtest=Y" target="_blank" alt="Opens CO-OP4CBD’S DEDICATED EXPERT DATABASE in a new tab">Join now</a>
                     </div>
 
@@ -167,6 +165,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </script>
 
 </body>
-{% component 'cookieBanner' %}
+
 
 </html>
