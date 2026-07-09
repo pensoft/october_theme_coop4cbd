@@ -286,6 +286,13 @@ $(document).ready(function() {
 
     $('.library .library-item .btn.btn-primary').text('Download');
 
+    renameLibraryDocTypes();
+
+    // The library list is re-rendered by AJAX (search, filters, pagination)
+    $(document).on('ajaxUpdateComplete', function () {
+        renameLibraryDocTypes();
+    });
+
     // Initialize training corner functionality
     initializeTrainingCorner();
 
@@ -999,6 +1006,14 @@ function initMailingTooltip(){
     $('.group-holder').eq(0).prepend( "<p style='margin-left: 10px; width: 100%;'>Prior to sending group emails, please make sure that all individuals you want to contact have been included in the respective group by clicking on the group icon.</p><p></p>" );
     $('.group-holder').eq(1).prepend( "<p style='margin-left: 10px; width: 100%;'>To see each person’s email, click on the account icon.</p><p></p>" );
 
+}
+
+function renameLibraryDocTypes() {
+    $('.library-item .doc_type').each(function () {
+        if ($.trim($(this).text()) === 'Policy brief') {
+            $(this).text('Technical brief');
+        }
+    });
 }
 
 function initializeTrainingCorner() {
