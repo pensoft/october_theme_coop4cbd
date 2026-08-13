@@ -18,6 +18,10 @@ use Pensoft\Internaldocuments\Models\Subfolders;
 use System\Models\File;
 
 function onStart(){
+	if(get('download')){
+		return $this->downloadFile((int)get('download'));
+	}
+
 	$term = Request::get('query') ? Request::get('query') : Request::get('q');
 	$this['term'] = $term;
 	if($term){
@@ -37,9 +41,33 @@ function onStart(){
 	}
 }
 
-public function onDownloadHandler(){
-	$files = post('files');
-	return Redirect::to('trigger-download')->with('files', $files); // pass attributes in the session
+/**
+ * Serves a single internal document over a plain GET request, so the download
+ * is a normal link navigation that Matomo is able to track. Downloads used to
+ * be triggered by an AJAX form submit, which Matomo cannot see.
+ */
+protected function downloadFile($fileId){
+	if(!Auth::check()){
+		return Redirect::to('login');
+	}
+
+	$file = File::where('attachment_type', 'Pensoft\InternalDocuments\Models\Subfolders')
+		->where('id', $fileId)
+		->whereNull('deleted_at')
+		->first();
+
+	if(!$file){
+		return Redirect::back();
+	}
+
+	$pathToFile = $file->getLocalPath();
+	if(!file_exists($pathToFile)){
+		return Redirect::back();
+	}
+
+	return Response::download($pathToFile, $file->file_name, [
+		'Content-Type' => $file->content_type ?: 'application/octet-stream',
+	]);
 }
 ?>
 ==

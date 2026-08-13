@@ -12,7 +12,11 @@
 </div>
 <div style="clear: both;"></div>
 <p>
-	<a href="javascript:;" data-request="onDownloadHandler" data-request-data="files:  {{images}}" target="_blank" class="download-icon">Download all</a>
+	<a href="{{ ''|page }}?{{queries}}&download={{images|map(image => image.id)|join(',')}}&file_name=images.zip"
+	   target="_self"
+	   class="download-icon"
+	   aria-label="Download all images as a zip archive"
+	   download>Download all</a>
 	{% if images.count > 7 %}
 	&nbsp;&nbsp;&nbsp;
 	<a href="javascript:;" onclick="toggleImages('{{group_id}}');" class="show_all_btn{{group_id}}">Show all</a>

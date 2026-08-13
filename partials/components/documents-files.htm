@@ -12,7 +12,11 @@
 				{% endif %}
 			</div>
 			<div class="col-sm-2 col-xs-12 end-xs">
-				<a href="javascript:;" data-request="onDownloadHandler" data-request-data="files:  [{{file}}]" target="_blank" class="download-icon">Download</a>
+				<a href="{{ ''|page }}?{{queries}}&download={{file.id}}&file_name={{file.file_name|replace({' ': '_'})}}"
+				   target="_self"
+				   class="download-icon"
+				   aria-label="Download {{file.file_name}}"
+				   download="{{file.file_name}}">Download</a>
 			</div>
 
 			<script>

@@ -31,7 +31,11 @@
 					{% endif %}
 
 
-					<a href="javascript:;" data-request="onDownloadHandler" data-request-data="files:  [{{file}}]" target="_blank" class="download-icon">Download</a>
+					<a href="{{ ''|page }}?download={{file.id}}&file_name={{file.file_name|replace({' ': '_'})}}"
+					   target="_self"
+					   class="download-icon"
+					   aria-label="Download {{file.file_name}}"
+					   download="{{file.file_name}}">Download</a>
 				{% endif %}
 
 			</h4>

@@ -16,7 +16,6 @@ use Pensoft\Media\Models\Presentations;
 use Pensoft\Media\Models\Pressreleases;
 use Pensoft\Media\Models\Videos;
 use Pensoft\Media\Models\Graphic;
-use System\Models\File;
 
 function onStart(){
 	$this['logos'] =  MediaLogos::get();
@@ -26,22 +25,6 @@ function onStart(){
 	$this['pressreleases'] =  Pressreleases::get();
 	$this['videos'] =  Videos::get();
 	$this['graphics'] =  Graphic::get();
-}
-
-
-function onDownloadFile(){
-	$file = File::find(post('id'));
-	$pathToFile = $file->getLocalPath();
-$fileName = $file->file_name;
-$fileType = $file->content_type;
-$headers = [
-'HTTP/1.1 200 OK',
-'Pragma: public',
-'Content-Type: '.$fileType,
-'Content-Type: application/force-download'
-];
-
-return Response::download($pathToFile, $fileName, $headers);
 }
 ?>
 ==
