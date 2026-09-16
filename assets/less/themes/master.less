@@ -1777,6 +1777,808 @@ now override the 3.3 new styles for modern browsers & apply opacity
 }
 
 
+// Smooth in-page jumps for this page's anchor links (#cop17-programme,
+// #cop17-resources). scroll-behavior has to sit on the scrolling element, so it
+// is scoped with :has() to leave every other page's default jump untouched.
+html:has(.content-wrapper.cop17){
+    scroll-behavior: smooth;
+
+    // Instant jump for anyone who has asked for less motion (WCAG 2.3.3).
+    @media (prefers-reduced-motion: reduce){
+        scroll-behavior: auto;
+    }
+}
+
+.cop17{
+
+    // Each section's body comes from a Pensoft.Jumbotron record, and the
+    // component wraps every body in .container-fluid.banner. The page wrappers
+    // own the band colour and rhythm, so the plugin's wrapper is neutralised.
+    // background-color needs !important because @secondary-color carries one.
+    .container-fluid.banner{
+        margin-top: 0;
+        margin-bottom: 0;
+        background-color: transparent !important;
+    }
+
+    @cop17-navy: #001B4B;
+    @cop17-blue: #0042B7;
+    @cop17-green: #4BDBA3;
+    @cop17-light: #EFF2F8;
+    @cop17-muted: #8698B2;
+
+    .cop17_section_title(){
+        font: normal normal bold 40px/54px Jost;
+        letter-spacing: 0px;
+        text-transform: uppercase;
+        margin: 0;
+        .breakpoint-huge-down({
+            font-size: 34px;
+            line-height: 46px;
+        });
+        .breakpoint-large-down({
+            font-size: 28px;
+            line-height: 38px;
+        });
+    }
+
+    // Small blue/green caps used as an eyebrow above a title.
+    .cop17_eyebrow(){
+        display: block;
+        font: normal normal 500 13px/20px Jost;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+    }
+
+
+    /* ---------- Hero ---------- */
+
+    .cop17_hero{
+        position: relative;
+        overflow: hidden;
+        background: #FFFFFF;
+        padding: 40px 0 70px 0;
+
+        // The butterflies are decorative, so they live on pseudo-elements
+        // instead of the markup — nothing for a screen reader to announce.
+        &:before,
+        &:after{
+            content: ' ';
+            position: absolute;
+            pointer-events: none;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            z-index: 0;
+            .breakpoint-huge-down({
+                display: none;
+            });
+        }
+
+        // Widths and heights stay in the source aspect ratio so
+        // background-size: contain never letterboxes the wings.
+        &:before{
+            left: -10vw;
+            top: -2vw;
+            width: 38vw;
+            height: 32vw;
+            background-image: url("../../assets/images/cop17/butterfly-left.png");
+            transform: scaleX(-1);
+        }
+
+        &:after{
+            right: -5vw;
+            bottom: 4vw;
+            width: 30vw;
+            height: 23vw;
+            background-image: url("../../assets/images/cop17/butterfly-right.png");
+        }
+
+        .container{
+            position: relative;
+            z-index: 1;
+        }
+    }
+
+    .cop17_intro{
+        width: 100%;
+        max-width: 760px;
+        margin: 0 auto;
+    }
+
+    .cop17_logo{
+        text-align: center;
+        img{
+            max-height: 60px;
+            max-width: 100%;
+            object-fit: contain;
+            .breakpoint-large-down({
+                max-height: 46px;
+            });
+        }
+    }
+
+    .cop17-page-title{
+        text-align: center;
+        margin: 40px auto 0 auto;
+
+        h1{
+            font: normal normal bold 45px/56px Jost;
+            letter-spacing: 0px;
+            color: @cop17-navy;
+            text-transform: uppercase;
+            opacity: 1;
+            // Holds the headline to the three-line break in the design.
+            max-width: 660px;
+            margin: 0 auto;
+            .breakpoint-huge-down({
+                font-size: 36px;
+                line-height: 46px;
+            });
+            .breakpoint-large-down({
+                font-size: 28px;
+                line-height: 38px;
+            });
+        }
+
+        .tagline{
+            font: normal normal 300 18px/28px Jost;
+            letter-spacing: 0px;
+            color: @cop17-navy;
+            margin: 26px auto 0 auto;
+            width: 100%;
+            max-width: 430px;
+            .breakpoint-large-down({
+                font-size: 16px;
+                line-height: 26px;
+            });
+        }
+
+        .explore_link{
+            display: inline-flex;
+            align-items: center;
+            font: normal normal bold 18px/28px Jost;
+            color: @cop17-blue;
+            margin-top: 30px;
+
+            .arrow_icon{
+                background: url("../../assets/images/cop17/arrow-down-blue.svg") center no-repeat;
+                background-size: contain;
+                width: 14px;
+                height: 16px;
+                margin-left: 10px;
+                transition: transform 0.3s ease-in-out;
+            }
+
+            &:hover,
+            &:focus{
+                text-decoration: underline;
+                .arrow_icon{
+                    transform: translateY(4px);
+                }
+            }
+        }
+    }
+
+
+    /* ---------- Participating initiatives ---------- */
+
+    .cop17_initiatives{
+        background: #FFFFFF;
+        padding: 0 0 50px 0;
+
+        .initiatives_list{
+            list-style: none;
+            max-width: 1060px;
+            margin: 0 auto;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            .breakpoint-large-down({
+                justify-content: center;
+                gap: 30px 40px;
+            });
+
+            li{
+                margin: 0;
+                padding: 0;
+                &:before{
+                    content: none;
+                }
+            }
+
+            a{
+                display: inline-flex;
+                align-items: flex-start;
+                gap: 6px;
+
+                &:hover .link_icon,
+                &:focus .link_icon{
+                    transform: translate(2px, -2px);
+                }
+            }
+
+            img{
+                // Overrides the global `img { width: 100% }` so each logo
+                // keeps its own intrinsic width inside the flex row.
+                width: auto;
+                max-height: 48px;
+                max-width: 170px;
+                object-fit: contain;
+                .breakpoint-large-down({
+                    max-height: 38px;
+                    max-width: 130px;
+                });
+            }
+
+            .link_icon{
+                flex: 0 0 auto;
+                width: 13px;
+                height: 13px;
+                background: url("../../assets/images/cop17/link-green.svg") center no-repeat;
+                background-size: contain;
+                transition: transform 0.3s ease-in-out;
+            }
+        }
+    }
+
+
+    /* ---------- Statement ---------- */
+
+    .cop17_statement{
+        background: #FFFFFF;
+        padding: 50px 0 70px 0;
+
+        .container{
+            border-top: 1px solid #DDE3EC;
+            padding-top: 55px;
+        }
+
+        h2{
+            .cop17_section_title();
+            color: @cop17-navy;
+
+            // The green phrase takes its own line, as in the design.
+            .accent{
+                display: block;
+                color: @cop17-green;
+            }
+        }
+
+        .statement_body{
+            padding-left: 60px;
+            .breakpoint-huge-down({
+                padding-left: 15px;
+            });
+            .breakpoint-large-down({
+                margin-top: 30px;
+            });
+
+            p{
+                font: normal normal 300 17px/26px Jost;
+                color: @cop17-navy;
+                margin: 0 0 24px 0;
+            }
+
+            .btn-primary{
+                margin-top: 6px;
+            }
+        }
+    }
+
+
+    /* ---------- Programme ---------- */
+
+    .cop17_programme{
+        position: relative;
+        overflow: hidden;
+        background: @cop17-light;
+        padding: 70px 0 90px 0;
+
+        // Hummingbird, decorative, anchored to the bottom-left of the band.
+        &:before{
+            content: ' ';
+            position: absolute;
+            left: -2vw;
+            bottom: 0;
+            width: 36vw;
+            height: 27.8vw;
+            background: url("../../assets/images/cop17/hummingbird.png") left bottom no-repeat;
+            background-size: contain;
+            pointer-events: none;
+            z-index: 0;
+            .breakpoint-large-down({
+                display: none;
+            });
+        }
+
+        .container{
+            position: relative;
+            z-index: 1;
+        }
+
+        .programme_heading h2{
+            .cop17_section_title();
+            color: @cop17-navy;
+        }
+
+        .programme_list{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            border-top: 1px solid #D3DAE6;
+
+            li{
+                margin: 0;
+                padding: 30px 0;
+                border-bottom: 1px solid #D3DAE6;
+                &:before{
+                    content: none;
+                }
+            }
+        }
+
+        .session_when{
+            .date{
+                display: block;
+                font: normal normal bold 22px/30px Jost;
+                color: @cop17-navy;
+            }
+            .time{
+                display: block;
+                font: normal normal 300 18px/28px Jost;
+                color: @cop17-navy;
+            }
+        }
+
+        .session_what{
+            .label{
+                .cop17_eyebrow();
+                color: @cop17-blue;
+            }
+
+            h3{
+                font: normal normal 500 23px/32px Jost;
+                color: @cop17-navy;
+                margin: 4px 0 6px 0;
+            }
+
+            .location{
+                display: block;
+                font: normal normal 300 15px/22px Jost;
+                color: @cop17-muted;
+            }
+        }
+
+        .programme_note{
+            font: normal normal 300 15px/22px Jost;
+            color: @cop17-muted;
+            margin: 26px 0 0 0;
+        }
+    }
+
+
+    /* ---------- Dark band: booth + engage ---------- */
+
+    .cop17_dark{
+        background: @cop17-navy;
+        padding: 80px 0 90px 0;
+
+        h2{
+            .cop17_section_title();
+            color: #FFFFFF;
+        }
+    }
+
+    .cop17_booth{
+        .row{
+            display: flex;
+            align-items: center;
+            .breakpoint-large-down({
+                display: block;
+            });
+        }
+
+        .booth_map{
+            background: #FFFFFF;
+            // 3:2 keeps the embed from collapsing before the iframe loads.
+            aspect-ratio: 3 / 2;
+            width: 100%;
+
+            iframe{
+                display: block;
+                width: 100%;
+                height: 100%;
+                border: 0;
+            }
+        }
+
+        .booth_title{
+            h2{
+                max-width: 520px;
+            }
+            padding-left: 60px;
+            .breakpoint-huge-down({
+                padding-left: 15px;
+            });
+            .breakpoint-large-down({
+                margin-top: 40px;
+            });
+        }
+    }
+
+    .cop17_engage{
+        // Booth and engage share one jumbotron container, so this gap stands in
+        // for the 40px container padding each block used to contribute, plus the
+        // 90px that separated them.
+        margin-top: 170px;
+
+        .engage_list{
+            list-style: none;
+            margin: 38px 0 0 0;
+            padding: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+
+            li{
+                margin: 0;
+                padding: 28px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                &:before{
+                    content: none;
+                }
+            }
+
+            .row{
+                display: flex;
+                align-items: center;
+                .breakpoint-large-down({
+                    display: block;
+                });
+            }
+        }
+
+        .engage_number{
+            font: normal normal 500 14px/24px Jost;
+            color: @cop17-green;
+        }
+
+        .engage_title h3{
+            font: normal normal bold 22px/30px Jost;
+            color: #FFFFFF;
+            margin: 0;
+        }
+
+        .engage_description{
+            font: normal normal 300 15px/22px Jost;
+            color: rgba(255, 255, 255, 0.8);
+            .breakpoint-large-down({
+                margin-top: 10px;
+            });
+        }
+    }
+
+
+    /* ---------- Resources ---------- */
+
+    .section_intro{
+        text-align: center;
+        margin: 0 auto 50px auto;
+
+        h2{
+            .cop17_section_title();
+            color: @cop17-navy;
+            max-width: 580px;
+            margin: 0 auto;
+        }
+
+        p{
+            font: normal normal 300 17px/25px Jost;
+            color: @cop17-navy;
+            max-width: 720px;
+            margin: 20px auto 0 auto;
+        }
+    }
+
+    .cop17_resources{
+        background: #FFFFFF;
+        padding: 80px 0 50px 0;
+
+        .row{
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .col-md-4{
+            display: flex;
+            .breakpoint-large-down({
+                margin-bottom: 20px;
+            });
+        }
+
+        .resource_card{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            background: @cop17-blue;
+            padding: 25px;
+
+            .label{
+                .cop17_eyebrow();
+                color: rgba(255, 255, 255, 0.65);
+            }
+
+            h3{
+                font: normal normal 500 24px/32px Jost;
+                color: #FFFFFF;
+                margin: 14px 0 10px 0;
+            }
+
+            p{
+                font: normal normal 300 15px/22px Jost;
+                color: rgba(255, 255, 255, 0.85);
+                margin: 0;
+            }
+
+            .requester{
+                display: block;
+                font: normal normal 500 14px/22px Jost;
+                letter-spacing: 0.4px;
+                text-transform: uppercase;
+                color: #FFFFFF;
+                margin-top: 22px;
+                margin-bottom: 40px;
+            }
+
+            .btn-primary{
+                // Pushes every card's button to the same baseline.
+                margin-top: auto;
+                padding-top: 12px;
+                padding-bottom: 12px;
+                width: 100%;
+            }
+        }
+    }
+
+
+    /* ---------- Meet the team ---------- */
+
+    .cop17_team{
+        background: #FFFFFF;
+        padding: 50px 0 60px 0;
+
+        // The jumbotron body sits directly inside .container, so this reaches
+        // the section heading without also catching the per-group titles.
+        .container > h2{
+            .cop17_section_title();
+            color: @cop17-navy;
+            margin-bottom: 40px;
+        }
+
+        .team_group{
+            margin-bottom: 40px;
+        }
+
+        .group_title{
+            .cop17_eyebrow();
+            color: @cop17-blue;
+            border-bottom: 1px solid #DDE3EC;
+            padding-bottom: 14px;
+            margin: 0 0 24px 0;
+        }
+
+        .row{
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        // Five across doesn't map onto the 12-column grid, so the members
+        // use their own flex track instead of col-* classes.
+        .team_member{
+            flex: 0 0 20%;
+            max-width: 20%;
+            text-align: center;
+            margin-bottom: 24px;
+            .breakpoint-large-down({
+                flex-basis: 33.333%;
+                max-width: 33.333%;
+            });
+            .breakpoint-medium-down({
+                flex-basis: 50%;
+                max-width: 50%;
+            });
+
+            img{
+                display: block;
+                width: 100%;
+                aspect-ratio: 1 / 1;
+                object-fit: cover;
+                margin: 0 auto 14px auto;
+            }
+
+            .name{
+                display: block;
+                font: normal normal bold 16px/24px Jost;
+                color: @cop17-navy;
+            }
+
+            .organisation{
+                display: block;
+                font: normal normal 300 14px/22px Jost;
+                color: @cop17-muted;
+            }
+        }
+    }
+
+
+    /* ---------- Other EU-funded projects ---------- */
+
+    .cop17_eu_projects{
+        background: #FFFFFF;
+        padding: 40px 0 90px 0;
+
+        .row{
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .col-md-3{
+            display: flex;
+            .breakpoint-large-down({
+                margin-bottom: 20px;
+            });
+        }
+
+        .project_card{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            background: @cop17-light;
+            padding: 24px;
+
+            .name{
+                display: block;
+                font: normal normal 500 16px/24px Jost;
+                letter-spacing: 0.6px;
+                text-transform: uppercase;
+                color: @cop17-navy;
+                border-bottom: 1px solid #D3DAE6;
+                padding-bottom: 22px;
+                margin-bottom: 22px;
+            }
+
+            a{
+                display: inline-flex;
+                align-items: center;
+                font: normal normal 300 16px/24px Jost;
+                color: @cop17-green;
+                margin-top: auto;
+
+                .arrow_icon{
+                    width: 14px;
+                    height: 13px;
+                    margin-left: 8px;
+                    background: url("../../assets/images/cop17/arrow-right-green.svg") center no-repeat;
+                    background-size: contain;
+                    transition: transform 0.3s ease-in-out;
+                }
+
+                &:hover,
+                &:focus{
+                    text-decoration: underline;
+                    .arrow_icon{
+                        transform: translateX(4px);
+                    }
+                }
+            }
+        }
+    }
+
+
+    /* ---------- Quick links + newsletter ---------- */
+
+    .cop17_outro{
+        background: @cop17-navy;
+        padding: 0 0 90px 0;
+
+        // The bar spans the viewport, so its jumbotron container drops the
+        // centred max-width and padding that every other section relies on.
+        .cop17_quick_links_bar .container{
+            max-width: none;
+            padding: 0;
+        }
+
+        .quick_links{
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 0 80px 0;
+            padding: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+
+            li{
+                flex: 1 1 0;
+                margin: 0;
+                padding: 0;
+                text-align: center;
+                border-left: 1px solid rgba(255, 255, 255, 0.15);
+                &:first-child{
+                    border-left: 0;
+                }
+                &:before{
+                    content: none;
+                }
+                .breakpoint-large-down({
+                    flex-basis: 100%;
+                    border-left: 0;
+                    border-top: 1px solid rgba(255, 255, 255, 0.15);
+                    &:first-child{
+                        border-top: 0;
+                    }
+                });
+            }
+
+            a{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font: normal normal 500 16px/24px Jost;
+                color: @cop17-green;
+                padding: 20px 15px;
+
+                .arrow_icon{
+                    width: 14px;
+                    height: 13px;
+                    margin-left: 8px;
+                    background: url("../../assets/images/cop17/arrow-right-green.svg") center no-repeat;
+                    background-size: contain;
+                    transition: transform 0.3s ease-in-out;
+                }
+
+                &:hover,
+                &:focus{
+                    text-decoration: underline;
+                    .arrow_icon{
+                        transform: translateX(4px);
+                    }
+                }
+            }
+        }
+
+        h2{
+            .cop17_section_title();
+            color: #FFFFFF;
+            max-width: 520px;
+        }
+
+        .newsletter_body{
+            padding-left: 60px;
+            .breakpoint-huge-down({
+                padding-left: 15px;
+            });
+            .breakpoint-large-down({
+                margin-top: 30px;
+            });
+
+            p{
+                font: normal normal 300 15px/22px Jost;
+                color: rgba(255, 255, 255, 0.8);
+                margin: 0 0 22px 0;
+            }
+
+            .btn-primary{
+                width: 100%;
+                padding-top: 12px;
+                padding-bottom: 12px;
+            }
+        }
+    }
+}
+
+
 .visually-hidden {
     display: none;
 }

@@ -1,0 +1,106 @@
+url = "/cop17"
+layout = "default"
+title = "COP17 Armenia"
+
+[siteSearchInclude]
+
+[jumbotron hero]
+jumbotron = "cop17-hero"
+templates = "template3"
+description_limit = 0
+
+[jumbotron initiatives]
+jumbotron = "cop17-initiatives"
+templates = "template3"
+description_limit = 0
+
+[jumbotron statement]
+jumbotron = "cop17-statement"
+templates = "template3"
+description_limit = 0
+
+[jumbotron programme]
+jumbotron = "cop17-programme"
+templates = "template3"
+description_limit = 0
+
+[jumbotron darkband]
+jumbotron = "cop17-dark-band"
+templates = "template3"
+description_limit = 0
+
+[jumbotron resources]
+jumbotron = "cop17-resources"
+templates = "template3"
+description_limit = 0
+
+[jumbotron team]
+jumbotron = "cop17-team"
+templates = "template3"
+description_limit = 0
+
+[jumbotron euprojects]
+jumbotron = "cop17-eu-projects"
+templates = "template3"
+description_limit = 0
+
+[jumbotron quicklinks]
+jumbotron = "cop17-quick-links"
+templates = "template3"
+description_limit = 0
+
+[jumbotron newsletter]
+jumbotron = "cop17-newsletter"
+templates = "template3"
+description_limit = 0
+==
+{% component 'siteSearchInclude' %}
+
+{#
+   Every section's markup is authored in the rich editor on its own
+   Pensoft.Jumbotron record (slugs below). The wrappers here only carry the
+   band background, spacing, decorative artwork and anchor ids — see the
+   .cop17 block in assets/less/themes/master.less. Reference copies of each
+   body live in content/cop17/.
+#}
+
+<div class="cop17_hero">
+    {% component 'hero' %}
+</div>
+
+<div class="cop17_initiatives">
+    {% component 'initiatives' %}
+</div>
+
+<div class="cop17_statement">
+    {% component 'statement' %}
+</div>
+
+<div class="cop17_programme" id="cop17-programme">
+    {% component 'programme' %}
+</div>
+
+<div class="cop17_dark">
+    {% component 'darkband' %}
+</div>
+
+<div class="cop17_resources" id="cop17-resources">
+    {% component 'resources' %}
+</div>
+
+<div class="cop17_team">
+    {% component 'team' %}
+</div>
+
+<div class="cop17_eu_projects">
+    {% component 'euprojects' %}
+</div>
+
+<div class="cop17_outro">
+    <div class="cop17_quick_links_bar">
+        {% component 'quicklinks' %}
+    </div>
+    <div class="cop17_newsletter">
+        {% component 'newsletter' %}
+    </div>
+</div>
